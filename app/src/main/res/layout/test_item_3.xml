@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <data>
+
+        <variable
+            name="game"
+            type="com.game.mcw.gameinformation.modle.Game" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/iv_pic"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{game.title}"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@{game.author}"
+            android:textColor="@color/text_green"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/iv_pic"
+            android:layout_width="120dp"
+            android:layout_height="68dp"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY" />
+
+
+    </RelativeLayout>
+</layout>
