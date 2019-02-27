@@ -1,4 +1,4 @@
 package com.game.mcw.gameinformation.modle
 
 
-class Game(val id: Int, val url: String, val title: String, val img: String, val author: String, val score: String, val category: String)
+class Game(val name: String, val url: String, val icon: String, val image: String, var plays: String, val score: String, val brief: String, val content: String)

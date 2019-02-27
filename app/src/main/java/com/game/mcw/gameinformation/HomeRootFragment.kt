@@ -41,7 +41,7 @@ class HomeRootFragment : BaseFragment() {
 
         mFragments.add(HomeChild1Fragment())
         mFragments.add(HomeChild2Fragment())
-        mFragments.add(HomeChild3Fragment())
+//        mFragments.add(GameFragment())
         mBinding.vpFragment.offscreenPageLimit = mFragments.size
         mBinding.vpFragment.adapter = HomeFragmentPagerAdapter(childFragmentManager, mFragments)
 

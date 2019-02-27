@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
 
     <data>
@@ -9,42 +11,112 @@
             type="com.game.mcw.gameinformation.modle.Game" />
     </data>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/common_bg_gray"
         android:orientation="vertical"
-        android:padding="10dp"
+        android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp">
 
-        <TextView
-            android:id="@+id/tv"
+
+        <FrameLayout
+            android:id="@+id/fl_top"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_game_img"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintDimensionRatio="h,720:405"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@drawable/bg_game_context"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:padding="10dp"
+                android:text="@{game.content}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_14" />
+        </FrameLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@id/iv_pic"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:text="@{game.title}"
-            android:textColor="@android:color/black"
-            android:textSize="14sp" />
+            android:background="@drawable/bg_game_bottom"
+            android:padding="10dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:text="@{game.author}"
-            android:textColor="@color/text_green"
-            android:textSize="12sp" />
+            <ImageView
+                android:id="@+id/iv_game_icon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerVertical="true" />
 
-        <ImageView
-            android:id="@+id/iv_pic"
-            android:layout_width="120dp"
-            android:layout_height="68dp"
-            android:layout_alignParentRight="true"
-            android:scaleType="fitXY" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toLeftOf="@+id/btn_play"
+                android:layout_toRightOf="@+id/iv_game_icon"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="@{game.name}" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="@{game.plays}" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="@{game.brief}" />
+            </LinearLayout>
 
 
-    </RelativeLayout>
+            <Button
+                android:id="@+id/btn_play"
+                android:layout_width="68dp"
+                android:layout_height="32dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/bg_game_play_btn"
+                android:text="直接玩"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
 </layout>

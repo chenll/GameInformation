@@ -14,17 +14,24 @@ import com.qmuiteam.qmui.util.QMUIDisplayHelper
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 class MyApapter3(layid: Int) : BaseMVAdapter<Game, MVViewHolder>(layid) {
-    var options: RequestOptions
+    private var options: RequestOptions
+    private var optionsAll: RequestOptions
 
     init {
-        val roundedCornersTransformation = RoundedCornersTransformation(QMUIDisplayHelper.dp2px(MyApplication.INSTANCE, 5), 0, RoundedCornersTransformation.CornerType.ALL)
+        val roundedCornersTransformation = RoundedCornersTransformation(QMUIDisplayHelper.dp2px(MyApplication.INSTANCE, 5), 0, RoundedCornersTransformation.CornerType.TOP)
         options = RequestOptions().transforms(CenterCrop(), roundedCornersTransformation)
+        optionsAll = RequestOptions().transforms(CenterCrop(), RoundedCornersTransformation(QMUIDisplayHelper.dp2px(MyApplication.INSTANCE, 5), 0, RoundedCornersTransformation.CornerType.ALL))
     }
 
     override fun convert(helper: MVViewHolder, item: Game) {
+        if (!item.plays.contains("人在玩")) {
+            item.plays = "${item.plays}人在玩"
+        }
         helper.getBinding().setVariable(BR.game, item)
         helper.getBinding().executePendingBindings()
-        Glide.with(mContext).load(item.img).apply(options).into(helper.getView(R.id.iv_pic))
+        helper.addOnClickListener(R.id.btn_play)
+        Glide.with(mContext).load(item.image).apply(options).into(helper.getView(R.id.iv_game_img))
+        Glide.with(mContext).load(item.icon).apply(optionsAll).into(helper.getView(R.id.iv_game_icon))
     }
 
 
