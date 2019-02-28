@@ -15,9 +15,10 @@ class MainActivity : BaseActivity() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         initBottomTabs()
         mBinding.viewStart.layoutParams.height = getStatusbarHeight()
-        mFragments.add(HomeRootFragment())
+//        mFragments.add(HomeRootFragment())
+        mFragments.add(NewsFragment())
         mFragments.add(GameFragment())
-        mFragments.add(CircleFragment())
+        mFragments.add(GameGiftFragment())
         mFragments.add(MyFragment())
         mBinding.vpFragment.offscreenPageLimit = mFragments.size
         mBinding.vpFragment.adapter = HomeFragmentPagerAdapter(supportFragmentManager, mFragments)

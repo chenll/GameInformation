@@ -1,8 +1,6 @@
 package com.game.mcw.gameinformation
 
 import android.annotation.SuppressLint
-import android.databinding.BindingMethod
-import android.databinding.BindingMethods
 import android.databinding.DataBindingUtil
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -11,12 +9,10 @@ import android.support.design.widget.AppBarLayout
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
-import android.widget.ImageView
 import android.widget.LinearLayout
 import com.game.mcw.gameinformation.adapter.HomeFragmentPagerAdapter
 import com.game.mcw.gameinformation.databinding.FragmentHomeBinding
@@ -39,7 +35,7 @@ class HomeRootFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mFragments.add(HomeChild1Fragment())
+        mFragments.add(NewsFragment())
         mFragments.add(HomeChild2Fragment())
 //        mFragments.add(GameFragment())
         mBinding.vpFragment.offscreenPageLimit = mFragments.size

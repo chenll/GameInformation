@@ -17,7 +17,7 @@ import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class HomeChild1Fragment : BaseFragment() {
+class NewsFragment : BaseFragment() {
     private lateinit var mBinding: FragmentHomeChild1Binding
     private lateinit var mAdapter: NewsApapter
     private var page = 1

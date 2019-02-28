@@ -19,5 +19,8 @@ interface IndexApi {
     @GET("/index/list/video")
     fun getVideoList(@Query("page") pageNum: Int): Observable<AppResponse<Any>>
 
+    @GET("/index/list/gift")
+    fun getGiftList(@Query("page") pageNum: Int): Observable<AppResponse<Any>>
+
 
 }

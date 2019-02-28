@@ -1,6 +1,7 @@
 package com.game.mcw.gameinformation.net
 
 import com.game.mcw.gameinformation.modle.Game
+import com.game.mcw.gameinformation.modle.GameGift
 import com.game.mcw.gameinformation.modle.News
 import com.game.mcw.gameinformation.modle.Video
 import com.game.mcw.gameinformation.modle.dispose.RepositoryUtils
@@ -14,4 +15,5 @@ class IndexRepository(indexApi: IndexApi) {
 
     fun getNewsList(page: Int): Observable<List<News>> = RepositoryUtils.extractData(mIndexApi.getNewsList(page), object : TypeToken<List<News>>() {}.type)
     fun getVideoList(page: Int): Observable<List<Video>> = RepositoryUtils.extractData(mIndexApi.getVideoList(page), object : TypeToken<List<Video>>() {}.type)
+    fun getGameGiftList(page: Int): Observable<List<GameGift>> = RepositoryUtils.extractData(mIndexApi.getGiftList(page), object : TypeToken<List<GameGift>>() {}.type)
 }
