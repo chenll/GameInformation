@@ -31,7 +31,7 @@ class MainActivity : BaseActivity() {
         val navigationController = mBinding.tabBottom.material()
                 .addItem(android.R.drawable.ic_menu_camera, "首页")
                 .addItem(android.R.drawable.ic_menu_compass, "游戏")
-                .addItem(android.R.drawable.ic_menu_search, "圈子")
+                .addItem(android.R.drawable.ic_menu_search, "礼包")
                 .addItem(android.R.drawable.ic_menu_help, "我的")
                 .build()
         navigationController.setupWithViewPager(mBinding.vpFragment)

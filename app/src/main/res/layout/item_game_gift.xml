@@ -11,22 +11,45 @@
             type="com.game.mcw.gameinformation.modle.GameGift" />
     </data>
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/common_bg_gray"
-        android:orientation="vertical"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp">
+        android:layout_height="wrap_content">
 
+        <ImageView
+            android:id="@+id/iv_game_icon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:ignore="MissingConstraints" />
 
-     <TextView
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         android:text="@{gameGift.gameName}"/>
+        <TextView
+            android:id="@+id/tv_game_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            android:text="@{gameGift.gameName}"
+            app:layout_constraintBaseline_toBaselineOf="@+id/iv_game_icon"
+            app:layout_constraintLeft_toRightOf="@+id/iv_game_icon"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:ignore="MissingConstraints" />
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@{gameGift.name}"
+            android:paddingLeft="10dp"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            app:layout_constraintLeft_toRightOf="@+id/iv_game_icon"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_game_name"
+            tools:ignore="MissingConstraints" />
 
-    </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+
 </layout>
