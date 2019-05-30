@@ -52,7 +52,7 @@ class NewsFragment : BaseFragment() {
     private fun loadData(isRefresh: Boolean) {
         AppRepository.getIndexRepository().getNewsList(if (isRefresh) 1 else page).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(object : NetRespObserver<List<News>>() {
             override fun onNext(data: List<News>) {
-                if (!data.isEmpty()) {
+                if (data.isNotEmpty()) {
                     if (isRefresh) {
                         mAdapter.setNewData(data)
                         page = 2
