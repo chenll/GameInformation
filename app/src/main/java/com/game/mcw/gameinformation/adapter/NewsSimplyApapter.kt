@@ -7,43 +7,41 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestOptions
 import com.game.mcw.gameinformation.BR
 import com.game.mcw.gameinformation.MyApplication
-import com.game.mcw.gameinformation.R
 import com.game.mcw.gameinformation.adapter.base.BaseMVMultiItemAdapter
 import com.game.mcw.gameinformation.adapter.base.MVViewHolder
 import com.game.mcw.gameinformation.databinding.ItemNews3Binding
 import com.game.mcw.gameinformation.databinding.ItemNews4Binding
 import com.game.mcw.gameinformation.modle.News
-import com.game.mcw.gameinformation.modle.NewsGroup
 import com.qmuiteam.qmui.util.QMUIDisplayHelper
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 
-class NewsApapter : BaseMVMultiItemAdapter<NewsGroup, MVViewHolder>() {
+class NewsSimplyApapter : BaseMVMultiItemAdapter<News, MVViewHolder>() {
 
     var options: RequestOptions
 
     init {
         val roundedCornersTransformation = RoundedCornersTransformation(QMUIDisplayHelper.dp2px(MyApplication.INSTANCE, 5), 0, RoundedCornersTransformation.CornerType.ALL)
         options = RequestOptions().transforms(CenterCrop(), roundedCornersTransformation)
-        addItemType(1, R.layout.test_item_1)
-        addItemType(2, R.layout.test_item_1_1)
-        addItemType(3, R.layout.item_news_3)
-        addItemType(4, R.layout.item_news_4)
+        addItemType(News.type_1, com.game.mcw.gameinformation.R.layout.test_item_1)
+        addItemType(News.type_2, com.game.mcw.gameinformation.R.layout.test_item_1_1)
+        addItemType(News.type_3, com.game.mcw.gameinformation.R.layout.item_news_3)
+        addItemType(News.type_4, com.game.mcw.gameinformation.R.layout.item_news_4)
     }
 
-    override fun convert(helper: MVViewHolder, item: NewsGroup) {
+    override fun convert(helper: MVViewHolder, item: News) {
 
         when (helper.itemViewType) {
-            1 -> {
-                convert1(helper, item.news[0])
+            News.type_1 -> {
+                convert1(helper, item)
             }
-            2 -> {
-                convert2(helper, item.news[0])
+            News.type_2 -> {
+                convert2(helper, item)
             }
-            3 -> {
+            News.type_3 -> {
                 convert3(helper, item)
             }
-            4 -> {
+            News.type_4 -> {
                 convert4(helper, item)
             }
         }
@@ -66,39 +64,26 @@ class NewsApapter : BaseMVMultiItemAdapter<NewsGroup, MVViewHolder>() {
     }
 
 
-    private fun convert3(helper: MVViewHolder, item: NewsGroup) {
+    private fun convert3(helper: MVViewHolder, item: News) {
         val binding = helper.getBinding() as ItemNews3Binding
-        binding.setVariable(BR.item, item)
-        if (binding.recyclerView.layoutManager == null) {
-            initConvert3RecyclerView(binding)
+        if (binding.recyclerView.adapter == null) {
+            initconvert3RecyclerView(binding)
         }
-        (binding.recyclerView.adapter as NewsSimply3Apapter).setNewData(item.news)
-    }
-
-    private fun convert4(helper: MVViewHolder, item: NewsGroup) {
-        val binding = helper.getBinding() as ItemNews4Binding
-        binding.setVariable(BR.item, item)
-        if (binding.recyclerView.layoutManager == null) {
-            initConvert4RecyclerView(binding)
-        }
-        (binding.recyclerView.adapter as NewsSimply4Apapter).setNewData(item.news)
 
     }
 
+    private fun convert4(helper: MVViewHolder, item: News) {}
 
-    private fun initConvert3RecyclerView(binding: ItemNews3Binding) {
+
+    private fun initconvert3RecyclerView(binding: ItemNews3Binding) {
         val layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerView.layoutManager = layoutManager
-        NewsSimply3Apapter(R.layout.item_item_news_1).bindToRecyclerView(binding.recyclerView)
-//        NewsSimplyApapter().bindToRecyclerView(binding.recyclerView)
-//
+
     }
 
-    private fun initConvert4RecyclerView(binding: ItemNews4Binding) {
-        val layoutManager = GridLayoutManager(mContext, 2)
+    private fun initconvert4RecyclerView(binding: ItemNews4Binding) {
+        val layoutManager = GridLayoutManager(mContext, LinearLayoutManager.VERTICAL, 2, false)
         binding.recyclerView.layoutManager = layoutManager
-        NewsSimply4Apapter(R.layout.item_item_news_2).bindToRecyclerView(binding.recyclerView)
-//        NewsSimply3Apapter(R.layout.test_item_1).bindToRecyclerView(binding.recyclerView)
 
     }
 }

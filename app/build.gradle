@@ -92,6 +92,7 @@ dependencies {
     implementation 'com.just.agentweb:agentweb:4.0.2' // (必选)
     implementation 'com.just.agentweb:download:4.0.2' // (可选)
     implementation 'com.just.agentweb:filechooser:4.0.2'// (可选)
+    implementation 'com.youth.banner:banner:1.4.10'
 
 
 }

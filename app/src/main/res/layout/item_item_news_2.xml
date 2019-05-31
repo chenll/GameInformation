@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.game.mcw.gameinformation.modle.News" />
+    </data>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cl_pic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="6dp">
+
+        <ImageView
+            android:id="@+id/iv_pic"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintDimensionRatio="H,16:9"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{item.description.trim()}"
+            android:textColor="@color/common_list_content_color"
+            android:textSize="16sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/btn_enter"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/btn_enter"
+            app:layout_constraintTop_toBottomOf="@+id/iv_pic" />
+
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/btn_enter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="2dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="2dp"
+            android:text="进入"
+            android:textColor="@color/white"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_pic"
+            app:qmui_backgroundColor="#35AFFC"
+            app:qmui_borderColor="#35AFFC"
+            app:qmui_radius="6dp" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</layout>

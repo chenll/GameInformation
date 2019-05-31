@@ -9,6 +9,7 @@ class News(val id: Int, val author: String, val description: String, val img: St
         const val type_1 = 1
         const val type_2 = 2
         const val type_3 = 3
+        const val type_4 = 4
 
     }
 
