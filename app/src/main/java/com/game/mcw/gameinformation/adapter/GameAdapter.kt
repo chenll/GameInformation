@@ -16,7 +16,7 @@ import com.game.mcw.gameinformation.utils.GlideUtil
 import com.qmuiteam.qmui.util.QMUIDisplayHelper
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
-class GameApapter(layid: Int) : BaseMVAdapter<Game, MVViewHolder>(layid) {
+class GameAdapter(layId: Int) : BaseMVAdapter<Game, MVViewHolder>(layId) {
     private var options: RequestOptions
 
     init {

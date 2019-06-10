@@ -6,11 +6,10 @@ import com.game.mcw.gameinformation.BR
 import com.game.mcw.gameinformation.adapter.base.BaseMVAdapter
 import com.game.mcw.gameinformation.adapter.base.MVViewHolder
 import com.game.mcw.gameinformation.databinding.ItemMyBinding
-import com.game.mcw.gameinformation.databinding.ItemMyCardBinding
 import com.game.mcw.gameinformation.modle.Card
 
 
-class MyApapter(layid: Int) : BaseMVAdapter<Card, MVViewHolder>(layid) {
+class MyAdapter(layId: Int) : BaseMVAdapter<Card, MVViewHolder>(layId) {
 
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)

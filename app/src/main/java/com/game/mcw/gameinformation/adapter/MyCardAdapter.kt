@@ -12,7 +12,7 @@ import com.game.mcw.gameinformation.modle.Card
 import com.qmuiteam.qmui.util.QMUIDisplayHelper
 
 
-class MyCardApapter(layid: Int) : BaseMVAdapter<Card, MVViewHolder>(layid) {
+class MyCardAdapter(layId: Int) : BaseMVAdapter<Card, MVViewHolder>(layId) {
 
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)

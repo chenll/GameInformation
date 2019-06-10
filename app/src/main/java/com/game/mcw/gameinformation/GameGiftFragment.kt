@@ -7,8 +7,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.game.mcw.gameinformation.adapter.GameGiftExclusiveApapter
-import com.game.mcw.gameinformation.adapter.GameGiftApapter
+import com.game.mcw.gameinformation.adapter.GameGiftExclusiveAdapter
+import com.game.mcw.gameinformation.adapter.GameGiftAdapter
 import com.game.mcw.gameinformation.databinding.FragmentGameGiftBinding
 import com.game.mcw.gameinformation.modle.GameGift
 import com.game.mcw.gameinformation.modle.dispose.NetRespObserver
@@ -21,8 +21,8 @@ import io.reactivex.schedulers.Schedulers
 
 class GameGiftFragment : BaseFragment() {
     private lateinit var mBinding: FragmentGameGiftBinding
-    private lateinit var mAdapter: GameGiftApapter
-    private lateinit var mExclusiveAdapter: GameGiftExclusiveApapter
+    private lateinit var mAdapter: GameGiftAdapter
+    private lateinit var mExclusiveAdapter: GameGiftExclusiveAdapter
     private var page = 1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -38,7 +38,7 @@ class GameGiftFragment : BaseFragment() {
         mBinding.recyclerView.isNestedScrollingEnabled = true
         mBinding.recyclerView.layoutManager = layoutManager
         mBinding.recyclerView.addItemDecoration(HorizontalDividerItemDecoration.Builder(activity).size(QMUIDisplayHelper.dp2px(activity, 1)).color(ContextCompat.getColor(activity!!, R.color.common_list_decoration)).build())
-        mAdapter = GameGiftApapter(R.layout.item_game_gift)
+        mAdapter = GameGiftAdapter(R.layout.item_game_gift)
         mAdapter.bindToRecyclerView(mBinding.recyclerView)
         mAdapter.isFirstOnly(false)
         mAdapter.disableLoadMoreIfNotFullPage()
@@ -58,7 +58,7 @@ class GameGiftFragment : BaseFragment() {
         val layoutManagerExclusive = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         mBinding.rvExclusive.layoutManager = layoutManagerExclusive
         mBinding.rvExclusive.addItemDecoration(VerticalDividerItemDecoration.Builder(activity).size(QMUIDisplayHelper.dp2px(activity, 6)).color(ContextCompat.getColor(activity!!, R.color.transparent)).build())
-        mExclusiveAdapter = GameGiftExclusiveApapter(R.layout.item_game_gift_exclusive)
+        mExclusiveAdapter = GameGiftExclusiveAdapter(R.layout.item_game_gift_exclusive)
         mExclusiveAdapter.bindToRecyclerView(mBinding.rvExclusive)
     }
 

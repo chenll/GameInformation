@@ -13,7 +13,7 @@ import com.game.mcw.gameinformation.modle.NewsGroup
 import com.game.mcw.gameinformation.utils.GlideUtil
 
 
-class NewsApapter : BaseMVMultiItemAdapter<NewsGroup, MVViewHolder>() {
+class NewsAdapter : BaseMVMultiItemAdapter<NewsGroup, MVViewHolder>() {
 
 
     init {
@@ -64,7 +64,7 @@ class NewsApapter : BaseMVMultiItemAdapter<NewsGroup, MVViewHolder>() {
         if (binding.recyclerView.layoutManager == null) {
             initConvert3RecyclerView(binding)
         }
-        (binding.recyclerView.adapter as NewsSimply3Apapter).setNewData(item.news)
+        (binding.recyclerView.adapter as NewsSimply3Adapter).setNewData(item.news)
     }
 
     private fun convert4(helper: MVViewHolder, item: NewsGroup) {
@@ -73,7 +73,7 @@ class NewsApapter : BaseMVMultiItemAdapter<NewsGroup, MVViewHolder>() {
         if (binding.recyclerView.layoutManager == null) {
             initConvert4RecyclerView(binding)
         }
-        (binding.recyclerView.adapter as NewsSimply4Apapter).setNewData(item.news)
+        (binding.recyclerView.adapter as NewsSimply4Adapter).setNewData(item.news)
 
     }
 
@@ -81,13 +81,13 @@ class NewsApapter : BaseMVMultiItemAdapter<NewsGroup, MVViewHolder>() {
     private fun initConvert3RecyclerView(binding: ItemNews3Binding) {
         val layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerView.layoutManager = layoutManager
-        NewsSimply3Apapter(R.layout.item_item_news_1).bindToRecyclerView(binding.recyclerView)
+        NewsSimply3Adapter(R.layout.item_item_news_1).bindToRecyclerView(binding.recyclerView)
     }
 
     private fun initConvert4RecyclerView(binding: ItemNews4Binding) {
         val layoutManager = GridLayoutManager(mContext, 2)
         binding.recyclerView.layoutManager = layoutManager
-        NewsSimply4Apapter(R.layout.item_item_news_2).bindToRecyclerView(binding.recyclerView)
+        NewsSimply4Adapter(R.layout.item_item_news_2).bindToRecyclerView(binding.recyclerView)
 
     }
 }

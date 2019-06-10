@@ -7,20 +7,17 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
-import com.game.mcw.gameinformation.adapter.MyApapter
-import com.game.mcw.gameinformation.adapter.MyCardApapter
-import com.game.mcw.gameinformation.adapter.NewsSimply3Apapter
+import com.game.mcw.gameinformation.adapter.MyAdapter
+import com.game.mcw.gameinformation.adapter.MyCardAdapter
 import com.game.mcw.gameinformation.databinding.FragmentMyBinding
 import com.game.mcw.gameinformation.modle.Card
 import com.game.mcw.gameinformation.utils.GlideUtil
-import kotlinx.android.synthetic.main.fragment_my.view.*
 
 class MyFragment : BaseFragment() {
 
     private lateinit var mBinding: FragmentMyBinding
-    private lateinit var mCardAdapter: MyCardApapter
-    private lateinit var mAdapter: MyApapter
+    private lateinit var mCardAdapter: MyCardAdapter
+    private lateinit var mAdapter: MyAdapter
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_my, container, false)
         mBinding.fragment = this
@@ -33,7 +30,7 @@ class MyFragment : BaseFragment() {
         GlideUtil.loadCircleHeadPic("", mBinding.ivHead)
         val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         mBinding.rvMyHead.layoutManager = layoutManager
-        mCardAdapter = MyCardApapter(R.layout.item_my_card)
+        mCardAdapter = MyCardAdapter(R.layout.item_my_card)
         mCardAdapter.addData(Card(111, "优惠券", R.mipmap.ic_launcher, intArrayOf(Color.parseColor("#A55DFD"), Color.parseColor("#E463FB"))))
         mCardAdapter.addData(Card(222, "积分", R.mipmap.ic_launcher, intArrayOf(Color.parseColor("#FE4A65"), Color.parseColor("#EF7B3F"))))
         mCardAdapter.addData(Card(333, "零钱", R.mipmap.ic_launcher, intArrayOf(Color.parseColor("#36D5F2"), Color.parseColor("#2EE8EB"))))
@@ -43,7 +40,7 @@ class MyFragment : BaseFragment() {
 
         val layoutManagerBody = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         mBinding.rvMyBody.layoutManager = layoutManagerBody
-        mAdapter = MyApapter(R.layout.item_my)
+        mAdapter = MyAdapter(R.layout.item_my)
         mAdapter.addData(Card(111, "每日任务", R.mipmap.ic_launcher, intArrayOf(Color.parseColor("#A55DFD"), Color.parseColor("#E463FB"))))
         mAdapter.addData(Card(222, "积分商城", R.mipmap.ic_launcher, intArrayOf(Color.parseColor("#FE4A65"), Color.parseColor("#EF7B3F"))))
         mAdapter.addData(Card(333, "VIP特权", R.mipmap.ic_launcher, intArrayOf(Color.parseColor("#36D5F2"), Color.parseColor("#2EE8EB"))))

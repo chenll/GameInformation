@@ -5,7 +5,7 @@ import com.game.mcw.gameinformation.adapter.base.BaseMVAdapter
 import com.game.mcw.gameinformation.adapter.base.MVViewHolder
 import com.game.mcw.gameinformation.modle.Video
 
-class VideoApapter(layid: Int) : BaseMVAdapter<Video, MVViewHolder>(layid) {
+class VideoAdapter(layId: Int) : BaseMVAdapter<Video, MVViewHolder>(layId) {
 
     override fun convert(helper: MVViewHolder, item: Video) {
         helper.getBinding().setVariable(BR.video, item)

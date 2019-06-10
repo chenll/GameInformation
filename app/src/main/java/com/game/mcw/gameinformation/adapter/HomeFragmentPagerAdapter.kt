@@ -6,18 +6,18 @@ import android.support.v4.app.FragmentPagerAdapter
 
 
 class HomeFragmentPagerAdapter(fragmentManager: FragmentManager, fragments: List<Fragment>) : FragmentPagerAdapter(fragmentManager) {
-    private var mfragments: List<Fragment> = fragments
-    var titles = arrayOf("资讯","视频","攻略")
+    private var mFragments: List<Fragment> = fragments
+    var mTitles = arrayOf("资讯","视频","攻略")
 
     override fun getItem(p0: Int): Fragment {
-        return mfragments[p0]
+        return mFragments[p0]
     }
 
     override fun getCount(): Int {
-        return mfragments.size
+        return mFragments.size
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return titles[position]
+        return mTitles[position]
     }
 }

@@ -7,7 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.game.mcw.gameinformation.adapter.NewsApapter
+import com.game.mcw.gameinformation.adapter.NewsAdapter
 import com.game.mcw.gameinformation.databinding.FragmentHomeChild1Binding
 import com.game.mcw.gameinformation.databinding.HeadNewsBinding
 import com.game.mcw.gameinformation.modle.AppResponse
@@ -26,7 +26,7 @@ import java.lang.reflect.Type
 
 class NewsFragment : BaseFragment() {
     private lateinit var mBinding: FragmentHomeChild1Binding
-    private lateinit var mAdapter: NewsApapter
+    private lateinit var mAdapter: NewsAdapter
     private var page = 1
     private lateinit var mHeadBinding: HeadNewsBinding
 
@@ -42,7 +42,7 @@ class NewsFragment : BaseFragment() {
         mBinding.recyclerView.layoutManager = layoutManager
         mBinding.recyclerView.addItemDecoration(HorizontalDividerItemDecoration.Builder(activity).size(QMUIDisplayHelper.dp2px(activity, 1)).color(ContextCompat.getColor(activity!!, R.color.common_list_decoration)).build())
 //        mAdapter = MyApapter1(R.layout.test_item_1)
-        mAdapter = NewsApapter()
+        mAdapter = NewsAdapter()
         mAdapter.bindToRecyclerView(mBinding.recyclerView)
 
         mHeadBinding = DataBindingUtil.inflate(LayoutInflater.from(activity), R.layout.head_news, null, false)

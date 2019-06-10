@@ -6,7 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.game.mcw.gameinformation.adapter.GameApapter
+import com.game.mcw.gameinformation.adapter.GameAdapter
 import com.game.mcw.gameinformation.databinding.FragmentHomeChild3Binding
 import com.game.mcw.gameinformation.modle.Game
 import com.game.mcw.gameinformation.modle.dispose.NetRespObserver
@@ -16,7 +16,7 @@ import io.reactivex.schedulers.Schedulers
 
 class GameFragment : BaseFragment() {
     private lateinit var mBinding: FragmentHomeChild3Binding
-    private lateinit var mAdapter: GameApapter
+    private lateinit var mAdapter: GameAdapter
     private var page = 1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -30,7 +30,7 @@ class GameFragment : BaseFragment() {
         mBinding.recyclerView.isNestedScrollingEnabled = true
         mBinding.recyclerView.layoutManager = layoutManager
 //        mBinding.recyclerView.addItemDecoration(HorizontalDividerItemDecoration.Builder(activity).size(QMUIDisplayHelper.dp2px(activity, 1)).color(ContextCompat.getColor(activity!!, R.color.common_list_decoration)).build())
-        mAdapter = GameApapter(R.layout.test_item_3)
+        mAdapter = GameAdapter(R.layout.test_item_3)
         mAdapter.bindToRecyclerView(mBinding.recyclerView)
 //        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
         mAdapter.isFirstOnly(false)

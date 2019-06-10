@@ -7,7 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.game.mcw.gameinformation.adapter.VideoApapter
+import com.game.mcw.gameinformation.adapter.VideoAdapter
 import com.game.mcw.gameinformation.databinding.FragmentHomeChild2Binding
 import com.game.mcw.gameinformation.modle.Video
 import com.game.mcw.gameinformation.modle.dispose.NetRespObserver
@@ -19,7 +19,7 @@ import io.reactivex.schedulers.Schedulers
 
 class HomeChild2Fragment : BaseFragment() {
     private lateinit var mBinding: FragmentHomeChild2Binding
-    private lateinit var mAdapter: VideoApapter
+    private lateinit var mAdapter: VideoAdapter
     private var page = 1
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home_child_2, container, false)
@@ -32,7 +32,7 @@ class HomeChild2Fragment : BaseFragment() {
         mBinding.recyclerView.isNestedScrollingEnabled = true
         mBinding.recyclerView.layoutManager = layoutManager
         mBinding.recyclerView.addItemDecoration(HorizontalDividerItemDecoration.Builder(activity).size(QMUIDisplayHelper.dp2px(activity, 1)).color(ContextCompat.getColor(activity!!, R.color.common_list_decoration)).build())
-        mAdapter = VideoApapter(R.layout.test_item_2)
+        mAdapter = VideoAdapter(R.layout.test_item_2)
         mAdapter.bindToRecyclerView(mBinding.recyclerView)
 //        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
         mAdapter.isFirstOnly(false)
