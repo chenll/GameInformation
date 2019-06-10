@@ -7,7 +7,7 @@ import com.game.mcw.gameinformation.databinding.ItemGameGiftExclusiveBinding
 import com.game.mcw.gameinformation.modle.GameGift
 import com.game.mcw.gameinformation.utils.GlideUtil
 
-class GameExclusiveGiftApapter(layid: Int) : BaseMVAdapter<GameGift, MVViewHolder>(layid) {
+class GameGiftExclusiveApapter(layid: Int) : BaseMVAdapter<GameGift, MVViewHolder>(layid) {
 
     override fun convert(helper: MVViewHolder, item: GameGift) {
         var binding = helper.getBinding() as ItemGameGiftExclusiveBinding

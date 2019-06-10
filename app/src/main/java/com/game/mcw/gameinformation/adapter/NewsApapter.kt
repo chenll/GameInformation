@@ -1,13 +1,8 @@
 package com.game.mcw.gameinformation.adapter
 
-import android.opengl.GLUtils
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.request.RequestOptions
 import com.game.mcw.gameinformation.BR
-import com.game.mcw.gameinformation.MyApplication
 import com.game.mcw.gameinformation.R
 import com.game.mcw.gameinformation.adapter.base.BaseMVMultiItemAdapter
 import com.game.mcw.gameinformation.adapter.base.MVViewHolder
@@ -16,8 +11,6 @@ import com.game.mcw.gameinformation.databinding.ItemNews4Binding
 import com.game.mcw.gameinformation.modle.News
 import com.game.mcw.gameinformation.modle.NewsGroup
 import com.game.mcw.gameinformation.utils.GlideUtil
-import com.qmuiteam.qmui.util.QMUIDisplayHelper
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 
 class NewsApapter : BaseMVMultiItemAdapter<NewsGroup, MVViewHolder>() {
@@ -89,15 +82,12 @@ class NewsApapter : BaseMVMultiItemAdapter<NewsGroup, MVViewHolder>() {
         val layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerView.layoutManager = layoutManager
         NewsSimply3Apapter(R.layout.item_item_news_1).bindToRecyclerView(binding.recyclerView)
-//        NewsSimplyApapter().bindToRecyclerView(binding.recyclerView)
-//
     }
 
     private fun initConvert4RecyclerView(binding: ItemNews4Binding) {
         val layoutManager = GridLayoutManager(mContext, 2)
         binding.recyclerView.layoutManager = layoutManager
         NewsSimply4Apapter(R.layout.item_item_news_2).bindToRecyclerView(binding.recyclerView)
-//        NewsSimply3Apapter(R.layout.test_item_1).bindToRecyclerView(binding.recyclerView)
 
     }
 }

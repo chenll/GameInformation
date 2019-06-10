@@ -7,12 +7,9 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.game.mcw.gameinformation.adapter.GameExclusiveGiftApapter
+import com.game.mcw.gameinformation.adapter.GameGiftExclusiveApapter
 import com.game.mcw.gameinformation.adapter.GameGiftApapter
-import com.game.mcw.gameinformation.adapter.MyApapter3
-import com.game.mcw.gameinformation.databinding.FragmentGameBinding
 import com.game.mcw.gameinformation.databinding.FragmentGameGiftBinding
-import com.game.mcw.gameinformation.databinding.FragmentHomeChild3Binding
 import com.game.mcw.gameinformation.modle.GameGift
 import com.game.mcw.gameinformation.modle.dispose.NetRespObserver
 import com.game.mcw.gameinformation.net.AppRepository
@@ -25,7 +22,7 @@ import io.reactivex.schedulers.Schedulers
 class GameGiftFragment : BaseFragment() {
     private lateinit var mBinding: FragmentGameGiftBinding
     private lateinit var mAdapter: GameGiftApapter
-    private lateinit var mExclusiveAdapter: GameExclusiveGiftApapter
+    private lateinit var mExclusiveAdapter: GameGiftExclusiveApapter
     private var page = 1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -61,7 +58,7 @@ class GameGiftFragment : BaseFragment() {
         val layoutManagerExclusive = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         mBinding.rvExclusive.layoutManager = layoutManagerExclusive
         mBinding.rvExclusive.addItemDecoration(VerticalDividerItemDecoration.Builder(activity).size(QMUIDisplayHelper.dp2px(activity, 6)).color(ContextCompat.getColor(activity!!, R.color.transparent)).build())
-        mExclusiveAdapter = GameExclusiveGiftApapter(R.layout.item_game_gift_exclusive)
+        mExclusiveAdapter = GameGiftExclusiveApapter(R.layout.item_game_gift_exclusive)
         mExclusiveAdapter.bindToRecyclerView(mBinding.rvExclusive)
     }
 
