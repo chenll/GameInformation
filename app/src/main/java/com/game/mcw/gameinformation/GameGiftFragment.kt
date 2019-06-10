@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.game.mcw.gameinformation.adapter.GameExclusiveGiftApapter
 import com.game.mcw.gameinformation.adapter.GameGiftApapter
 import com.game.mcw.gameinformation.adapter.MyApapter3
 import com.game.mcw.gameinformation.databinding.FragmentGameBinding
@@ -17,12 +18,14 @@ import com.game.mcw.gameinformation.modle.dispose.NetRespObserver
 import com.game.mcw.gameinformation.net.AppRepository
 import com.qmuiteam.qmui.util.QMUIDisplayHelper
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration
+import com.yqritc.recyclerviewflexibledivider.VerticalDividerItemDecoration
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class GameGiftFragment : BaseFragment() {
     private lateinit var mBinding: FragmentGameGiftBinding
     private lateinit var mAdapter: GameGiftApapter
+    private lateinit var mExclusiveAdapter: GameExclusiveGiftApapter
     private var page = 1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -32,6 +35,8 @@ class GameGiftFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initExclusiveRecyclerView()
+
         val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         mBinding.recyclerView.isNestedScrollingEnabled = true
         mBinding.recyclerView.layoutManager = layoutManager
@@ -52,15 +57,25 @@ class GameGiftFragment : BaseFragment() {
 //        }
     }
 
+    private fun initExclusiveRecyclerView() {
+        val layoutManagerExclusive = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        mBinding.rvExclusive.layoutManager = layoutManagerExclusive
+        mBinding.rvExclusive.addItemDecoration(VerticalDividerItemDecoration.Builder(activity).size(QMUIDisplayHelper.dp2px(activity, 6)).color(ContextCompat.getColor(activity!!, R.color.transparent)).build())
+        mExclusiveAdapter = GameExclusiveGiftApapter(R.layout.item_game_gift_exclusive)
+        mExclusiveAdapter.bindToRecyclerView(mBinding.rvExclusive)
+    }
+
     private fun loadData(isRefresh: Boolean) {
         AppRepository.getIndexRepository().getGameGiftList(if (isRefresh) 1 else page).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(object : NetRespObserver<List<GameGift>>() {
             override fun onNext(data: List<GameGift>) {
-                if (!data.isEmpty()) {
+                if (data.isNotEmpty()) {
                     if (isRefresh) {
                         mAdapter.setNewData(data)
+                        mExclusiveAdapter.setNewData(data)
                         page = 2
                     } else {
                         mAdapter.addData(data)
+                        mExclusiveAdapter.addData(data)
                         page++
                     }
                     mAdapter.notifyDataSetChanged()

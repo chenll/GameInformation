@@ -1,5 +1,6 @@
 package com.game.mcw.gameinformation.adapter
 
+import android.opengl.GLUtils
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -14,17 +15,15 @@ import com.game.mcw.gameinformation.databinding.ItemNews3Binding
 import com.game.mcw.gameinformation.databinding.ItemNews4Binding
 import com.game.mcw.gameinformation.modle.News
 import com.game.mcw.gameinformation.modle.NewsGroup
+import com.game.mcw.gameinformation.utils.GlideUtil
 import com.qmuiteam.qmui.util.QMUIDisplayHelper
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 
 class NewsApapter : BaseMVMultiItemAdapter<NewsGroup, MVViewHolder>() {
 
-    var options: RequestOptions
 
     init {
-        val roundedCornersTransformation = RoundedCornersTransformation(QMUIDisplayHelper.dp2px(MyApplication.INSTANCE, 5), 0, RoundedCornersTransformation.CornerType.ALL)
-        options = RequestOptions().transforms(CenterCrop(), roundedCornersTransformation)
         addItemType(1, R.layout.test_item_1)
         addItemType(2, R.layout.test_item_1_1)
         addItemType(3, R.layout.item_news_3)
@@ -55,14 +54,14 @@ class NewsApapter : BaseMVMultiItemAdapter<NewsGroup, MVViewHolder>() {
     private fun convert1(helper: MVViewHolder, item: News) {
         helper.getBinding().setVariable(BR.item, item)
         helper.getBinding().executePendingBindings()
-        Glide.with(mContext).load(item.img).apply(options).into(helper.getView(com.game.mcw.gameinformation.R.id.iv_pic))
+        GlideUtil.loadBorderRadiusGameIcon(item.img,helper.getView(R.id.iv_pic))
     }
 
 
     private fun convert2(helper: MVViewHolder, item: News) {
         helper.getBinding().setVariable(BR.item, item)
         helper.getBinding().executePendingBindings()
-        Glide.with(mContext).load(item.img).apply(options).into(helper.getView(com.game.mcw.gameinformation.R.id.iv_pic))
+        GlideUtil.loadBorderRadiusGameIcon(item.img,helper.getView(R.id.iv_pic))
     }
 
 

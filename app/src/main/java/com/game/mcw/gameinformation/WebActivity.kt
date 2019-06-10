@@ -14,7 +14,11 @@ import com.game.mcw.gameinformation.databinding.ActivityWebBinding
 import com.just.agentweb.AgentWeb
 import java.util.*
 
-class WebActivity : BaseActivity() {
+class WebActivity : BaseActivity<ActivityWebBinding>() {
+    override fun getLayoutId(): Int {
+        return R.layout.activity_web
+    }
+
     companion object {
         fun goWeb(context: Context, url: String) {
             val intent = Intent(context, WebActivity::class.java)
@@ -23,13 +27,11 @@ class WebActivity : BaseActivity() {
         }
     }
 
-    private lateinit var mBinding: ActivityWebBinding
     private lateinit var agentWeb: AgentWeb
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_web)
         agentWeb = AgentWeb.with(this)
                 .setAgentWebParent(mBinding.flWebRoot, FrameLayout.LayoutParams(-1, -1))
                 .useDefaultIndicator()

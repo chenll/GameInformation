@@ -7,12 +7,14 @@ import com.game.mcw.gameinformation.adapter.HomeFragmentPagerAdapter
 import com.game.mcw.gameinformation.databinding.ActivityMainBinding
 import java.util.*
 
-class MainActivity : BaseActivity() {
-    private lateinit var mBinding: ActivityMainBinding
+class MainActivity : BaseActivity<ActivityMainBinding>() {
+    override fun getLayoutId(): Int {
+        return R.layout.activity_main
+    }
+
     private var mFragments: MutableList<Fragment> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         initBottomTabs()
         mBinding.viewStart.layoutParams.height = getStatusbarHeight()
 //        mFragments.add(HomeRootFragment())

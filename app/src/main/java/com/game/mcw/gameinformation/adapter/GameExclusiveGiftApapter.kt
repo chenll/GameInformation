@@ -3,17 +3,17 @@ package com.game.mcw.gameinformation.adapter
 import com.game.mcw.gameinformation.BR
 import com.game.mcw.gameinformation.adapter.base.BaseMVAdapter
 import com.game.mcw.gameinformation.adapter.base.MVViewHolder
-import com.game.mcw.gameinformation.databinding.ItemGameGiftBinding
+import com.game.mcw.gameinformation.databinding.ItemGameGiftExclusiveBinding
 import com.game.mcw.gameinformation.modle.GameGift
 import com.game.mcw.gameinformation.utils.GlideUtil
 
-class GameGiftApapter(layid: Int) : BaseMVAdapter<GameGift, MVViewHolder>(layid) {
-
+class GameExclusiveGiftApapter(layid: Int) : BaseMVAdapter<GameGift, MVViewHolder>(layid) {
 
     override fun convert(helper: MVViewHolder, item: GameGift) {
-        val binding = helper.getBinding() as ItemGameGiftBinding
-        binding.setVariable(BR.gameGift, item)
-        binding.executePendingBindings()
+        var binding = helper.getBinding() as ItemGameGiftExclusiveBinding
+
+        helper.getBinding().setVariable(BR.gameGift, item)
+        helper.getBinding().executePendingBindings()
         GlideUtil.loadBorderRadiusGameIcon("", binding.ivGameIcon)
 
     }

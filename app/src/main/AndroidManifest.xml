@@ -27,6 +27,12 @@
             android:name=".WebActivity"
             android:configChanges="orientation|screenSize"
             android:hardwareAccelerated="true" />
+        <activity
+            android:name=".LoginActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".UserInfoActivity"
+            android:configChanges="orientation|screenSize" />
     </application>
 
 </manifest>
