@@ -1,6 +1,5 @@
 package com.game.mcw.gameinformation
 
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.game.mcw.gameinformation.adapter.HomeFragmentPagerAdapter
