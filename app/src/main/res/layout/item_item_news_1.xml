@@ -22,6 +22,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:scaleType="fitXY"
+            app:imageUrl="@{item.img}"
             app:layout_constraintDimensionRatio="1:1"
             tools:ignore="MissingConstraints" />
 

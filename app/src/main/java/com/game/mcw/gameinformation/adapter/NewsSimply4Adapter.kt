@@ -16,8 +16,6 @@ class NewsSimply4Adapter(layId: Int) : BaseMVAdapter<News, MVViewHolder>(layId) 
         var binding = helper.getBinding() as ItemItemNews2Binding
         binding.setVariable(BR.item, item)
         binding.executePendingBindings()
-        GlideUtil.loadBorderRadiusGameIcon(item.img,helper.getView(R.id.iv_pic))
-
     }
 
 }

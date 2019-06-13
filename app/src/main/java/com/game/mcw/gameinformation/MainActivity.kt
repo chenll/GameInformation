@@ -23,6 +23,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         mFragments.add(MyFragment())
         mBinding.vpFragment.offscreenPageLimit = mFragments.size
         mBinding.vpFragment.adapter = HomeFragmentPagerAdapter(supportFragmentManager, mFragments)
+//        startActivity(TestActivity::class.java)
 
 
     }

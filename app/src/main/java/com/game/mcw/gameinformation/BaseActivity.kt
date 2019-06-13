@@ -1,5 +1,6 @@
 package com.game.mcw.gameinformation
 
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
@@ -23,5 +24,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         QMUIStatusBarHelper.translucent(this)
         QMUIStatusBarHelper.setStatusBarDarkMode(this)
     }
-
+    fun startActivity(cls: Class<*>) {
+        super.startActivity(Intent(this, cls))
+    }
 }

@@ -47,14 +47,12 @@ class NewsAdapter : BaseMVMultiItemAdapter<NewsGroup, MVViewHolder>() {
     private fun convert1(helper: MVViewHolder, item: News) {
         helper.getBinding().setVariable(BR.item, item)
         helper.getBinding().executePendingBindings()
-        GlideUtil.loadBorderRadiusGameIcon(item.img,helper.getView(R.id.iv_pic))
     }
 
 
     private fun convert2(helper: MVViewHolder, item: News) {
         helper.getBinding().setVariable(BR.item, item)
         helper.getBinding().executePendingBindings()
-        GlideUtil.loadBorderRadiusGameIcon(item.img,helper.getView(R.id.iv_pic))
     }
 
 

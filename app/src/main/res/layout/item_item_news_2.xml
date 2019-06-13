@@ -30,6 +30,7 @@
             app:layout_constraintDimensionRatio="H,16:9"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            app:imageUrl="@{item.img}"
             tools:ignore="MissingConstraints" />
 
         <TextView
