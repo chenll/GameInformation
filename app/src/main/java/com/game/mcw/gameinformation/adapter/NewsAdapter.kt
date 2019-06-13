@@ -1,7 +1,5 @@
 package com.game.mcw.gameinformation.adapter
 
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
 import com.game.mcw.gameinformation.BR
 import com.game.mcw.gameinformation.R
 import com.game.mcw.gameinformation.adapter.base.BaseMVMultiItemAdapter
@@ -10,7 +8,6 @@ import com.game.mcw.gameinformation.databinding.ItemNews3Binding
 import com.game.mcw.gameinformation.databinding.ItemNews4Binding
 import com.game.mcw.gameinformation.modle.News
 import com.game.mcw.gameinformation.modle.NewsGroup
-import com.game.mcw.gameinformation.utils.GlideUtil
 
 
 class NewsAdapter : BaseMVMultiItemAdapter<NewsGroup, MVViewHolder>() {
@@ -59,8 +56,8 @@ class NewsAdapter : BaseMVMultiItemAdapter<NewsGroup, MVViewHolder>() {
     private fun convert3(helper: MVViewHolder, item: NewsGroup) {
         val binding = helper.getBinding() as ItemNews3Binding
         binding.setVariable(BR.item, item)
-        if (binding.recyclerView.layoutManager == null) {
-            initConvert3RecyclerView(binding)
+        if (binding.recyclerView.adapter == null) {
+            NewsSimply3Adapter(R.layout.item_item_news_1).bindToRecyclerView(binding.recyclerView)
         }
         (binding.recyclerView.adapter as NewsSimply3Adapter).setNewData(item.news)
     }
@@ -68,24 +65,10 @@ class NewsAdapter : BaseMVMultiItemAdapter<NewsGroup, MVViewHolder>() {
     private fun convert4(helper: MVViewHolder, item: NewsGroup) {
         val binding = helper.getBinding() as ItemNews4Binding
         binding.setVariable(BR.item, item)
-        if (binding.recyclerView.layoutManager == null) {
-            initConvert4RecyclerView(binding)
+        if (binding.recyclerView.adapter == null) {
+            NewsSimply4Adapter(R.layout.item_item_news_2).bindToRecyclerView(binding.recyclerView)
         }
         (binding.recyclerView.adapter as NewsSimply4Adapter).setNewData(item.news)
-
     }
 
-
-    private fun initConvert3RecyclerView(binding: ItemNews3Binding) {
-        val layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
-        binding.recyclerView.layoutManager = layoutManager
-        NewsSimply3Adapter(R.layout.item_item_news_1).bindToRecyclerView(binding.recyclerView)
-    }
-
-    private fun initConvert4RecyclerView(binding: ItemNews4Binding) {
-        val layoutManager = GridLayoutManager(mContext, 2)
-        binding.recyclerView.layoutManager = layoutManager
-        NewsSimply4Adapter(R.layout.item_item_news_2).bindToRecyclerView(binding.recyclerView)
-
-    }
 }

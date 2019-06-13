@@ -37,10 +37,10 @@ class NewsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+//        val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         mBinding.recyclerView.isNestedScrollingEnabled = true
-        mBinding.recyclerView.layoutManager = layoutManager
-        mBinding.recyclerView.addItemDecoration(HorizontalDividerItemDecoration.Builder(activity).size(QMUIDisplayHelper.dp2px(activity, 1)).color(ContextCompat.getColor(activity!!, R.color.common_list_decoration)).build())
+//        mBinding.recyclerView.layoutManager = layoutManager
+//        mBinding.recyclerView.addItemDecoration(HorizontalDividerItemDecoration.Builder(activity).size(QMUIDisplayHelper.dp2px(activity, 1)).color(ContextCompat.getColor(activity!!, R.color.common_list_decoration)).build())
 //        mAdapter = MyApapter1(R.layout.test_item_1)
         mAdapter = NewsAdapter()
         mAdapter.bindToRecyclerView(mBinding.recyclerView)

@@ -2,12 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data />
+    <data>
+
+        <import type="android.support.v7.widget.LinearLayoutManager" />
+    </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <include
             android:id="@+id/title"
@@ -26,7 +28,9 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                app:rvDecorationColor="@{@color/common_list_decoration}"
+                app:rvOrientation="@{LinearLayoutManager.VERTICAL}" />
 
         </android.support.v4.widget.SwipeRefreshLayout>
     </android.support.constraint.ConstraintLayout>

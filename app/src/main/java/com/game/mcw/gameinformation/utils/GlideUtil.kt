@@ -19,7 +19,7 @@ object GlideUtil {
      *加载圆形头像
      */
     fun loadCircleHeadPic(url: String, view: ImageView) {
-        loadCirclePic(view.context, url, view, R.mipmap.ic_launcher, R.mipmap.ic_launcher)
+        loadCirclePic(view.context, url, view)
     }
 
     /**
@@ -28,7 +28,7 @@ object GlideUtil {
     private fun loadCirclePic(
             context: Context,
             url: String,
-            view: ImageView, @DrawableRes place: Int, @DrawableRes error: Int
+            view: ImageView, @DrawableRes place: Int = R.mipmap.ic_launcher, @DrawableRes error: Int = R.mipmap.ic_launcher
     ) {
         val requestOptions = RequestOptions.bitmapTransform(CircleCrop())
         val transformsPlace = Glide.with(view.context).load(place).apply(requestOptions)
