@@ -9,17 +9,14 @@ import android.view.ViewGroup
 import com.game.mcw.gameinformation.adapter.NewsAdapter
 import com.game.mcw.gameinformation.databinding.FragmentHomeChild1Binding
 import com.game.mcw.gameinformation.databinding.HeadNewsBinding
-import com.game.mcw.gameinformation.modle.AppResponse
 import com.game.mcw.gameinformation.modle.IndexResource
+import com.game.mcw.gameinformation.modle.News
 import com.game.mcw.gameinformation.modle.NewsGroup
 import com.game.mcw.gameinformation.modle.dispose.NetRespObserver
 import com.game.mcw.gameinformation.net.AppRepository
 import com.game.mcw.gameinformation.utils.GlideImageLoader
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.lang.reflect.Type
 
 class NewsFragment : BaseFragment() {
     private lateinit var mBinding: FragmentHomeChild1Binding
@@ -54,11 +51,9 @@ class NewsFragment : BaseFragment() {
         mBinding.swipeRefreshLayout.setOnRefreshListener {
             loadData(true)
         }
-//        loadData(false)
+        loadData(false)
         loadHeadData()
-        val type: Type = object : TypeToken<AppResponse<List<NewsGroup>>>() {}.type
-        val s: AppResponse<List<NewsGroup>>? = Gson().fromJson("{\"code\":\"0\",\"msg\":\"操作成功\",\"data\":[{\"type\":3,\"title\":\"最近玩过\",\"news\":[{\"id\":7109,\"title\":\"《非常英雄》官方中文Steam正版分流下载发布！\",\"category\":\"单机资讯\",\"img\":\"http://imgs.ali213.net/news/2019/01/24/2019012453246796.jpg\",\"description\":\"小编今天为大家带来了《非常英雄（Unruly Heroes）》官方中文Steam正版分流下载，感兴趣的玩家们赶紧来看看吧。\",\"author\":\"小编：何者\",\"content\":\"\",\"views\":\"\"},{\"id\":7109,\"title\":\"《非常英雄》官方中文Steam正版分流下载发布！\",\"category\":\"单机资讯\",\"img\":\"http://imgs.ali213.net/news/2019/01/24/2019012453246796.jpg\",\"description\":\"小编今天为大家带来了《非常英雄（Unruly Heroes）》官方中文Steam正版分流下载，感兴趣的玩家们赶紧来看看吧。\",\"author\":\"小编：何者\",\"content\":\"\",\"views\":\"\"},{\"id\":7109,\"title\":\"《非常英雄》官方中文Steam正版分流下载发布！\",\"category\":\"单机资讯\",\"img\":\"http://imgs.ali213.net/news/2019/01/24/2019012453246796.jpg\",\"description\":\"小编今天为大家带来了《非常英雄（Unruly Heroes）》官方中文Steam正版分流下载，感兴趣的玩家们赶紧来看看吧。\",\"author\":\"小编：何者\",\"content\":\"\",\"views\":\"\"},{\"id\":7109,\"title\":\"《非常英雄》官方中文Steam正版分流下载发布！\",\"category\":\"单机资讯\",\"img\":\"http://imgs.ali213.net/news/2019/01/24/2019012453246796.jpg\",\"description\":\"小编今天为大家带来了《非常英雄（Unruly Heroes）》官方中文Steam正版分流下载，感兴趣的玩家们赶紧来看看吧。\",\"author\":\"小编：何者\",\"content\":\"\",\"views\":\"\"}]},{\"type\":4,\"title\":\"最近玩过\",\"news\":[{\"id\":7109,\"title\":\"《非常英雄》官方中文Steam正版分流下载发布！\",\"category\":\"单机资讯\",\"img\":\"http://imgs.ali213.net/news/2019/01/24/2019012453246796.jpg\",\"description\":\"小编今天为大家带来了《非常英雄（Unruly Heroes）》官方中文Steam正版分流下载，感兴趣的玩家们赶紧来看看吧。\",\"author\":\"小编：何者\",\"content\":\"\",\"views\":\"\"},{\"id\":7109,\"title\":\"《非常英雄》官方中文Steam正版分流下载发布！\",\"category\":\"单机资讯\",\"img\":\"http://imgs.ali213.net/news/2019/01/24/2019012453246796.jpg\",\"description\":\"小编今天为大家带来了《非常英雄（Unruly Heroes）》官方中文Steam正版分流下载，感兴趣的玩家们赶紧来看看吧。\",\"author\":\"小编：何者\",\"content\":\"\",\"views\":\"\"},{\"id\":7109,\"title\":\"《非常英雄》官方中文Steam正版分流下载发布！\",\"category\":\"单机资讯\",\"img\":\"http://imgs.ali213.net/news/2019/01/24/2019012453246796.jpg\",\"description\":\"小编今天为大家带来了《非常英雄（Unruly Heroes）》官方中文Steam正版分流下载，感兴趣的玩家们赶紧来看看吧。\",\"author\":\"小编：何者\",\"content\":\"\",\"views\":\"\"},{\"id\":7109,\"title\":\"《非常英雄》官方中文Steam正版分流下载发布！\",\"category\":\"单机资讯\",\"img\":\"http://imgs.ali213.net/news/2019/01/24/2019012453246796.jpg\",\"description\":\"小编今天为大家带来了《非常英雄（Unruly Heroes）》官方中文Steam正版分流下载，感兴趣的玩家们赶紧来看看吧。\",\"author\":\"小编：何者\",\"content\":\"\",\"views\":\"\"}]},{\"type\":1,\"news\":[{\"id\":7109,\"title\":\"《非常英雄》官方中文Steam正版分流下载发布！\",\"category\":\"单机资讯\",\"img\":\"http://imgs.ali213.net/news/2019/01/24/2019012453246796.jpg\",\"description\":\"小编今天为大家带来了《非常英雄（Unruly Heroes）》官方中文Steam正版分流下载，感兴趣的玩家们赶紧来看看吧。\",\"author\":\"小编：何者\",\"content\":\"\",\"views\":\"\"}]},{\"type\":1,\"news\":[{\"id\":7109,\"title\":\"《非常英雄》官方中文Steam正版分流下载发布！\",\"category\":\"单机资讯\",\"img\":\"http://imgs.ali213.net/news/2019/01/24/2019012453246796.jpg\",\"description\":\"小编今天为大家带来了《非常英雄（Unruly Heroes）》官方中文Steam正版分流下载，感兴趣的玩家们赶紧来看看吧。\",\"author\":\"小编：何者\",\"content\":\"\",\"views\":\"\"}]},{\"type\":1,\"news\":[{\"id\":7109,\"title\":\"《非常英雄》官方中文Steam正版分流下载发布！\",\"category\":\"单机资讯\",\"img\":\"http://imgs.ali213.net/news/2019/01/24/2019012453246796.jpg\",\"description\":\"小编今天为大家带来了《非常英雄（Unruly Heroes）》官方中文Steam正版分流下载，感兴趣的玩家们赶紧来看看吧。\",\"author\":\"小编：何者\",\"content\":\"\",\"views\":\"\"}]},{\"type\":1,\"news\":[{\"id\":7109,\"title\":\"《非常英雄》官方中文Steam正版分流下载发布！\",\"category\":\"单机资讯\",\"img\":\"http://imgs.ali213.net/news/2019/01/24/2019012453246796.jpg\",\"description\":\"小编今天为大家带来了《非常英雄（Unruly Heroes）》官方中文Steam正版分流下载，感兴趣的玩家们赶紧来看看吧。\",\"author\":\"小编：何者\",\"content\":\"\",\"views\":\"\"}]},{\"type\":3,\"title\":\"最近玩过\",\"news\":[{\"id\":7109,\"title\":\"《非常英雄》官方中文Steam正版分流下载发布！\",\"category\":\"单机资讯\",\"img\":\"http://imgs.ali213.net/news/2019/01/24/2019012453246796.jpg\",\"description\":\"小编今天为大家带来了《非常英雄（Unruly Heroes）》官方中文Steam正版分流下载，感兴趣的玩家们赶紧来看看吧。\",\"author\":\"小编：何者\",\"content\":\"\",\"views\":\"\"},{\"id\":7109,\"title\":\"《非常英雄》官方中文Steam正版分流下载发布！\",\"category\":\"单机资讯\",\"img\":\"http://imgs.ali213.net/news/2019/01/24/2019012453246796.jpg\",\"description\":\"小编今天为大家带来了《非常英雄（Unruly Heroes）》官方中文Steam正版分流下载，感兴趣的玩家们赶紧来看看吧。\",\"author\":\"小编：何者\",\"content\":\"\",\"views\":\"\"},{\"id\":7109,\"title\":\"《非常英雄》官方中文Steam正版分流下载发布！\",\"category\":\"单机资讯\",\"img\":\"http://imgs.ali213.net/news/2019/01/24/2019012453246796.jpg\",\"description\":\"小编今天为大家带来了《非常英雄（Unruly Heroes）》官方中文Steam正版分流下载，感兴趣的玩家们赶紧来看看吧。\",\"author\":\"小编：何者\",\"content\":\"\",\"views\":\"\"},{\"id\":7109,\"title\":\"《非常英雄》官方中文Steam正版分流下载发布！\",\"category\":\"单机资讯\",\"img\":\"http://imgs.ali213.net/news/2019/01/24/2019012453246796.jpg\",\"description\":\"小编今天为大家带来了《非常英雄（Unruly Heroes）》官方中文Steam正版分流下载，感兴趣的玩家们赶紧来看看吧。\",\"author\":\"小编：何者\",\"content\":\"\",\"views\":\"\"}]},{\"type\":1,\"news\":[{\"id\":7109,\"title\":\"《非常英雄》官方中文Steam正版分流下载发布！\",\"category\":\"单机资讯\",\"img\":\"http://imgs.ali213.net/news/2019/01/24/2019012453246796.jpg\",\"description\":\"小编今天为大家带来了《非常英雄（Unruly Heroes）》官方中文Steam正版分流下载，感兴趣的玩家们赶紧来看看吧。\",\"author\":\"小编：何者\",\"content\":\"\",\"views\":\"\"}]},{\"type\":1,\"news\":[{\"id\":7109,\"title\":\"《非常英雄》官方中文Steam正版分流下载发布！\",\"category\":\"单机资讯\",\"img\":\"http://imgs.ali213.net/news/2019/01/24/2019012453246796.jpg\",\"description\":\"小编今天为大家带来了《非常英雄（Unruly Heroes）》官方中文Steam正版分流下载，感兴趣的玩家们赶紧来看看吧。\",\"author\":\"小编：何者\",\"content\":\"\",\"views\":\"\"}]},{\"type\":1,\"news\":[{\"id\":7109,\"title\":\"《非常英雄》官方中文Steam正版分流下载发布！\",\"category\":\"单机资讯\",\"img\":\"http://imgs.ali213.net/news/2019/01/24/2019012453246796.jpg\",\"description\":\"小编今天为大家带来了《非常英雄（Unruly Heroes）》官方中文Steam正版分流下载，感兴趣的玩家们赶紧来看看吧。\",\"author\":\"小编：何者\",\"content\":\"\",\"views\":\"\"}]},{\"type\":1,\"news\":[{\"id\":7109,\"title\":\"《非常英雄》官方中文Steam正版分流下载发布！\",\"category\":\"单机资讯\",\"img\":\"http://imgs.ali213.net/news/2019/01/24/2019012453246796.jpg\",\"description\":\"小编今天为大家带来了《非常英雄（Unruly Heroes）》官方中文Steam正版分流下载，感兴趣的玩家们赶紧来看看吧。\",\"author\":\"小编：何者\",\"content\":\"\",\"views\":\"\"}]},{\"type\":1,\"news\":[{\"id\":7109,\"title\":\"《非常英雄》官方中文Steam正版分流下载发布！\",\"category\":\"单机资讯\",\"img\":\"http://imgs.ali213.net/news/2019/01/24/2019012453246796.jpg\",\"description\":\"小编今天为大家带来了《非常英雄（Unruly Heroes）》官方中文Steam正版分流下载，感兴趣的玩家们赶紧来看看吧。\",\"author\":\"小编：何者\",\"content\":\"\",\"views\":\"\"}]},{\"type\":1,\"news\":[{\"id\":7109,\"title\":\"《非常英雄》官方中文Steam正版分流下载发布！\",\"category\":\"单机资讯\",\"img\":\"http://imgs.ali213.net/news/2019/01/24/2019012453246796.jpg\",\"description\":\"小编今天为大家带来了《非常英雄（Unruly Heroes）》官方中文Steam正版分流下载，感兴趣的玩家们赶紧来看看吧。\",\"author\":\"小编：何者\",\"content\":\"\",\"views\":\"\"}]},{\"type\":1,\"news\":[{\"id\":7109,\"title\":\"《非常英雄》官方中文Steam正版分流下载发布！\",\"category\":\"单机资讯\",\"img\":\"http://imgs.ali213.net/news/2019/01/24/2019012453246796.jpg\",\"description\":\"小编今天为大家带来了《非常英雄（Unruly Heroes）》官方中文Steam正版分流下载，感兴趣的玩家们赶紧来看看吧。\",\"author\":\"小编：何者\",\"content\":\"\",\"views\":\"\"}]}]}", type)
-        mAdapter.setNewData(s?.data)
+
 
     }
 
@@ -67,16 +62,34 @@ class NewsFragment : BaseFragment() {
         AppRepository.getIndexRepository().getNewsList(if (isRefresh) 1 else page).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(object : NetRespObserver<List<NewsGroup>>() {
             override fun onNext(data: List<NewsGroup>) {
                 if (data.isNotEmpty()) {
-                    if (isRefresh) {
-                        mAdapter.setNewData(data)
-                        page = 2
-                    } else {
-                        mAdapter.addData(data)
-                        page++
+                    val dataFinal = ArrayList<NewsGroup>()
+                    for (newsGroup in data) {
+                        if (newsGroup.type == 3) {
+                            for (news in newsGroup.data) {
+                                val newsfinal = ArrayList<News>()
+                                newsfinal.add(news)
+                                val newgroupNew = NewsGroup(newsGroup.type, newsGroup.name, newsfinal)
+                                dataFinal.add(newgroupNew)
+                            }
+                        } else {
+                            dataFinal.add(newsGroup)
+                        }
                     }
+                    mAdapter.setNewData(dataFinal)
                     mAdapter.notifyDataSetChanged()
                     mAdapter.loadMoreComplete()
                     mBinding.swipeRefreshLayout.isRefreshing = false
+                    mAdapter.loadMoreEnd()
+//                    if (isRefresh) {
+//                        mAdapter.setNewData(data)
+//                        page = 2
+//                    } else {
+//                        mAdapter.addData(data)
+//                        page++
+//                    }
+//                    mAdapter.notifyDataSetChanged()
+//                    mAdapter.loadMoreComplete()
+//                    mBinding.swipeRefreshLayout.isRefreshing = false
                 } else {
                     mAdapter.loadMoreEnd()
                 }
@@ -99,7 +112,7 @@ class NewsFragment : BaseFragment() {
                     mHeadBinding.viewpager.setImageLoader(GlideImageLoader())
                     mHeadBinding.viewpager.setImages(data.banners)
                     mHeadBinding.viewpager.setOnBannerListener {
-                        Log.e("aaa","=======1")
+                        Log.e("aaa", "=======1")
                         activity?.let { it1 -> WebActivity.goWeb(it1, data.banners[it].url) }
                     }
                     mHeadBinding.viewpager.start()

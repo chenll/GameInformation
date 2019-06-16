@@ -1,36 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <data>
 
         <variable
             name="item"
-            type="com.game.mcw.gameinformation.modle.NewsGroup" />
+            type="com.game.mcw.gameinformation.modle.NewsGroup"/>
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp">
 
         <TextView
             android:id="@+id/tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:drawableLeft="@drawable/icon_gift_title"
+            android:drawablePadding="4dp"
             android:ellipsize="end"
-            android:lineSpacingMultiplier="1.2"
-            android:maxLines="2"
-            android:text="@{item.title.trim()}"
+            android:maxLines="1"
+            android:gravity="center_vertical"
+            android:text="@{item.name.trim()}"
             android:textColor="@color/common_list_content_color"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:rvColumns="@{2}" />
+            android:layout_marginTop="6dp"
+            app:rvColumns="@{2}"/>
 
     </LinearLayout>
 </layout>

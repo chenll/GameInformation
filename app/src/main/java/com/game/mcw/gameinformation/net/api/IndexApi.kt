@@ -20,8 +20,8 @@ interface IndexApi {
     @GET("/index/list/video")
     fun getVideoList(@Query("page") pageNum: Int): Observable<AppResponse<Any>>
 
-    @GET("/index/list/gift")
-    fun getGiftList(@Query("page") pageNum: Int): Observable<AppResponse<Any>>
+    @GET("/gift/list/recentGift")
+    fun getGiftList(@Query("page") pageNum: Int, @Query("token") token: Int = 111, @Query("limit") limit: Int = 20): Observable<AppResponse<Any>>
 
     /**
      * 首页资源 包括banner 弹窗 开屏

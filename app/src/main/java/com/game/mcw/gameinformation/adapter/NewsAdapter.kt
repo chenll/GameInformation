@@ -14,26 +14,30 @@ class NewsAdapter : BaseMVMultiItemAdapter<NewsGroup, MVViewHolder>() {
 
 
     init {
-        addItemType(1, R.layout.test_item_1)
-        addItemType(2, R.layout.test_item_1_1)
-        addItemType(3, R.layout.item_news_3)
-        addItemType(4, R.layout.item_news_4)
+        addItemType(1, R.layout.item_news_3)
+        addItemType(2, R.layout.item_news_4)
+        addItemType(3, R.layout.test_item_1)
+        addItemType(4, R.layout.test_item_1_1)
+//        addItemType(1, R.layout.test_item_1)
+//        addItemType(2, R.layout.test_item_1_1)
+//        addItemType(3, R.layout.item_news_3)
+//        addItemType(4, R.layout.item_news_4)
     }
 
     override fun convert(helper: MVViewHolder, item: NewsGroup) {
 
         when (helper.itemViewType) {
             1 -> {
-                convert1(helper, item.news[0])
-            }
-            2 -> {
-                convert2(helper, item.news[0])
-            }
-            3 -> {
                 convert3(helper, item)
             }
-            4 -> {
+            2 -> {
                 convert4(helper, item)
+            }
+            3 -> {
+                convert1(helper, item.data[0])
+            }
+            4 -> {
+                convert2(helper, item.data[0])
             }
         }
 
@@ -59,7 +63,7 @@ class NewsAdapter : BaseMVMultiItemAdapter<NewsGroup, MVViewHolder>() {
         if (binding.recyclerView.adapter == null) {
             NewsSimply3Adapter(R.layout.item_item_news_1).bindToRecyclerView(binding.recyclerView)
         }
-        (binding.recyclerView.adapter as NewsSimply3Adapter).setNewData(item.news)
+        (binding.recyclerView.adapter as NewsSimply3Adapter).setNewData(item.data)
     }
 
     private fun convert4(helper: MVViewHolder, item: NewsGroup) {
@@ -68,7 +72,7 @@ class NewsAdapter : BaseMVMultiItemAdapter<NewsGroup, MVViewHolder>() {
         if (binding.recyclerView.adapter == null) {
             NewsSimply4Adapter(R.layout.item_item_news_2).bindToRecyclerView(binding.recyclerView)
         }
-        (binding.recyclerView.adapter as NewsSimply4Adapter).setNewData(item.news)
+        (binding.recyclerView.adapter as NewsSimply4Adapter).setNewData(item.data)
     }
 
 }

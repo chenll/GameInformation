@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="186dp"
             android:layout_alignParentRight="true"
-            app:imageUrl="@{item.img}"
+            app:imageUrl="@{item.image}"
             android:scaleType="fitXY" />
 
         <TextView
@@ -37,7 +37,7 @@
             android:ellipsize="end"
             android:lineSpacingMultiplier="1.2"
             android:maxLines="2"
-            android:text="@{item.description.trim()}"
+            android:text="@{item.name.trim()}"
             android:textColor="@color/common_list_content_color"
             android:textSize="16sp" />
 
@@ -47,7 +47,7 @@
             android:layout_below="@+id/tv"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="6dp"
-            android:text="@{item.author}"
+            android:text="@{item.content}"
             android:textColor="@color/common_list_green_color"
             android:textSize="12sp" />
 

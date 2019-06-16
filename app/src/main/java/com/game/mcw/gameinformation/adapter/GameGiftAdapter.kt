@@ -14,7 +14,6 @@ class GameGiftAdapter(layId: Int) : BaseMVAdapter<GameGift, MVViewHolder>(layId)
         val binding = helper.getBinding() as ItemGameGiftBinding
         binding.setVariable(BR.gameGift, item)
         binding.executePendingBindings()
-        GlideUtil.loadBorderRadiusGameIcon("", binding.ivGameIcon)
 
     }
 
