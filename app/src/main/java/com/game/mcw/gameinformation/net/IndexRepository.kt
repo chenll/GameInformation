@@ -13,4 +13,5 @@ class IndexRepository(indexApi: IndexApi) {
     fun getNewsList(page: Int): Observable<List<NewsGroup>> = RepositoryUtils.extractData(mIndexApi.getNewsList(page), object : TypeToken<List<NewsGroup>>() {}.type)
     fun getVideoList(page: Int): Observable<List<Video>> = RepositoryUtils.extractData(mIndexApi.getVideoList(page), object : TypeToken<List<Video>>() {}.type)
     fun getGameGiftList(page: Int): Observable<List<GameGift>> = RepositoryUtils.extractData(mIndexApi.getGiftList(page), object : TypeToken<List<GameGift>>() {}.type)
+    fun getInit(): Observable<IndexResource> = RepositoryUtils.extractData(mIndexApi.getInit(), object : TypeToken<IndexResource>() {}.type)
 }
