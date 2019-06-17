@@ -8,16 +8,11 @@ import io.reactivex.disposables.Disposable
 
 abstract class NetRespObserver<T> : Observer<T> {
     override fun onComplete() {
-//        LogUtils.logMe("NetRespObserver   onComplete")
-//        ToastUtil.setHasnotNet(false)
-        Log.e("aaa", "onComplete")
 
     }
 
     override fun onSubscribe(d: Disposable) {
-//        LogUtils.logMe("NetRespObserver   onSubscribe")
-//        ToastUtil.setHasnotNet(false)
-        Log.e("aaa", "onSubscribe")
+
 
     }
 
@@ -28,27 +23,6 @@ abstract class NetRespObserver<T> : Observer<T> {
             else -> Log.e("aaa", "无错误信息")
         }
 
-
-//        if (e is AppRespException) {
-//            ToastHelper.show(PhoneApp.INSTANCE, e.message ?: "")
-//        }
-
-        //如果出现了 403 错误, 认为是 账号被顶, 跳转到
-//        if (RegisterAndLoginActivity.jumpt2RegisterAndLoginPage(e.message ?: "")) return
-
-
-        //如果出现了 没有网络 错误
-//        if (RegisterAndLoginActivity.netIsNotAvailable(e.message ?: "")){
-//
-//            //先将恢复为可以弹窗
-//            ToastUtil.setHasnotNet(false)
-//
-//            ToastUtil.showToastMsg(PhoneApp.INSTANCE.getString(R.string.str_no_net))
-//
-//            ToastUtil.setHasnotNet(true)
-//
-//            return
-//        }
     }
 
 }

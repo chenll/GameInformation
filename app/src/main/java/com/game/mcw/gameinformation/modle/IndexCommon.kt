@@ -1,4 +1,4 @@
 package com.game.mcw.gameinformation.modle
 
 
-class IndexCommon(val id: Int, val image: String, val url: String)
+class IndexCommon(val image: String, val url: String, val startDate: String, val endDate: String)

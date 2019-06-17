@@ -11,9 +11,16 @@ import retrofit2.http.POST
  * Created by sky on 18/1/24.
  */
 interface UserApi {
+    /**
+     * 登录
+     */
     @FormUrlEncoded
     @POST("/user/login")
     fun userLogin(@Field("mobile") mobile: String, @Field("code") code: String): Observable<AppResponse<Any>>
+
+    @FormUrlEncoded
+    @POST("/user/sms/send")
+    fun getVcode(@Field("mobile") mobile: String, @Field("type") code: Int): Observable<Any>
 
 
 }

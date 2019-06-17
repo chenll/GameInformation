@@ -24,6 +24,12 @@ interface IndexApi {
     fun getGiftList(@Query("page") pageNum: Int, @Query("token") token: Int = 111, @Query("limit") limit: Int = 20): Observable<AppResponse<Any>>
 
     /**
+     * 独家礼包
+     */
+    @GET("/gift/list/exclusiveGift")
+    fun getExclusiveGift(): Observable<AppResponse<Any>>
+
+    /**
      * 首页资源 包括banner 弹窗 开屏
      */
     @GET("/index/init")

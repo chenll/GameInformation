@@ -7,19 +7,21 @@
         <import type="android.support.v7.widget.LinearLayoutManager" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
+        android:orientation="vertical"
         android:layout_height="match_parent">
 
         <include
             android:id="@+id/title"
+            app:layout_constraintTop_toTopOf="parent"
             layout="@layout/toolbar_home" />
 
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title">
@@ -33,6 +35,6 @@
                 app:rvOrientation="@{LinearLayoutManager.VERTICAL}" />
 
         </android.support.v4.widget.SwipeRefreshLayout>
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 
 </layout>

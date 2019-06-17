@@ -7,14 +7,16 @@ import com.game.mcw.gameinformation.modle.AppResponse
 import com.game.mcw.gameinformation.modle.exception.AppRespException
 import com.google.gson.GsonBuilder
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Function
+import io.reactivex.schedulers.Schedulers
 import java.lang.reflect.Type
 
 
 object RepositoryUtils {
     val mGson = GsonBuilder().create()
 
-    private val TAG = "aaa"
+    private val TAG = "response"
 
     fun <T> extractData(observable: Observable<AppResponse<Any>>, clazz: Class<T>): Observable<T> {
         return observable.flatMap(Function<AppResponse<Any>, Observable<T>> { response ->
@@ -50,12 +52,11 @@ object RepositoryUtils {
 
 
     // 请求洛基服务器数据的响应处理
-    fun <T> extractDataRocky(observable: Observable<Any>, clazz: Class<T>): Observable<T> {
+    fun <T> extractDataSimple(observable: Observable<Any>, clazz: Class<T>): Observable<T> {
         return observable.flatMap(Function<Any, Observable<T>> { response ->
-            Log.e(TAG, "extractDataRocky :${response.toString()}")
             return@Function Observable.just<T>(mGson.fromJson(mGson.toJson(response), clazz))
 
-        })
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
     }
 
 }

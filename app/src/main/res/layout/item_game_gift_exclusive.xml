@@ -8,7 +8,7 @@
 
         <variable
             name="gameGift"
-            type="com.game.mcw.gameinformation.modle.GameGift" />
+            type="com.game.mcw.gameinformation.modle.GameExclusiveGift" />
     </data>
 
     <LinearLayout
@@ -22,6 +22,7 @@
             android:layout_width="68dp"
             android:layout_height="68dp"
             android:src="@mipmap/ic_launcher"
+            app:imageUrl="@{gameGift.icon}"
             app:layout_constraintLeft_toLeftOf="parent"
             tools:ignore="MissingConstraints" />
 
@@ -31,15 +32,15 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxEms="5"
+            android:textSize="13sp"
             android:singleLine="true"
-            android:text="@{gameGift.gameName}" />
+            android:text="@{gameGift.name}" />
 
         <TextView
             android:id="@+id/tv_intro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{"剩余礼包 "+gameGift.leftCount}'
-
+            android:text='@{"剩余礼包 "+gameGift.count}'
             android:textSize="10sp" />
 
 

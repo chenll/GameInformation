@@ -6,7 +6,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.game.mcw.gameinformation.adapter.NewsAdapter
+import com.game.mcw.gameinformation.databinding.CommonEmptyViewBinding
 import com.game.mcw.gameinformation.databinding.FragmentHomeChild1Binding
 import com.game.mcw.gameinformation.databinding.HeadNewsBinding
 import com.game.mcw.gameinformation.modle.IndexResource
@@ -23,6 +26,7 @@ class NewsFragment : BaseFragment() {
     private lateinit var mAdapter: NewsAdapter
     private var page = 1
     private lateinit var mHeadBinding: HeadNewsBinding
+    private lateinit var emptyViewBinding: CommonEmptyViewBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home_child_1, container, false)
@@ -41,7 +45,8 @@ class NewsFragment : BaseFragment() {
 
         mHeadBinding = DataBindingUtil.inflate(LayoutInflater.from(activity), R.layout.head_news, null, false)
         mAdapter.setHeaderView(mHeadBinding.root)
-
+        emptyViewBinding = DataBindingUtil.inflate(LayoutInflater.from(activity), R.layout.common_empty_view, null, false)
+        mAdapter.emptyView = emptyViewBinding.root
 //        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
         mAdapter.isFirstOnly(false)
         mAdapter.disableLoadMoreIfNotFullPage()
@@ -119,7 +124,17 @@ class NewsFragment : BaseFragment() {
 
                 } else {
                     mAdapter.removeAllHeaderView()
+                }
 
+
+                if (data.starts.isNotEmpty()) {
+                    for (start in data.starts) {
+                        Log.e("aaa", "开始时间${start.startDate} 结束时间${start.endDate}")
+//                        if (System.currentTimeMillis() > start.startDate && System.currentTimeMillis() < start.endDate) {
+//                            Glide.with(activity!!).load(start.image).diskCacheStrategy(DiskCacheStrategy.RESOURCE).preload()
+//                        }
+
+                    }
                 }
             }
 

@@ -18,7 +18,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         mBinding.viewStart.layoutParams.height = getStatusbarHeight()
 //        mFragments.add(HomeRootFragment())
         mFragments.add(NewsFragment())
-        mFragments.add(GameFragment())
+//        mFragments.add(GameFragment())
         mFragments.add(GameGiftFragment())
         mFragments.add(MyFragment())
         mBinding.vpFragment.offscreenPageLimit = mFragments.size
@@ -32,7 +32,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private fun initBottomTabs() {
         val navigationController = mBinding.tabBottom.material()
                 .addItem(android.R.drawable.ic_menu_camera, "首页")
-                .addItem(android.R.drawable.ic_menu_compass, "游戏")
+//                .addItem(android.R.drawable.ic_menu_compass, "游戏")
                 .addItem(android.R.drawable.ic_menu_search, "礼包")
                 .addItem(android.R.drawable.ic_menu_help, "我的")
                 .build()

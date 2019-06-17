@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
 
     <data>
 
         <variable
             name="gameGift"
-            type="com.game.mcw.gameinformation.modle.GameGift"/>
+            type="com.game.mcw.gameinformation.modle.GameGift" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -22,7 +22,7 @@
             android:src="@mipmap/ic_launcher"
             app:imageUrl="@{gameGift.icon}"
             app:layout_constraintLeft_toLeftOf="parent"
-            tools:ignore="MissingConstraints"/>
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/tv_game_name"
@@ -31,11 +31,12 @@
             android:gravity="bottom"
             android:paddingLeft="10dp"
             android:text="@{gameGift.gameName}"
+            android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/tv_intro"
             app:layout_constraintLeft_toRightOf="@+id/iv_game_icon"
             app:layout_constraintRight_toLeftOf="@+id/btn_get"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints"/>
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/tv_intro"
@@ -44,11 +45,12 @@
             android:gravity="top"
             android:paddingLeft="10dp"
             android:text="@{gameGift.name}"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/iv_game_icon"
             app:layout_constraintRight_toLeftOf="@+id/btn_get"
             app:layout_constraintTop_toBottomOf="@+id/tv_game_name"
-            tools:ignore="MissingConstraints"/>
+            tools:ignore="MissingConstraints" />
 
         <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
             android:id="@+id/btn_get"
@@ -67,7 +69,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:qmui_backgroundColor="#35AFFC"
             app:qmui_borderColor="#35AFFC"
-            app:qmui_radius="6dp"/>
+            app:qmui_radius="6dp" />
 
     </android.support.constraint.ConstraintLayout>
 

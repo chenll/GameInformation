@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import com.game.mcw.gameinformation.adapter.GameGiftExclusiveAdapter
 import com.game.mcw.gameinformation.adapter.GameGiftAdapter
 import com.game.mcw.gameinformation.databinding.FragmentGameGiftBinding
+import com.game.mcw.gameinformation.modle.GameExclusiveGift
 import com.game.mcw.gameinformation.modle.GameGift
 import com.game.mcw.gameinformation.modle.dispose.NetRespObserver
 import com.game.mcw.gameinformation.net.AppRepository
@@ -37,7 +38,7 @@ class GameGiftFragment : BaseFragment() {
         val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         mBinding.recyclerView.isNestedScrollingEnabled = true
         mBinding.recyclerView.layoutManager = layoutManager
-        mBinding.recyclerView.addItemDecoration(HorizontalDividerItemDecoration.Builder(activity).size(QMUIDisplayHelper.dp2px(activity, 1)).color(ContextCompat.getColor(activity!!, R.color.common_list_decoration)).build())
+        mBinding.recyclerView.addItemDecoration(HorizontalDividerItemDecoration.Builder(activity).size(QMUIDisplayHelper.dp2px(activity, 6)).color(ContextCompat.getColor(activity!!, R.color.transparent)).build())
         mAdapter = GameGiftAdapter(R.layout.item_game_gift)
         mAdapter.bindToRecyclerView(mBinding.recyclerView)
         mAdapter.isFirstOnly(false)
@@ -52,15 +53,31 @@ class GameGiftFragment : BaseFragment() {
 //        mAdapter.setOnItemChildClickListener { adapter, view, position ->
 //            activity?.let { WebActivity.goWeb(it, mAdapter.getItem(position)!!.url) }
 //        }
+        loadExclusiveGiftData()
     }
 
     private fun initExclusiveRecyclerView() {
         val layoutManagerExclusive = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         mBinding.rvExclusive.layoutManager = layoutManagerExclusive
-        mBinding.rvExclusive.addItemDecoration(VerticalDividerItemDecoration.Builder(activity).size(QMUIDisplayHelper.dp2px(activity, 6)).color(ContextCompat.getColor(activity!!, R.color.transparent)).build())
+        mBinding.rvExclusive.addItemDecoration(VerticalDividerItemDecoration.Builder(activity).size(QMUIDisplayHelper.dp2px(activity, 10)).color(ContextCompat.getColor(activity!!, R.color.transparent)).build())
         mExclusiveAdapter = GameGiftExclusiveAdapter(R.layout.item_game_gift_exclusive)
         mExclusiveAdapter.bindToRecyclerView(mBinding.rvExclusive)
     }
+
+    private fun loadExclusiveGiftData() {
+        AppRepository.getIndexRepository().getGameExclusiveGiftList().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(object : NetRespObserver<List<GameExclusiveGift>>() {
+            override fun onNext(data: List<GameExclusiveGift>) {
+                if (data.isNotEmpty()) {
+                    mExclusiveAdapter.setNewData(data)
+                } else {
+                    mExclusiveAdapter.setNewData(null)
+                }
+            }
+
+
+        })
+    }
+
 
     private fun loadData(isRefresh: Boolean) {
         AppRepository.getIndexRepository().getGameGiftList(if (isRefresh) 1 else page).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(object : NetRespObserver<List<GameGift>>() {
@@ -68,11 +85,9 @@ class GameGiftFragment : BaseFragment() {
                 if (data.isNotEmpty()) {
                     if (isRefresh) {
                         mAdapter.setNewData(data)
-                        mExclusiveAdapter.setNewData(data)
                         page = 2
                     } else {
                         mAdapter.addData(data)
-                        mExclusiveAdapter.addData(data)
                         page++
                     }
                     mAdapter.notifyDataSetChanged()
@@ -88,8 +103,6 @@ class GameGiftFragment : BaseFragment() {
                 super.onError(e)
                 mAdapter.loadMoreFail()
                 mBinding.swipeRefreshLayout.isRefreshing = false
-
-
             }
         })
     }
