@@ -4,14 +4,17 @@ import com.game.mcw.gameinformation.BR
 import com.game.mcw.gameinformation.R
 import com.game.mcw.gameinformation.adapter.base.BaseMVMultiItemAdapter
 import com.game.mcw.gameinformation.adapter.base.MVViewHolder
+import com.game.mcw.gameinformation.binding.GamePresenter
 import com.game.mcw.gameinformation.databinding.ItemNews3Binding
 import com.game.mcw.gameinformation.databinding.ItemNews4Binding
+import com.game.mcw.gameinformation.databinding.TestItem1Binding
 import com.game.mcw.gameinformation.modle.News
 import com.game.mcw.gameinformation.modle.NewsGroup
 
 
 class NewsAdapter : BaseMVMultiItemAdapter<NewsGroup, MVViewHolder>() {
 
+    val mGamePresenter = GamePresenter()
 
     init {
         addItemType(1, R.layout.item_news_3)
@@ -46,8 +49,10 @@ class NewsAdapter : BaseMVMultiItemAdapter<NewsGroup, MVViewHolder>() {
 
 
     private fun convert1(helper: MVViewHolder, item: News) {
-        helper.getBinding().setVariable(BR.item, item)
-        helper.getBinding().executePendingBindings()
+        val binding = helper.getBinding() as TestItem1Binding
+        binding.item = item
+        binding.presenter = mGamePresenter
+        binding.executePendingBindings()
     }
 
 

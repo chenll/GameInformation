@@ -7,13 +7,18 @@
     <data>
 
         <variable
+            name="presenter"
+            type="com.game.mcw.gameinformation.binding.GamePresenter" />
+
+        <variable
             name="item"
             type="com.game.mcw.gameinformation.modle.News" />
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:onClick="@{(view) -> presenter.onGameClick(view,item)}">
 
         <ImageView
             android:id="@+id/iv_pic"
@@ -32,8 +37,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:ellipsize="end"
-            android:maxLines="1"
             android:gravity="center"
+            android:maxLines="1"
             android:text="@{item.name.trim()}"
             android:textColor="@color/common_list_content_color"
             android:textSize="12sp"

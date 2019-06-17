@@ -47,7 +47,7 @@ object RepositoryUtils {
                 Observable.error(AppRespException(response))
             }
 
-        })
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
     }
 
 

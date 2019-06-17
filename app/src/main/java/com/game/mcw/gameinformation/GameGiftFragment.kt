@@ -1,5 +1,6 @@
 package com.game.mcw.gameinformation
 
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
@@ -62,6 +63,11 @@ class GameGiftFragment : BaseFragment() {
         mBinding.rvExclusive.addItemDecoration(VerticalDividerItemDecoration.Builder(activity).size(QMUIDisplayHelper.dp2px(activity, 10)).color(ContextCompat.getColor(activity!!, R.color.transparent)).build())
         mExclusiveAdapter = GameGiftExclusiveAdapter(R.layout.item_game_gift_exclusive)
         mExclusiveAdapter.bindToRecyclerView(mBinding.rvExclusive)
+        mExclusiveAdapter.setOnItemClickListener { adapter, view, position ->
+            val intent = Intent(activity, ExclusiveGiftDetailActivity::class.java)
+            intent.putExtra("GameExclusiveGift", adapter.getItem(position) as GameExclusiveGift)
+            startActivity(intent)
+        }
     }
 
     private fun loadExclusiveGiftData() {

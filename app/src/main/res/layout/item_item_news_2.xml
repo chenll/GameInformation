@@ -8,6 +8,10 @@
     <data>
 
         <variable
+            name="presenter"
+            type="com.game.mcw.gameinformation.binding.GamePresenter" />
+
+        <variable
             name="item"
             type="com.game.mcw.gameinformation.modle.News" />
     </data>
@@ -17,6 +21,7 @@
         android:id="@+id/cl_pic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{(view) -> presenter.onGameClick(view,item)}"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="6dp">
@@ -27,10 +32,10 @@
             android:layout_height="0dp"
             android:scaleType="fitXY"
             android:src="@mipmap/ic_launcher"
+            app:imageUrl="@{item.image}"
             app:layout_constraintDimensionRatio="H,16:9"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:imageUrl="@{item.image}"
             tools:ignore="MissingConstraints" />
 
         <TextView
