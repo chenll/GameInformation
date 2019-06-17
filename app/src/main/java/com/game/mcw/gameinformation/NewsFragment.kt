@@ -1,25 +1,30 @@
 package com.game.mcw.gameinformation
 
+import android.app.ProgressDialog.show
 import android.databinding.DataBindingUtil
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.game.mcw.gameinformation.adapter.NewsAdapter
 import com.game.mcw.gameinformation.databinding.CommonEmptyViewBinding
 import com.game.mcw.gameinformation.databinding.FragmentHomeChild1Binding
 import com.game.mcw.gameinformation.databinding.HeadNewsBinding
-import com.game.mcw.gameinformation.modle.IndexResource
-import com.game.mcw.gameinformation.modle.News
-import com.game.mcw.gameinformation.modle.NewsGroup
+import com.game.mcw.gameinformation.modle.*
 import com.game.mcw.gameinformation.modle.dispose.NetRespObserver
 import com.game.mcw.gameinformation.net.AppRepository
 import com.game.mcw.gameinformation.utils.GlideImageLoader
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import org.litepal.LitePal
 
 class NewsFragment : BaseFragment() {
     private lateinit var mBinding: FragmentHomeChild1Binding
@@ -118,7 +123,7 @@ class NewsFragment : BaseFragment() {
                     mHeadBinding.viewpager.setImages(data.banners)
                     mHeadBinding.viewpager.setOnBannerListener {
                         Log.e("aaa", "=======1")
-                        activity?.let { it1 -> WebActivity.goWeb(it1, data.banners[it].url) }
+                        activity?.let { it1 -> data.banners[it].url?.let { it2 -> WebActivity.goWeb(it1, it2) } }
                     }
                     mHeadBinding.viewpager.start()
 
@@ -128,13 +133,39 @@ class NewsFragment : BaseFragment() {
 
 
                 if (data.starts.isNotEmpty()) {
+                    LitePal.deleteAll(IndexCommon::class.java)
                     for (start in data.starts) {
                         Log.e("aaa", "开始时间${start.startDate} 结束时间${start.endDate}")
 //                        if (System.currentTimeMillis() > start.startDate && System.currentTimeMillis() < start.endDate) {
-//                            Glide.with(activity!!).load(start.image).diskCacheStrategy(DiskCacheStrategy.RESOURCE).preload()
+                        start.save()
+                        Glide.with(activity!!).load(start.image).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).preload()
 //                        }
 
                     }
+                }
+                if (data.popups.isNotEmpty()) {
+
+                    Glide.with(activity!!).load(data.popups[0].image).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).listener(object : RequestListener<Drawable> {
+                        override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                            val bundle = Bundle()
+                            bundle.putParcelable("indexCommon", data.popups[0])
+                            val homePopUpDialog = HomePopUpDialog()
+                            homePopUpDialog.arguments = bundle
+                            homePopUpDialog.show(childFragmentManager, "homepopupdialog")
+                            return true
+                        }
+
+                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                            return false
+                        }
+
+                    }).preload()
+
+//                    AudioSpeedChooseDialog fragment = new AudioSpeedChooseDialog();
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("currentSpeed", currentSpeed);
+//                    bundle.putStringArrayList("speeds", speeds);
+//                    fragment.setArguments(bundle);
                 }
             }
 

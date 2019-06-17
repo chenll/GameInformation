@@ -22,6 +22,7 @@
         -->
     <list>
         <mapping class="com.game.mcw.gameinformation.modle.UserBean" />
+        <mapping class="com.game.mcw.gameinformation.modle.IndexCommon" />
     </list>
 
 </litepal>

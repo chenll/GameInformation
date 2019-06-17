@@ -4,7 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 
 
-class GameExclusiveGift(val count: Int, val icon: String, val id: Int, val name: String) : Parcelable {
+class GameExclusiveGift(val count: Int, val icon: String?, val id: Int, val name: String?) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
             parcel.readString(),
