@@ -8,6 +8,11 @@
         <variable
             name="fragment"
             type="com.game.mcw.gameinformation.MyFragment" />
+
+
+        <variable
+            name="user"
+            type="com.game.mcw.gameinformation.modle.UserBean" />
     </data>
 
 
@@ -35,8 +40,9 @@
                 android:id="@+id/tv_tel"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginLeft="10dp"
                 android:gravity="bottom"
-                android:text="111111"
+                android:text='@{user==null?"-":user.mobile}'
                 app:layout_constraintBottom_toTopOf="@+id/tv_nick"
                 app:layout_constraintLeft_toRightOf="@+id/iv_head"
                 app:layout_constraintRight_toLeftOf="@+id/btn_sign"
@@ -47,7 +53,8 @@
                 android:id="@+id/tv_nick"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:text="222222"
+                android:layout_marginLeft="10dp"
+                android:text='@{user==null?"-":user.nickname}'
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/iv_head"
                 app:layout_constraintRight_toLeftOf="@+id/btn_sign"

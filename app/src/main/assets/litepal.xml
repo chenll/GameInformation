@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <!--
+        定义应用程序的数据库名称。
+        默认情况下，每个数据库名都应该以.db结尾。
+        如果你没有用。db来命名你的数据库，LitePal会自动为你加上后缀。
+        For example:
+        下面写法会生成BookStore.db
+        -->
+    <dbname value="game" />
+    <!--
+        定义数据库的版本。
+        每次你想要升级数据库，修改映射标记中定义的版本值+ 1，数据库升级将会被自动处理。
+        详情见后文的升级.
+        -->
+    <version value="1" />
+    <!--o
+        用映射标签指定的modle在表中定义数据模型.
+        LitePal会在模型中定义的字段将映射到对应表的列中。
+        For example:
+        下面Song 属于package com.routon.litepal.litepaltest.dbmodel
+        -->
+    <list>
+        <mapping class="com.game.mcw.gameinformation.modle.UserBean" />
+    </list>
+
+</litepal>

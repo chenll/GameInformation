@@ -7,9 +7,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.game.mcw.gameinformation.adapter.MyAdapter
 import com.game.mcw.gameinformation.adapter.MyCardAdapter
 import com.game.mcw.gameinformation.databinding.FragmentMyBinding
+import com.game.mcw.gameinformation.manager.MyUserManager
 import com.game.mcw.gameinformation.modle.Card
 import com.game.mcw.gameinformation.utils.GlideUtil
 
@@ -21,11 +23,25 @@ class MyFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_my, container, false)
         mBinding.fragment = this
+        mBinding.user = MyUserManager.instance.userBean
         return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mBinding.user = MyUserManager.instance.userBean
+        if (MyUserManager.instance.userBean != null) {
+            Toast.makeText(activity, "已登录${MyUserManager.instance.userBean!!.userId}", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(activity, "未登录", Toast.LENGTH_SHORT).show()
+        }
+        initViews()
+
+
+    }
+
+
+    private fun initViews() {
 
         GlideUtil.loadCircleHeadPic("", mBinding.ivHead)
         val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
@@ -51,11 +67,7 @@ class MyFragment : BaseFragment() {
     }
 
     fun click(v: View) {
-        if (v.id == R.id.iv_head) {
-            startActivity(UserInfoActivity::class.java)
-        } else {
-            startActivity(LoginActivity::class.java)
-        }
+        startActivity(if (MyUserManager.instance.userBean == null) LoginActivity::class.java else UserInfoActivity::class.java)
     }
 
 }

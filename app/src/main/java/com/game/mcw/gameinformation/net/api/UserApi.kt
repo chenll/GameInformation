@@ -22,5 +22,9 @@ interface UserApi {
     @POST("/user/sms/send")
     fun getVcode(@Field("mobile") mobile: String, @Field("type") code: Int): Observable<Any>
 
+    @FormUrlEncoded
+    @POST("/center/user/edit")
+    fun editUserMessage(@Field("mobile") mobile: String, @Field("type") code: Int): Observable<AppResponse<Any>>
+
 
 }

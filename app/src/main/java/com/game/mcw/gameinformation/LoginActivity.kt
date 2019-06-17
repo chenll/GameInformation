@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Switch
 import android.widget.Toast
 import com.game.mcw.gameinformation.databinding.ActivityLoginBinding
+import com.game.mcw.gameinformation.manager.MyUserManager
 import com.game.mcw.gameinformation.modle.UserBean
 import com.game.mcw.gameinformation.modle.VcodeResponse
 import com.game.mcw.gameinformation.modle.dispose.NetRespObserver
@@ -13,6 +14,10 @@ import com.game.mcw.gameinformation.net.AppRepository
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import org.litepal.LitePal
+import org.litepal.extension.deleteAll
+import org.litepal.extension.findAsync
+import org.litepal.extension.findFirstAsync
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
@@ -69,8 +74,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             }
             AppRepository.getUserRepository().login(mBinding.etMobile.text.toString(), mBinding.etVcode.text.toString()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(object : NetRespObserver<UserBean>() {
                 override fun onNext(data: UserBean) {
-
-
+                    MyUserManager.instance.updateUser(data)
                 }
 
                 override fun onError(e: Throwable) {

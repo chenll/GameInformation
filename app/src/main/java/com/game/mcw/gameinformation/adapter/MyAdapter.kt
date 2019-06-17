@@ -20,4 +20,6 @@ class MyAdapter(layId: Int) : BaseMVAdapter<Card, MVViewHolder>(layId) {
 
     }
 
+
+
 }

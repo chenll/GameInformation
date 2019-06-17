@@ -3,6 +3,7 @@ package com.game.mcw.gameinformation
 import android.app.Application
 import com.facebook.stetho.Stetho
 import com.game.mcw.gameinformation.net.AppRepository
+import org.litepal.LitePal
 
 class MyApplication : Application() {
 
@@ -16,5 +17,7 @@ class MyApplication : Application() {
         INSTANCE = this
         Stetho.initializeWithDefaults(this)
         AppRepository.initialize(this)
+        LitePal.initialize(this)
+
     }
 }

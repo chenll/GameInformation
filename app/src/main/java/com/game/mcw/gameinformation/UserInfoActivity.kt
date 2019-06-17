@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.view.View
 import com.game.mcw.gameinformation.databinding.ActivityUserinfoBinding
-import com.game.mcw.gameinformation.utils.GlideUtil
+import com.game.mcw.gameinformation.manager.MyUserManager
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog
 
@@ -17,7 +17,7 @@ class UserInfoActivity : BaseActivity<ActivityUserinfoBinding>() {
         super.onCreate(savedInstanceState)
         mBinding.activity = this
         initToolBar()
-        GlideUtil.loadCircleHeadPic("http://cdn.duitang.com/uploads/item/201610/03/20161003000301_Wfm5X.jpeg", mBinding.ivHead)
+        mBinding.user = MyUserManager.instance.userBean
     }
 
     private fun initToolBar() {

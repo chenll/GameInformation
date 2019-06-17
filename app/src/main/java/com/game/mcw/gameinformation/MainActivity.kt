@@ -1,9 +1,13 @@
 package com.game.mcw.gameinformation
 
+import android.os.Build.VERSION_CODES.P
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.widget.Toast
 import com.game.mcw.gameinformation.adapter.HomeFragmentPagerAdapter
 import com.game.mcw.gameinformation.databinding.ActivityMainBinding
+import com.game.mcw.gameinformation.modle.UserBean
+import org.litepal.LitePal
 import java.util.*
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -24,8 +28,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         mBinding.vpFragment.offscreenPageLimit = mFragments.size
         mBinding.vpFragment.adapter = HomeFragmentPagerAdapter(supportFragmentManager, mFragments)
 //        startActivity(TestActivity::class.java)
-
-
     }
 
 
