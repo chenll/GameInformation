@@ -51,11 +51,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     isVCodeSended = (data.code == "0")
                 }
 
-                override fun onError(e: Throwable) {
-                    super.onError(e)
-                    Toast.makeText(this@LoginActivity, "${e.message}", Toast.LENGTH_SHORT).show()
-                }
-
             })
 
         }
@@ -77,12 +72,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     MyUserManager.instance.updateUser(data)
                     Toast.makeText(this@LoginActivity, "登录成功", Toast.LENGTH_SHORT).show()
                     finish()
-                }
-
-                override fun onError(e: Throwable) {
-                    super.onError(e)
-                    Toast.makeText(this@LoginActivity, "${e.message}", Toast.LENGTH_SHORT).show()
-
                 }
 
 

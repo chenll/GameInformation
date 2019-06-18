@@ -60,7 +60,6 @@ class GameGiftFragment : BaseFragment() {
                 override fun onError(e: Throwable) {
                     super.onError(e)
                     hideLoading()
-                    Toast.makeText(activity, "${e.message}", Toast.LENGTH_SHORT).show()
                 }
 
 

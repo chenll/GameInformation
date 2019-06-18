@@ -128,7 +128,6 @@ class UserInfoActivity : BaseActivity<ActivityUserinfoBinding>() {
                         override fun onError(e: Throwable) {
                             super.onError(e)
                             hideLoading()
-                            Toast.makeText(this@UserInfoActivity, "${e.message}", Toast.LENGTH_SHORT).show()
                         }
                     })
 
