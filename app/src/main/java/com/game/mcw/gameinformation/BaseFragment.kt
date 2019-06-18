@@ -7,20 +7,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog
 import org.greenrobot.eventbus.EventBus
 
 open class BaseFragment : Fragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 
     fun startActivity(cls: Class<*>) {
         super.startActivity(Intent(activity, cls))
@@ -38,6 +28,20 @@ open class BaseFragment : Fragment() {
         }
         super.onDestroy()
 
+    }
+
+    fun showLoading(message: String = "正在加载...") {
+        if (activity is BaseActivity<*>) {
+            (activity as BaseActivity<*>).showLoading(message)
+        }
+
+    }
+
+
+    fun hideLoading() {
+        if (activity is BaseActivity<*>) {
+            (activity as BaseActivity<*>).hideLoading()
+        }
     }
 
 }

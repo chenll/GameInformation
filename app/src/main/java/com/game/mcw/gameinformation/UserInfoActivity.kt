@@ -112,6 +112,7 @@ class UserInfoActivity : BaseActivity<ActivityUserinfoBinding>() {
             //图片路径 同样视频地址也是这个 根据requestCode
 //            val pathList = Matisse.obtainResult(data)
             val pathList = Matisse.obtainPathResult(data)
+            showLoading()
             AppRepository.getIndexRepository().upLoadFile(pathList[0])
                     .subscribeOn(Schedulers.io()).observeOn(Schedulers.io())
                     .flatMap(Function<String, Observable<UserBean>> { headUrl ->
@@ -120,11 +121,13 @@ class UserInfoActivity : BaseActivity<ActivityUserinfoBinding>() {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(object : NetRespObserver<UserBean>() {
                         override fun onNext(user: UserBean) {
+                            hideLoading()
                             MyUserManager.instance.updateUser(user)
                         }
 
                         override fun onError(e: Throwable) {
                             super.onError(e)
+                            hideLoading()
                             Toast.makeText(this@UserInfoActivity, "${e.message}", Toast.LENGTH_SHORT).show()
                         }
                     })

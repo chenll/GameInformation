@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.game.mcw.gameinformation.adapter.GameGiftExclusiveAdapter
 import com.game.mcw.gameinformation.adapter.GameGiftAdapter
 import com.game.mcw.gameinformation.databinding.FragmentGameGiftBinding
@@ -19,6 +20,7 @@ import com.qmuiteam.qmui.util.QMUIDisplayHelper
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration
 import com.yqritc.recyclerviewflexibledivider.VerticalDividerItemDecoration
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 class GameGiftFragment : BaseFragment() {
@@ -47,6 +49,23 @@ class GameGiftFragment : BaseFragment() {
         mAdapter.setOnLoadMoreListener({
             loadData(false)
         }, mBinding.recyclerView)
+        mAdapter.setOnItemChildClickListener { adapter, view, position ->
+            showLoading()
+            AppRepository.getIndexRepository().takeGift((adapter.getItem(position) as GameGift).id).subscribe(object : NetRespObserver<String>() {
+                override fun onNext(t: String) {
+                    hideLoading()
+                    Toast.makeText(activity, "领取成功", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onError(e: Throwable) {
+                    super.onError(e)
+                    hideLoading()
+                    Toast.makeText(activity, "${e.message}", Toast.LENGTH_SHORT).show()
+                }
+
+
+            })
+        }
         mBinding.swipeRefreshLayout.setOnRefreshListener {
             loadData(true)
         }

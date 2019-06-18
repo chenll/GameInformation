@@ -22,7 +22,7 @@ class IndexRepository(indexApi: IndexApi) {
     fun getInit(): Observable<IndexResource> = RepositoryUtils.extractData(mIndexApi.getInit(), object : TypeToken<IndexResource>() {}.type)
 
 
-    fun getInit(giftId: Int): Observable<GameGift> = RepositoryUtils.extractData(mIndexApi.takeGift(giftId), object : TypeToken<GameGift>() {}.type)
+    fun takeGift(giftId: Int): Observable<String> = RepositoryUtils.extractData(mIndexApi.takeGift(giftId), object : TypeToken<String>() {}.type)
 
 
     fun upLoadFile(path: String): Observable<String> {
