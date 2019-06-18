@@ -1,8 +1,10 @@
 package com.game.mcw.gameinformation.net
 
 import android.content.Context
+import android.text.TextUtils
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.game.mcw.gameinformation.BuildConfig
+import com.game.mcw.gameinformation.manager.MyUserManager
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -23,11 +25,13 @@ class NetClient(val ctx: Context) {
                 .addNetworkInterceptor(StethoInterceptor())
                 .addInterceptor { chain ->
                     val original = chain.request().newBuilder().addHeader("device", "android")
-//                    val token = KeyValueCache.getToken()
-//                    if (!TextUtils.isEmpty(token)) {
-//                        original.addHeader("X-Auth-Token", token)
-//                        Logger.d("token $token")
-//                    }
+                    if (MyUserManager.instance.userBean != null) {
+                        val token = MyUserManager.instance.userBean!!.token
+                        if (!TextUtils.isEmpty(token)) {
+                            original.addHeader("X-Auth-Token", token)
+                        }
+                    }
+
                     val request = original.build()
                     chain.proceed(request.newBuilder().method(request.method(), request.body()).build())
                 }

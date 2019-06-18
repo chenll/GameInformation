@@ -75,6 +75,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             AppRepository.getUserRepository().login(mBinding.etMobile.text.toString(), mBinding.etVcode.text.toString()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(object : NetRespObserver<UserBean>() {
                 override fun onNext(data: UserBean) {
                     MyUserManager.instance.updateUser(data)
+                    Toast.makeText(this@LoginActivity, "登录成功", Toast.LENGTH_SHORT).show()
+                    finish()
                 }
 
                 override fun onError(e: Throwable) {

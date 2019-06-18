@@ -24,7 +24,7 @@ interface UserApi {
 
     @FormUrlEncoded
     @POST("/center/user/edit")
-    fun editUserMessage(@Field("mobile") mobile: String, @Field("type") code: Int): Observable<AppResponse<Any>>
+    fun editUserMessage(@Field("avatar") avatar: String, @Field("nickname") nickname: String, @Field("sex") sex: String): Observable<AppResponse<Any>>
 
 
 }

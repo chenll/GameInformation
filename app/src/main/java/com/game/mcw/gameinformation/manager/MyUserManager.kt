@@ -1,11 +1,13 @@
 package com.game.mcw.gameinformation.manager
 
+import com.game.mcw.gameinformation.event.UserChangeEvent
 import com.game.mcw.gameinformation.modle.UserBean
+import org.greenrobot.eventbus.EventBus
 import org.litepal.LitePal
 
 class MyUserManager private constructor() {
 
-     var userBean: UserBean? = null
+    var userBean: UserBean? = null
 
     companion object {
         val instance: MyUserManager by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
@@ -18,9 +20,10 @@ class MyUserManager private constructor() {
     }
 
 
-    fun updateUser(userBean: UserBean) {
+    fun updateUser(userBean: UserBean?) {
         this.userBean = userBean
         LitePal.deleteAll(UserBean::class.java)
-        userBean.saveOrUpdate("userId=?", userBean.userId.toString())
+        userBean?.saveOrUpdate("userId=?", userBean.userId.toString())
+        EventBus.getDefault().post(UserChangeEvent())
     }
 }

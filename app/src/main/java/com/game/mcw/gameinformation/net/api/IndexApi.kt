@@ -2,8 +2,8 @@ package com.game.mcw.gameinformation.net.api
 
 import com.game.mcw.gameinformation.modle.AppResponse
 import io.reactivex.Observable
-import retrofit2.http.GET
-import retrofit2.http.Query
+import okhttp3.MultipartBody
+import retrofit2.http.*
 
 
 /**
@@ -46,6 +46,13 @@ interface IndexApi {
      */
     @GET("/index/init")
     fun getInit(): Observable<AppResponse<Any>>
+
+    /**
+     * 首页资源 包括banner 弹窗 开屏
+     */
+    @Multipart
+    @POST("/file/upload")
+    fun uploadFile(@Part body: MultipartBody.Part): Observable<AppResponse<Any>>
 
 
 }

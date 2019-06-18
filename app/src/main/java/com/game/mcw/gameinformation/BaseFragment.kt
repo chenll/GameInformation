@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import org.greenrobot.eventbus.EventBus
 
 open class BaseFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,5 +26,18 @@ open class BaseFragment : Fragment() {
         super.startActivity(Intent(activity, cls))
     }
 
+    fun registerEventBus() {
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this)
+        }
+    }
+
+    override fun onDestroy() {
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this)
+        }
+        super.onDestroy()
+
+    }
 
 }

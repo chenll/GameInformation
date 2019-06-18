@@ -11,9 +11,12 @@ import android.widget.Toast
 import com.game.mcw.gameinformation.adapter.MyAdapter
 import com.game.mcw.gameinformation.adapter.MyCardAdapter
 import com.game.mcw.gameinformation.databinding.FragmentMyBinding
+import com.game.mcw.gameinformation.event.UserChangeEvent
 import com.game.mcw.gameinformation.manager.MyUserManager
 import com.game.mcw.gameinformation.modle.Card
 import com.game.mcw.gameinformation.utils.GlideUtil
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class MyFragment : BaseFragment() {
 
@@ -29,6 +32,7 @@ class MyFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        registerEventBus()
         mBinding.user = MyUserManager.instance.userBean
         if (MyUserManager.instance.userBean != null) {
             Toast.makeText(activity, "已登录${MyUserManager.instance.userBean!!.userId}", Toast.LENGTH_SHORT).show()
@@ -68,6 +72,12 @@ class MyFragment : BaseFragment() {
 
     fun click(v: View) {
         startActivity(if (MyUserManager.instance.userBean == null) LoginActivity::class.java else UserInfoActivity::class.java)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun Event(userChangeEvent: UserChangeEvent) {
+        mBinding.user = MyUserManager.instance.userBean
+
     }
 
 }

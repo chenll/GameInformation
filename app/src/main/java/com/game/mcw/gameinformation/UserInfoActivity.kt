@@ -1,12 +1,32 @@
 package com.game.mcw.gameinformation
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.Intent
+import android.content.pm.ActivityInfo
+import android.os.Build
 import android.os.Bundle
+import android.support.annotation.RequiresApi
 import android.support.v4.content.ContextCompat
 import android.view.View
+import android.widget.Toast
 import com.game.mcw.gameinformation.databinding.ActivityUserinfoBinding
 import com.game.mcw.gameinformation.manager.MyUserManager
+import com.game.mcw.gameinformation.modle.UserBean
+import com.game.mcw.gameinformation.modle.dispose.NetRespObserver
+import com.game.mcw.gameinformation.net.AppRepository
+import com.game.mcw.gameinformation.utils.GlideV4ImageEngine
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog
+import com.tbruyelle.rxpermissions2.RxPermissions
+import com.zhihu.matisse.Matisse
+import com.zhihu.matisse.MimeType
+import com.zhihu.matisse.internal.entity.CaptureStrategy
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Function
+import io.reactivex.schedulers.Schedulers
+
 
 class UserInfoActivity : BaseActivity<ActivityUserinfoBinding>() {
     override fun getLayoutId(): Int {
@@ -36,7 +56,30 @@ class UserInfoActivity : BaseActivity<ActivityUserinfoBinding>() {
         QMUIStatusBarHelper.setStatusBarLightMode(this)
     }
 
-    fun onHeadItemClick(view: View) {}
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
+    @SuppressLint("CheckResult")
+    fun onHeadItemClick(view: View) {
+        RxPermissions(this).request(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe {
+            if (it) {
+                Matisse.from(this@UserInfoActivity)
+                        .choose(MimeType.ofImage())
+                        .showSingleMediaType(true)
+                        .capture(true)
+                        .captureStrategy(CaptureStrategy(true, "PhotoPicker"))
+                        .countable(true).maxSelectable(1)
+                        .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+                        .thumbnailScale(0.8f)
+                        .imageEngine(GlideV4ImageEngine())
+                        .forResult(111)
+            } else {
+
+            }
+
+        }
+
+
+    }
+
     fun onUUIDItemClick(view: View) {}
     fun onNiceNameItemClick(view: View) {
         QMUIDialog.EditTextDialogBuilder(this)
@@ -53,9 +96,40 @@ class UserInfoActivity : BaseActivity<ActivityUserinfoBinding>() {
         QMUIDialog.MessageDialogBuilder(this)
                 .setMessage("确定不是手滑了吗？")
                 .addAction("取消") { dialog, _ -> dialog.dismiss() }
-                .addAction("确定") { dialog, _ -> dialog.dismiss() }
+                .addAction("确定") { dialog, _ ->
+                    MyUserManager.instance.updateUser(null)
+                    dialog.dismiss()
+                    finish()
+                }
                 .create().show()
 
+    }
+
+    @SuppressLint("CheckResult")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 111 && resultCode == RESULT_OK) {
+            //图片路径 同样视频地址也是这个 根据requestCode
+//            val pathList = Matisse.obtainResult(data)
+            val pathList = Matisse.obtainPathResult(data)
+            AppRepository.getIndexRepository().upLoadFile(pathList[0])
+                    .subscribeOn(Schedulers.io()).observeOn(Schedulers.io())
+                    .flatMap(Function<String, Observable<UserBean>> { headUrl ->
+                        return@Function AppRepository.getUserRepository().editUserMessage(avatar = headUrl)
+                    })
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(object : NetRespObserver<UserBean>() {
+                        override fun onNext(user: UserBean) {
+                            MyUserManager.instance.updateUser(user)
+                        }
+
+                        override fun onError(e: Throwable) {
+                            super.onError(e)
+                            Toast.makeText(this@UserInfoActivity, "${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+                    })
+
+        }
     }
 
 }
