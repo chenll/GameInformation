@@ -10,7 +10,7 @@
     <color name="common_list_decoration">#EEEEEE</color>
     <color name="common_list_content_color">#ff424242</color>
     <color name="common_list_green_color">#ff14b9c8</color>
-    <color name="common_decoration">#E6E6E6</color>
+    <color name="common_decoration">#1A000000</color>
 
     <color name="text_black">#000000</color>
     <color name="text_black_60">#80000000</color>

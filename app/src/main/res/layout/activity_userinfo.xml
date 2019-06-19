@@ -26,7 +26,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/common_decoration_size"
             android:background="@color/common_decoration" />
 
         <TableLayout
@@ -42,17 +42,18 @@
 
                 <TextView
                     style="@style/userinfo_item"
+                    android:layout_height="50dp"
                     android:text="头像" />
 
-                <FrameLayout>
+
+                <FrameLayout android:paddingRight="12dp">
 
                     <ImageView
                         android:id="@+id/iv_head"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:layout_gravity="right|center_vertical"
-                        android:scaleType="fitXY"
-                        app:imageUrl='@{user.avatar??""}' />
+                        android:scaleType="fitXY" />
                 </FrameLayout>
 
 
@@ -61,7 +62,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="@dimen/common_decoration_size"
                 android:background="@color/common_decoration" />
 
             <TableRow
@@ -70,18 +71,22 @@
 
                 <TextView
                     style="@style/userinfo_item"
+                    android:layout_height="50dp"
                     android:text="UUID" />
 
                 <TextView
                     android:layout_gravity="right|center_vertical"
-                    android:text='@{user.userId+""}' />
+                    android:paddingRight="12dp"
+                    android:text='@{user.userId+""}'
+
+                    android:textColor="@color/text_black_60" />
 
                 <ImageView android:src="@mipmap/arrow_right" />
             </TableRow>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="@dimen/common_decoration_size"
                 android:background="@color/common_decoration" />
 
             <TableRow
@@ -90,18 +95,23 @@
 
                 <TextView
                     style="@style/userinfo_item"
+                    android:layout_height="50dp"
+
                     android:text="呢称" />
 
                 <TextView
                     android:layout_gravity="right|center_vertical"
-                    android:text='@{user.nickname??"_"}' />
+                    android:paddingRight="12dp"
+                    android:text='@{user.nickname??"_"}'
+
+                    android:textColor="@color/text_black_60" />
 
                 <ImageView android:src="@mipmap/arrow_right" />
             </TableRow>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="@dimen/common_decoration_size"
                 android:background="@color/common_decoration" />
 
             <TableRow
@@ -110,16 +120,22 @@
 
                 <TextView
                     style="@style/userinfo_item"
+                    android:layout_height="50dp"
+
                     android:text="性别" />
 
-                <TextView android:layout_gravity="right|center_vertical" />
+                <TextView
+                    android:layout_gravity="right|center_vertical"
+                    android:paddingRight="12dp"
+
+                    android:textColor="@color/text_black_60" />
 
                 <ImageView android:src="@mipmap/arrow_right" />
             </TableRow>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="@dimen/common_decoration_size"
                 android:background="@color/common_decoration" />
 
             <TableRow
@@ -128,16 +144,21 @@
 
                 <TextView
                     style="@style/userinfo_item"
+                    android:layout_height="50dp"
+
                     android:text="用户协议" />
 
-                <TextView android:layout_gravity="right" />
+                <TextView
+                    android:layout_gravity="right"
+                    android:paddingRight="12dp"
+                    android:textColor="@color/text_black_60" />
 
                 <ImageView android:src="@mipmap/arrow_right" />
             </TableRow>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="@dimen/common_decoration_size"
                 android:background="@color/common_decoration" />
 
             <TableRow
@@ -146,6 +167,7 @@
 
                 <TextView
                     style="@style/userinfo_item"
+                    android:layout_height="50dp"
                     android:text="退出登录" />
             </TableRow>
         </TableLayout>

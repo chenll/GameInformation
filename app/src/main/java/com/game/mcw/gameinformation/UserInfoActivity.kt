@@ -9,12 +9,12 @@ import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.support.v4.content.ContextCompat
 import android.view.View
-import android.widget.Toast
 import com.game.mcw.gameinformation.databinding.ActivityUserinfoBinding
 import com.game.mcw.gameinformation.manager.MyUserManager
 import com.game.mcw.gameinformation.modle.UserBean
 import com.game.mcw.gameinformation.modle.dispose.NetRespObserver
 import com.game.mcw.gameinformation.net.AppRepository
+import com.game.mcw.gameinformation.utils.GlideUtil
 import com.game.mcw.gameinformation.utils.GlideV4ImageEngine
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog
@@ -38,6 +38,7 @@ class UserInfoActivity : BaseActivity<ActivityUserinfoBinding>() {
         mBinding.activity = this
         initToolBar()
         mBinding.user = MyUserManager.instance.userBean
+        MyUserManager.instance.userBean?.avatar?.let { GlideUtil.loadCircleHeadPic(it, mBinding.ivHead) }
     }
 
     private fun initToolBar() {
@@ -49,6 +50,7 @@ class UserInfoActivity : BaseActivity<ActivityUserinfoBinding>() {
         mBinding.includeToolbar.toolbar.setNavigationOnClickListener {
             finish()
         }
+        mBinding.includeToolbar.toolbarTitle.text = "个人资料"
     }
 
     override fun initStatusBar() {

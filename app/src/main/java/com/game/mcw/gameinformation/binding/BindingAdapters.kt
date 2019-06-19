@@ -6,6 +6,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.ImageView
+import com.game.mcw.gameinformation.R
 import com.game.mcw.gameinformation.utils.GlideUtil
 import com.qmuiteam.qmui.util.QMUIDisplayHelper
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration
@@ -30,30 +31,25 @@ object BindingAdapters {
     @BindingAdapter(value = ["rvOrientation", "rvColumns", "rvDecorationSize", "rvDecorationColor"], requireAll = false)
     @JvmStatic
     fun initRecyclerView(recyclerView: RecyclerView, orientation: Int?, columns: Int?, decorationSize: Int?, @ColorInt decorationColor: Int?) {
+        val lineSizeException = decorationSize
+                ?: recyclerView.context.resources.getDimensionPixelSize(R.dimen.common_decoration_size)
         if (columns == null) {
-            val layoutManager = LinearLayoutManager(recyclerView.context, orientation ?: LinearLayoutManager.VERTICAL, false)
-//        val layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
-            recyclerView.layoutManager = layoutManager
-            if (decorationColor != null) {
-                if (orientation ?: LinearLayoutManager.VERTICAL == LinearLayoutManager.VERTICAL) {
-                    recyclerView.addItemDecoration(HorizontalDividerItemDecoration.Builder(recyclerView.context).size(decorationSize
-                            ?: QMUIDisplayHelper.dp2px(recyclerView.context, 1)).color(decorationColor).build())
+            val recyclerViewOrientation = orientation ?: LinearLayoutManager.VERTICAL
+            recyclerView.layoutManager = LinearLayoutManager(recyclerView.context, recyclerViewOrientation, false)
+            decorationColor?.let {
+                if (recyclerViewOrientation == LinearLayoutManager.VERTICAL) {
+                    recyclerView.addItemDecoration(HorizontalDividerItemDecoration.Builder(recyclerView.context).size(lineSizeException).color(decorationColor).build())
                 } else {
-                    recyclerView.addItemDecoration(VerticalDividerItemDecoration.Builder(recyclerView.context).size(decorationSize
-                            ?: QMUIDisplayHelper.dp2px(recyclerView.context, 1)).color(decorationColor).build())
+                    recyclerView.addItemDecoration(VerticalDividerItemDecoration.Builder(recyclerView.context).size(lineSizeException).color(decorationColor).build())
                 }
-
             }
 
 
         } else {
-            val layoutManager = GridLayoutManager(recyclerView.context, columns)
-            recyclerView.layoutManager = layoutManager
-            if (decorationColor != null) {
-                recyclerView.addItemDecoration(HorizontalDividerItemDecoration.Builder(recyclerView.context).size(decorationSize
-                        ?: QMUIDisplayHelper.dp2px(recyclerView.context, 1)).color(decorationColor).build())
-                recyclerView.addItemDecoration(VerticalDividerItemDecoration.Builder(recyclerView.context).size(decorationSize
-                        ?: QMUIDisplayHelper.dp2px(recyclerView.context, 1)).color(decorationColor).build())
+            recyclerView.layoutManager = GridLayoutManager(recyclerView.context, columns)
+            decorationColor?.let {
+                recyclerView.addItemDecoration(HorizontalDividerItemDecoration.Builder(recyclerView.context).size(lineSizeException).color(decorationColor).build())
+                recyclerView.addItemDecoration(VerticalDividerItemDecoration.Builder(recyclerView.context).size(lineSizeException).color(decorationColor).build())
             }
         }
 
