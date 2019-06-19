@@ -12,10 +12,10 @@
         android:orientation="vertical"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/title"
-            app:layout_constraintTop_toTopOf="parent"
-            layout="@layout/toolbar_home" />
+        <!--<include-->
+            <!--android:id="@+id/title"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--layout="@layout/toolbar_home" />-->
 
 
         <android.support.v4.widget.SwipeRefreshLayout

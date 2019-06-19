@@ -8,13 +8,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/toolbar_home" />
+        <!--<include layout="@layout/toolbar_home" />-->
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="22dp"
             android:drawableLeft="@drawable/icon_gift_title"
             android:drawablePadding="4dp"
             android:text="独家礼包"

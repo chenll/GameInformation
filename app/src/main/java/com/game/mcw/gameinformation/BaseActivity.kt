@@ -25,8 +25,10 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     abstract fun getLayoutId(): Int
 
     open fun initStatusBar() {
+//        QMUIStatusBarHelper.translucent(this)
+//        QMUIStatusBarHelper.setStatusBarDarkMode(this)
         QMUIStatusBarHelper.translucent(this)
-        QMUIStatusBarHelper.setStatusBarDarkMode(this)
+        QMUIStatusBarHelper.setStatusBarLightMode(this)
     }
 
     fun startActivity(cls: Class<*>) {
