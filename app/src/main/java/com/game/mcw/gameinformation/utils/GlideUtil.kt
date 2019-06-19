@@ -19,7 +19,7 @@ object GlideUtil {
      *加载圆形头像
      */
     fun loadCircleHeadPic(url: String, view: ImageView) {
-        loadCirclePic(view.context, url, view)
+        loadCirclePic(view.context, url, view, R.mipmap.head_default, R.mipmap.head_default)
     }
 
     /**

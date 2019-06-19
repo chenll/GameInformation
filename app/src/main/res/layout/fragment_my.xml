@@ -22,17 +22,20 @@
         android:background="@android:color/white"
         android:orientation="vertical">
 
-        <include layout="@layout/toolbar_home" />
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingTop="20dp"
+            android:onClick="@{fragment::click}"
+
+            android:paddingRight="16dp">
 
             <ImageView
                 android:id="@+id/iv_head"
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                android:onClick="@{fragment::click}"
+                android:layout_width="53dp"
+                android:layout_height="53dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 tools:ignore="MissingConstraints" />
 
@@ -43,6 +46,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="bottom"
                 android:text='@{user==null?"-":user.mobile}'
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toTopOf="@+id/tv_nick"
                 app:layout_constraintLeft_toRightOf="@+id/iv_head"
                 app:layout_constraintRight_toLeftOf="@+id/btn_sign"
@@ -55,6 +59,8 @@
                 android:layout_height="0dp"
                 android:layout_marginLeft="10dp"
                 android:text='@{user==null?"-":user.nickname}'
+                android:textColor="#181818"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/iv_head"
                 app:layout_constraintRight_toLeftOf="@+id/btn_sign"
@@ -62,32 +68,52 @@
                 tools:ignore="MissingConstraints" />
 
 
-            <Button
+            <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
                 android:id="@+id/btn_sign"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{fragment::click}"
+                android:drawableLeft="@mipmap/sign_icon"
+                android:drawablePadding="2dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="4dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="4dp"
                 android:text="签到"
+                android:textColor="#181818"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:qmui_backgroundColor="@color/white"
+                app:qmui_borderColor="#66000000"
+                app:qmui_isRadiusAdjustBounds="true"
+                tools:ignore="MissingConstraints" />
+
+
         </android.support.constraint.ConstraintLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_my_head"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="14dp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="14dp"
             android:background="@color/common_decoration" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_my_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp" />
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="14dp" />
     </LinearLayout>
 </layout>

@@ -14,7 +14,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="4dp">
+        android:padding="3dp">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/cl_cardbg"
@@ -25,10 +25,9 @@
 
             <ImageView
                 android:id="@+id/iv_card_icon"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:src="@mipmap/ic_launcher"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingConstraints" />

@@ -16,6 +16,7 @@ class MyAdapter(layId: Int) : BaseMVAdapter<Card, MVViewHolder>(layId) {
     override fun convert(helper: MVViewHolder, item: Card) {
         val binding = helper.getBinding() as ItemMyBinding
         binding.setVariable(BR.item, item)
+        binding.ivCardIcon.setImageResource(item.icon)
         binding.executePendingBindings()
 
     }

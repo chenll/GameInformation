@@ -50,24 +50,28 @@ class MyFragment : BaseFragment() {
         GlideUtil.loadCircleHeadPic("", mBinding.ivHead)
         val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         mBinding.rvMyHead.layoutManager = layoutManager
-        mCardAdapter = MyCardAdapter(R.layout.item_my_card)
-        mCardAdapter.addData(Card(111, "优惠券", R.mipmap.ic_launcher, intArrayOf(Color.parseColor("#A55DFD"), Color.parseColor("#E463FB"))))
-        mCardAdapter.addData(Card(222, "积分", R.mipmap.ic_launcher, intArrayOf(Color.parseColor("#FE4A65"), Color.parseColor("#EF7B3F"))))
-        mCardAdapter.addData(Card(333, "零钱", R.mipmap.ic_launcher, intArrayOf(Color.parseColor("#36D5F2"), Color.parseColor("#2EE8EB"))))
-        mCardAdapter.addData(Card(444, "金钻", R.mipmap.ic_launcher, intArrayOf(Color.parseColor("#FC8970"), Color.parseColor("#F6A524"))))
-        mCardAdapter.bindToRecyclerView(mBinding.rvMyHead)
+        mCardAdapter = MyCardAdapter(R.layout.item_my_card).apply {
+            addData(Card(1, "优惠券", R.mipmap.my_card_icon_1, intArrayOf(Color.parseColor("#9D55FE"), Color.parseColor("#E15EFB"))))
+            addData(Card(0, "积分", R.mipmap.my_card_icon_2, intArrayOf(Color.parseColor("#FE425F"), Color.parseColor("#FE7224"))))
+            addData(Card(1, "零钱", R.mipmap.my_card_icon_3, intArrayOf(Color.parseColor("#2CD3ED"), Color.parseColor("#25E8E5"))))
+            addData(Card(6, "金钻", R.mipmap.my_card_icon_4, intArrayOf(Color.parseColor("#FF8268"), Color.parseColor("#FF9D1A"))))
+            bindToRecyclerView(mBinding.rvMyHead)
+
+        }
 
 
         val layoutManagerBody = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         mBinding.rvMyBody.layoutManager = layoutManagerBody
-        mAdapter = MyAdapter(R.layout.item_my)
-        mAdapter.addData(Card(111, "每日任务", R.mipmap.ic_launcher, intArrayOf(Color.parseColor("#A55DFD"), Color.parseColor("#E463FB"))))
-        mAdapter.addData(Card(222, "积分商城", R.mipmap.ic_launcher, intArrayOf(Color.parseColor("#FE4A65"), Color.parseColor("#EF7B3F"))))
-        mAdapter.addData(Card(333, "VIP特权", R.mipmap.ic_launcher, intArrayOf(Color.parseColor("#36D5F2"), Color.parseColor("#2EE8EB"))))
-        mAdapter.addData(Card(444, "在线客服", R.mipmap.ic_launcher, intArrayOf(Color.parseColor("#FC8970"), Color.parseColor("#F6A524"))))
-        mAdapter.addData(Card(444, "收入明细", R.mipmap.ic_launcher, intArrayOf(Color.parseColor("#FC8970"), Color.parseColor("#F6A524"))))
-        mAdapter.addData(Card(444, "隐私政策", R.mipmap.ic_launcher, intArrayOf(Color.parseColor("#FC8970"), Color.parseColor("#F6A524"))))
-        mAdapter.bindToRecyclerView(mBinding.rvMyBody)
+        mAdapter = MyAdapter(R.layout.item_my).apply {
+            addData(Card(111, "每日任务", R.mipmap.my_icon_1, intArrayOf(Color.parseColor("#A55DFD"), Color.parseColor("#E463FB"))))
+            addData(Card(222, "积分商城", R.mipmap.my_icon_2, intArrayOf(Color.parseColor("#FE4A65"), Color.parseColor("#EF7B3F"))))
+            addData(Card(333, "VIP特权", R.mipmap.my_icon_3, intArrayOf(Color.parseColor("#36D5F2"), Color.parseColor("#2EE8EB"))))
+            addData(Card(444, "在线客服", R.mipmap.my_icon_4, intArrayOf(Color.parseColor("#FC8970"), Color.parseColor("#F6A524"))))
+            addData(Card(444, "收入明细", R.mipmap.my_icon_5, intArrayOf(Color.parseColor("#FC8970"), Color.parseColor("#F6A524"))))
+            addData(Card(444, "隐私政策", R.mipmap.my_icon_6, intArrayOf(Color.parseColor("#FC8970"), Color.parseColor("#F6A524"))))
+            bindToRecyclerView(mBinding.rvMyBody)
+        }
+
     }
 
     fun click(v: View) {

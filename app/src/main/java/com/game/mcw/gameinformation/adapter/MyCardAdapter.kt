@@ -23,14 +23,16 @@ class MyCardAdapter(layId: Int) : BaseMVAdapter<Card, MVViewHolder>(layId) {
         val rad = QMUIDisplayHelper.dp2px(mContext, 4).toFloat()
         bgDrawable.cornerRadii = floatArrayOf(rad, rad, rad, rad, rad, rad, rad, rad)
         binding.clCardbg.background = bgDrawable
+        binding.ivCardIcon.setImageResource(item.icon)
         binding.executePendingBindings()
+
 
     }
 
     override fun createBaseViewHolder(view: View?): MVViewHolder {
         val holder = super.createBaseViewHolder(view)
-        holder.itemView.layoutParams.width = QMUIDisplayHelper.getScreenWidth(mContext) / 4
-        holder.itemView.layoutParams.height = QMUIDisplayHelper.getScreenWidth(mContext) / 4
+        holder.itemView.layoutParams.width = (QMUIDisplayHelper.getScreenWidth(mContext) - QMUIDisplayHelper.dpToPx(28)) / 4
+        holder.itemView.layoutParams.height = (QMUIDisplayHelper.getScreenWidth(mContext) - QMUIDisplayHelper.dpToPx(28)) * 75 / 320
         return holder
     }
 
