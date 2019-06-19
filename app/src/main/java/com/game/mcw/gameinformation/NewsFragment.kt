@@ -110,15 +110,10 @@ class NewsFragment : BaseFragment() {
         AppRepository.getIndexRepository().getInit().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(object : NetRespObserver<IndexResource>() {
             override fun onNext(data: IndexResource) {
                 if (data.banners.isNotEmpty()) {
-                    with(mHeadBinding.viewpager) {
-                        setImageLoader(GlideImageLoader())
-                        setImages(data.banners)
-                        setOnBannerListener {
-                            Log.e("aaa", "=======1")
-                            activity?.let { it1 -> data.banners[it].url?.let { it2 -> WebActivity.goWeb(it1, it2) } }
-                        }
-                        start()
-                    }
+                    mHeadBinding.viewpager.setImageLoader(GlideImageLoader()).setImages(data.banners)
+                            .setOnBannerListener {
+                                activity?.let { it1 -> data.banners[it].url?.let { it2 -> WebActivity.goWeb(it1, it2) } }
+                            }.start()
                 } else {
                     mAdapter.removeAllHeaderView()
                 }
@@ -134,28 +129,25 @@ class NewsFragment : BaseFragment() {
                     }
                 }
                 if (data.popups.isNotEmpty()) {
-                    for (popup in data.popups) {
-                        if (popup.isEffectived()) {
-                            Glide.with(activity!!).load(data.popups[0].image).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).listener(object : RequestListener<Drawable> {
-                                override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-                                    val bundle = Bundle()
-                                    bundle.putParcelable("indexCommon", data.popups[0])
-                                    val homePopUpDialog = HomePopUpDialog()
-                                    homePopUpDialog.arguments = bundle
-                                    homePopUpDialog.show(childFragmentManager, "homepopupdialog")
-                                    return true
+                    data.popups.toTypedArray().filter { it.isEffectived() }[0].apply {
+                        val indexCommon = this
+                        Glide.with(activity!!).load(indexCommon.image).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).listener(object : RequestListener<Drawable> {
+                            override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                                HomePopUpDialog().apply {
+                                    arguments = Bundle().apply { putParcelable("indexCommon", indexCommon) }
+                                    show(this@NewsFragment.childFragmentManager, "homepopupdialog")
                                 }
+                                return true
+                            }
 
-                                override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                                    return false
-                                }
+                            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                                return false
+                            }
 
-                            }).preload()
-                            break
-                        }
+                        }).preload()
                     }
-
                 }
+
             }
 
             override fun onError(e: Throwable) {
