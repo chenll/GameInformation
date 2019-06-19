@@ -14,7 +14,7 @@ import com.game.mcw.gameinformation.modle.NewsGroup
 
 class NewsAdapter : BaseMVMultiItemAdapter<NewsGroup, MVViewHolder>() {
 
-    val mGamePresenter = GamePresenter()
+    private val mGamePresenter = GamePresenter()
 
     init {
         addItemType(1, R.layout.item_news_3)
