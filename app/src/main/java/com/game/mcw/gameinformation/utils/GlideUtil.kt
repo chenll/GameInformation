@@ -50,12 +50,13 @@ object GlideUtil {
         val roundedCorners = RoundedCorners(QMUIDisplayHelper.dp2px(MyApplication.INSTANCE, 6))
 //        val requestOptions = RequestOptions.bitmapTransform(MultiTransformation<Bitmap>(MultiTransformation(roundedCorners)))
         val requestOptions = RequestOptions.bitmapTransform(roundedCorners)
-        val transforms = Glide.with(view.context).load(R.mipmap.ic_launcher).apply(requestOptions)
+        val transforms = Glide.with(view.context).load(R.mipmap.game_icon_def).apply(requestOptions)
         Glide.with(view.context).load(url)
                 .apply(requestOptions)
-                .placeholder(R.mipmap.ic_launcher)
+                .placeholder(R.mipmap.game_icon_def)
                 .thumbnail(transforms)
-                .error(R.mipmap.ic_launcher)
+                .error(R.mipmap.game_icon_def)
+                .dontAnimate()
                 .into(view)
     }
 

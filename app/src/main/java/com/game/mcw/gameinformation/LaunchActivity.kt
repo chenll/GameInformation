@@ -29,7 +29,7 @@ class LaunchActivity : BaseActivity<ActivityLaunchBinding>() {
             }
 
         }
-        mDisposable = Flowable.intervalRange(0, 5, 0, 1, TimeUnit.SECONDS)
+        mDisposable = Flowable.intervalRange(0, 3, 0, 1, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext {}.doOnCancel { goToMain() }
                 .doOnComplete { goToMain() }
