@@ -44,7 +44,7 @@ public class JudgeNestedScrollView extends NestedScrollView {
                 return !(xDistance >= yDistance || yDistance < scaledTouchSlop) && isNeedScroll;
 
         }
-        Log.e("aaa",  "111");
+        Log.e("aaa", "111");
 
         return super.onInterceptTouchEvent(ev);
     }

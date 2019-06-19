@@ -7,7 +7,6 @@ import com.game.mcw.gameinformation.modle.dispose.RepositoryUtils
 import com.game.mcw.gameinformation.net.api.UserApi
 import com.google.gson.reflect.TypeToken
 import io.reactivex.Observable
-import retrofit2.http.Field
 
 class UserRepository(userApi: UserApi) {
     private var mUserApi: UserApi = userApi
@@ -16,7 +15,7 @@ class UserRepository(userApi: UserApi) {
     fun getVcode4Regist(mobile: String): Observable<VcodeResponse> = RepositoryUtils.extractDataSimple(mUserApi.getVcode(mobile, 2), VcodeResponse::class.java)
 
 
-//    fun editUserMessage(avatar: String = MyUserManager.instance.userBean!!.avatar, nickname: String = MyUserManager.instance.userBean!!.nickname, sex: String = MyUserManager.instance.userBean!!.sex): Observable<UserBean> = RepositoryUtils.extractData(mUserApi.editUserMessage(avatar, nickname, sex), UserBean::class.java)
+    //    fun editUserMessage(avatar: String = MyUserManager.instance.userBean!!.avatar, nickname: String = MyUserManager.instance.userBean!!.nickname, sex: String = MyUserManager.instance.userBean!!.sex): Observable<UserBean> = RepositoryUtils.extractData(mUserApi.editUserMessage(avatar, nickname, sex), UserBean::class.java)
     fun editUserMessage(avatar: String = MyUserManager.instance.userBean!!.avatar, nickname: String = MyUserManager.instance.userBean!!.nickname, sex: String = "1"): Observable<UserBean> = RepositoryUtils.extractData(mUserApi.editUserMessage(avatar, nickname, sex), UserBean::class.java)
 
 }

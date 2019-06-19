@@ -6,7 +6,6 @@ import com.game.mcw.gameinformation.adapter.base.BaseMVAdapter
 import com.game.mcw.gameinformation.adapter.base.MVViewHolder
 import com.game.mcw.gameinformation.databinding.ItemGameGiftBinding
 import com.game.mcw.gameinformation.modle.GameGift
-import com.game.mcw.gameinformation.utils.GlideUtil
 
 class GameGiftAdapter(layId: Int) : BaseMVAdapter<GameGift, MVViewHolder>(layId) {
 

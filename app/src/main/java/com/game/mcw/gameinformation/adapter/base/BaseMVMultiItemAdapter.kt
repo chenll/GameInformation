@@ -5,7 +5,6 @@ import android.databinding.ViewDataBinding
 import android.view.View
 import android.view.ViewGroup
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
-import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.game.mcw.gameinformation.R
 

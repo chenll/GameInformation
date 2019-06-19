@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView
 import android.widget.ImageView
 import com.game.mcw.gameinformation.R
 import com.game.mcw.gameinformation.utils.GlideUtil
-import com.qmuiteam.qmui.util.QMUIDisplayHelper
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration
 import com.yqritc.recyclerviewflexibledivider.VerticalDividerItemDecoration
 

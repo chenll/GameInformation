@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.game.mcw.gameinformation.databinding.FragmentGameBinding
-import com.game.mcw.gameinformation.databinding.FragmentHomeBinding
 
 class GameTempFragment : BaseFragment() {
     private lateinit var mBinding: FragmentGameBinding

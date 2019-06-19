@@ -5,7 +5,6 @@ import android.widget.Toast
 import com.game.mcw.gameinformation.MyApplication
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
-import org.w3c.dom.Text
 
 
 abstract class NetRespObserver<T> : Observer<T> {

@@ -3,13 +3,9 @@ package com.game.mcw.gameinformation
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.support.v4.app.Fragment
 import android.util.Log
 import android.widget.Toast
-import com.game.mcw.gameinformation.adapter.HomeFragmentPagerAdapter
-import com.game.mcw.gameinformation.databinding.ActivityMainBinding
 import com.game.mcw.gameinformation.databinding.ActivityTestBinding
-import java.util.*
 
 class TestActivity : BaseActivity<ActivityTestBinding>() {
     companion object {

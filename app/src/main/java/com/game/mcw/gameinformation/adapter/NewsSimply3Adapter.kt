@@ -2,13 +2,11 @@ package com.game.mcw.gameinformation.adapter
 
 import android.view.View
 import com.game.mcw.gameinformation.BR
-import com.game.mcw.gameinformation.R
 import com.game.mcw.gameinformation.adapter.base.BaseMVAdapter
 import com.game.mcw.gameinformation.adapter.base.MVViewHolder
 import com.game.mcw.gameinformation.binding.GamePresenter
 import com.game.mcw.gameinformation.databinding.ItemItemNews1Binding
 import com.game.mcw.gameinformation.modle.News
-import com.game.mcw.gameinformation.utils.GlideUtil
 import com.qmuiteam.qmui.util.QMUIDisplayHelper
 
 

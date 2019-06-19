@@ -2,7 +2,6 @@ package com.game.mcw.gameinformation.modle
 
 import android.os.Parcel
 import android.os.Parcelable
-import android.text.TextUtils
 import org.litepal.crud.LitePalSupport
 
 

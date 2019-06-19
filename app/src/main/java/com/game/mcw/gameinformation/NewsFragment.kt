@@ -3,7 +3,6 @@ package com.game.mcw.gameinformation
 import android.databinding.DataBindingUtil
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +16,10 @@ import com.game.mcw.gameinformation.adapter.NewsAdapter
 import com.game.mcw.gameinformation.databinding.CommonEmptyViewBinding
 import com.game.mcw.gameinformation.databinding.FragmentHomeChild1Binding
 import com.game.mcw.gameinformation.databinding.HeadNewsBinding
-import com.game.mcw.gameinformation.modle.*
+import com.game.mcw.gameinformation.modle.IndexCommon
+import com.game.mcw.gameinformation.modle.IndexResource
+import com.game.mcw.gameinformation.modle.News
+import com.game.mcw.gameinformation.modle.NewsGroup
 import com.game.mcw.gameinformation.modle.dispose.NetRespObserver
 import com.game.mcw.gameinformation.net.AppRepository
 import com.game.mcw.gameinformation.utils.GlideImageLoader

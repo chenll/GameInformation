@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.game.mcw.gameinformation.databinding.FragmentCircleBinding
-import com.game.mcw.gameinformation.databinding.FragmentHomeBinding
 
 class CircleFragment : BaseFragment() {
     private lateinit var mBinding: FragmentCircleBinding

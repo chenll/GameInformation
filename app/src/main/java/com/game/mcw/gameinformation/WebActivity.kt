@@ -2,17 +2,10 @@ package com.game.mcw.gameinformation
 
 import android.content.Context
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.LinearLayout
-import com.game.mcw.gameinformation.adapter.HomeFragmentPagerAdapter
-import com.game.mcw.gameinformation.databinding.ActivityMainBinding
 import com.game.mcw.gameinformation.databinding.ActivityWebBinding
 import com.just.agentweb.AgentWeb
-import java.util.*
 
 class WebActivity : BaseActivity<ActivityWebBinding>() {
     override fun getLayoutId(): Int {

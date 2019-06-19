@@ -3,7 +3,6 @@ package com.game.mcw.gameinformation
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
-import android.widget.Switch
 import android.widget.Toast
 import com.game.mcw.gameinformation.databinding.ActivityLoginBinding
 import com.game.mcw.gameinformation.manager.MyUserManager
@@ -14,10 +13,6 @@ import com.game.mcw.gameinformation.net.AppRepository
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import org.litepal.LitePal
-import org.litepal.extension.deleteAll
-import org.litepal.extension.findAsync
-import org.litepal.extension.findFirstAsync
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 

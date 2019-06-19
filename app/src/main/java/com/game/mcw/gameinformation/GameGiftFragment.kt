@@ -9,8 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.game.mcw.gameinformation.adapter.GameGiftExclusiveAdapter
 import com.game.mcw.gameinformation.adapter.GameGiftAdapter
+import com.game.mcw.gameinformation.adapter.GameGiftExclusiveAdapter
 import com.game.mcw.gameinformation.databinding.FragmentGameGiftBinding
 import com.game.mcw.gameinformation.modle.GameExclusiveGift
 import com.game.mcw.gameinformation.modle.GameGift
@@ -20,7 +20,6 @@ import com.qmuiteam.qmui.util.QMUIDisplayHelper
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration
 import com.yqritc.recyclerviewflexibledivider.VerticalDividerItemDecoration
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 class GameGiftFragment : BaseFragment() {
@@ -38,10 +37,12 @@ class GameGiftFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         initExclusiveRecyclerView()
 
-        val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        mBinding.recyclerView.isNestedScrollingEnabled = true
-        mBinding.recyclerView.layoutManager = layoutManager
-        mBinding.recyclerView.addItemDecoration(HorizontalDividerItemDecoration.Builder(activity).size(QMUIDisplayHelper.dp2px(activity, 6)).color(ContextCompat.getColor(activity!!, R.color.transparent)).build())
+        val layoutManagerVertical = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        with(mBinding.recyclerView) {
+            isNestedScrollingEnabled = true
+            layoutManager = layoutManagerVertical
+            addItemDecoration(HorizontalDividerItemDecoration.Builder(activity).size(QMUIDisplayHelper.dp2px(activity, 6)).color(ContextCompat.getColor(activity!!, R.color.transparent)).build())
+        }
         mAdapter = GameGiftAdapter(R.layout.item_game_gift).apply {
             bindToRecyclerView(mBinding.recyclerView)
             isFirstOnly(false)
@@ -49,13 +50,14 @@ class GameGiftFragment : BaseFragment() {
             setOnLoadMoreListener({
                 loadData(false)
             }, mBinding.recyclerView)
-            setOnItemChildClickListener { adapter, view, position ->
+            setOnItemChildClickListener { adapter, _, position ->
                 showLoading()
                 AppRepository.getIndexRepository().takeGift((adapter.getItem(position) as GameGift).id).subscribe(object : NetRespObserver<String>() {
                     override fun onNext(t: String) {
                         hideLoading()
                         Toast.makeText(activity, "领取成功", Toast.LENGTH_SHORT).show()
                     }
+
                     override fun onError(e: Throwable) {
                         super.onError(e)
                         hideLoading()
@@ -82,13 +84,15 @@ class GameGiftFragment : BaseFragment() {
         val layoutManagerExclusive = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         mBinding.rvExclusive.layoutManager = layoutManagerExclusive
         mBinding.rvExclusive.addItemDecoration(VerticalDividerItemDecoration.Builder(activity).size(QMUIDisplayHelper.dp2px(activity, 10)).color(ContextCompat.getColor(activity!!, R.color.transparent)).build())
-        mExclusiveAdapter = GameGiftExclusiveAdapter(R.layout.item_game_gift_exclusive)
-        mExclusiveAdapter.bindToRecyclerView(mBinding.rvExclusive)
-        mExclusiveAdapter.setOnItemClickListener { adapter, view, position ->
-            val intent = Intent(activity, ExclusiveGiftDetailActivity::class.java)
-            intent.putExtra("GameExclusiveGift", adapter.getItem(position) as GameExclusiveGift)
-            startActivity(intent)
+        mExclusiveAdapter = GameGiftExclusiveAdapter(R.layout.item_game_gift_exclusive).apply {
+            bindToRecyclerView(mBinding.rvExclusive)
+            setOnItemClickListener { adapter, _, position ->
+                val intent = Intent(activity, ExclusiveGiftDetailActivity::class.java)
+                intent.putExtra("GameExclusiveGift", adapter.getItem(position) as GameExclusiveGift)
+                startActivity(intent)
+            }
         }
+
     }
 
     private fun loadExclusiveGiftData() {
