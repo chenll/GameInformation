@@ -10,7 +10,9 @@ import com.qmuiteam.qmui.widget.dialog.QMUITipDialog
 
 abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     lateinit var mBinding: T
-    private var loadingDialog: QMUITipDialog? = null
+    private val loadingDialog: QMUITipDialog by lazy {
+        QMUITipDialog.Builder(this).setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING).setTipWord("正在加载...").create()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         initStatusBar()
@@ -31,23 +33,20 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         super.startActivity(Intent(this, cls))
     }
 
-    fun showLoading(message: String = "正在加载...") {
-        if (loadingDialog == null) {
-            loadingDialog = QMUITipDialog.Builder(this).setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING).setTipWord(message).create()
-        }
-        if (loadingDialog!!.isShowing) {
+    fun showLoading() {
+        if (loadingDialog.isShowing) {
             return
         }
-        loadingDialog?.show()
+        loadingDialog.show()
     }
 
 
     fun hideLoading() {
-        loadingDialog?.dismiss()
+        loadingDialog.dismiss()
     }
 
     override fun onDestroy() {
-        if (loadingDialog != null && loadingDialog!!.isShowing) {
+        if (loadingDialog.isShowing) {
             hideLoading()
         }
         super.onDestroy()

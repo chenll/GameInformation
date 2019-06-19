@@ -19,10 +19,15 @@ class LaunchActivity : BaseActivity<ActivityLaunchBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding.aty = this
-        LitePal.findFirstAsync(IndexCommon::class.java).listen {
-            if (it != null) {
-                Glide.with(this@LaunchActivity).load(it.image).centerCrop().into(mBinding.ivLaunch)
+        LitePal.findAllAsync(IndexCommon::class.java).listen { list ->
+            list?.let {
+                list.forEach {
+                    if (it.isEffectived()) {
+                        Glide.with(this@LaunchActivity).load(it.image).centerCrop().into(mBinding.ivLaunch)
+                    }
+                }
             }
+
         }
         mDisposable = Flowable.intervalRange(0, 5, 0, 1, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())

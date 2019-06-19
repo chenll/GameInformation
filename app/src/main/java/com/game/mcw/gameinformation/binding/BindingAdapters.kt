@@ -31,8 +31,7 @@ object BindingAdapters {
     @JvmStatic
     fun initRecyclerView(recyclerView: RecyclerView, orientation: Int?, columns: Int?, decorationSize: Int?, @ColorInt decorationColor: Int?) {
         if (columns == null) {
-            val layoutManager = LinearLayoutManager(recyclerView.context, orientation
-                    ?: LinearLayoutManager.VERTICAL, false)
+            val layoutManager = LinearLayoutManager(recyclerView.context, orientation ?: LinearLayoutManager.VERTICAL, false)
 //        val layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
             recyclerView.layoutManager = layoutManager
             if (decorationColor != null) {

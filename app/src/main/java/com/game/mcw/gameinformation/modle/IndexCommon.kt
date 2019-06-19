@@ -2,6 +2,7 @@ package com.game.mcw.gameinformation.modle
 
 import android.os.Parcel
 import android.os.Parcelable
+import android.text.TextUtils
 import org.litepal.crud.LitePalSupport
 
 
@@ -33,4 +34,30 @@ class IndexCommon(val image: String?, val url: String?, val startDate: String?, 
             return arrayOfNulls(size)
         }
     }
+
+    fun isEffectived(): Boolean {
+        val startDateLong = try {
+            startDate?.toLong()
+        } catch (e: Exception) {
+            null
+        }
+        val endDateLong = try {
+            endDate?.toLong()
+        } catch (e: Exception) {
+            null
+        }
+        startDateLong?.let {
+            if (System.currentTimeMillis() < it) {
+                return false
+            }
+        }
+        endDateLong?.let {
+            if (System.currentTimeMillis() > it) {
+                return false
+            }
+        }
+
+        return true
+    }
+
 }

@@ -30,9 +30,9 @@ open class BaseFragment : Fragment() {
 
     }
 
-    fun showLoading(message: String = "正在加载...") {
+    fun showLoading() {
         if (activity is BaseActivity<*>) {
-            (activity as BaseActivity<*>).showLoading(message)
+            (activity as BaseActivity<*>).showLoading()
         }
 
     }

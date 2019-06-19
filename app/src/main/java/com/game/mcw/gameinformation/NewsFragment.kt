@@ -1,6 +1,5 @@
 package com.game.mcw.gameinformation
 
-import android.app.ProgressDialog.show
 import android.databinding.DataBindingUtil
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -40,24 +39,18 @@ class NewsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         mBinding.recyclerView.isNestedScrollingEnabled = true
-//        mBinding.recyclerView.layoutManager = layoutManager
-//        mBinding.recyclerView.addItemDecoration(HorizontalDividerItemDecoration.Builder(activity).size(QMUIDisplayHelper.dp2px(activity, 1)).color(ContextCompat.getColor(activity!!, R.color.common_list_decoration)).build())
-//        mAdapter = MyApapter1(R.layout.test_item_1)
-        mAdapter = NewsAdapter()
-        mAdapter.bindToRecyclerView(mBinding.recyclerView)
-
         mHeadBinding = DataBindingUtil.inflate(LayoutInflater.from(activity), R.layout.head_news, null, false)
-        mAdapter.setHeaderView(mHeadBinding.root)
         emptyViewBinding = DataBindingUtil.inflate(LayoutInflater.from(activity), R.layout.common_empty_view, null, false)
-        mAdapter.emptyView = emptyViewBinding.root
-//        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
-        mAdapter.isFirstOnly(false)
-        mAdapter.disableLoadMoreIfNotFullPage()
-        mAdapter.setOnLoadMoreListener({
-            loadData(false)
-        }, mBinding.recyclerView)
+        mAdapter = NewsAdapter().apply {
+            bindToRecyclerView(mBinding.recyclerView)
+            setHeaderView(mHeadBinding.root)
+            emptyView = emptyViewBinding.root
+            isFirstOnly(false)
+//            openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
+            disableLoadMoreIfNotFullPage()
+            setOnLoadMoreListener({ loadData(false) }, mBinding.recyclerView)
+        }
         mBinding.swipeRefreshLayout.setOnRefreshListener {
             loadData(true)
         }
@@ -71,25 +64,26 @@ class NewsFragment : BaseFragment() {
     private fun loadData(isRefresh: Boolean) {
         AppRepository.getIndexRepository().getNewsList(if (isRefresh) 1 else page).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(object : NetRespObserver<List<NewsGroup>>() {
             override fun onNext(data: List<NewsGroup>) {
-                if (data.isNotEmpty()) {
-                    val dataFinal = ArrayList<NewsGroup>()
-                    for (newsGroup in data) {
-                        if (newsGroup.type == 3) {
-                            for (news in newsGroup.data) {
-                                val newsfinal = ArrayList<News>()
-                                newsfinal.add(news)
-                                val newgroupNew = NewsGroup(newsGroup.type, newsGroup.name, newsfinal)
-                                dataFinal.add(newgroupNew)
-                            }
-                        } else {
-                            dataFinal.add(newsGroup)
-                        }
-                    }
-                    mAdapter.setNewData(dataFinal)
-                    mAdapter.notifyDataSetChanged()
-                    mAdapter.loadMoreComplete()
-                    mBinding.swipeRefreshLayout.isRefreshing = false
+                mBinding.swipeRefreshLayout.isRefreshing = false
+                if (data.isEmpty()) {
                     mAdapter.loadMoreEnd()
+                    return
+                }
+                val dataFinal = ArrayList<NewsGroup>()
+                for (newsGroup in data) {
+                    if (newsGroup.type == 3) {
+                        for (news in newsGroup.data) {
+                            dataFinal.add(NewsGroup(newsGroup.type, newsGroup.name, ArrayList<News>().apply { add(news) }))
+                        }
+                    } else {
+                        dataFinal.add(newsGroup)
+                    }
+                }
+                with(mAdapter) {
+                    setNewData(dataFinal)
+                    loadMoreComplete()
+                    loadMoreEnd()
+                }
 //                    if (isRefresh) {
 //                        mAdapter.setNewData(data)
 //                        page = 2
@@ -99,10 +93,7 @@ class NewsFragment : BaseFragment() {
 //                    }
 //                    mAdapter.notifyDataSetChanged()
 //                    mAdapter.loadMoreComplete()
-//                    mBinding.swipeRefreshLayout.isRefreshing = false
-                } else {
-                    mAdapter.loadMoreEnd()
-                }
+
 
             }
 
@@ -119,14 +110,15 @@ class NewsFragment : BaseFragment() {
         AppRepository.getIndexRepository().getInit().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(object : NetRespObserver<IndexResource>() {
             override fun onNext(data: IndexResource) {
                 if (data.banners.isNotEmpty()) {
-                    mHeadBinding.viewpager.setImageLoader(GlideImageLoader())
-                    mHeadBinding.viewpager.setImages(data.banners)
-                    mHeadBinding.viewpager.setOnBannerListener {
-                        Log.e("aaa", "=======1")
-                        activity?.let { it1 -> data.banners[it].url?.let { it2 -> WebActivity.goWeb(it1, it2) } }
+                    with(mHeadBinding.viewpager) {
+                        setImageLoader(GlideImageLoader())
+                        setImages(data.banners)
+                        setOnBannerListener {
+                            Log.e("aaa", "=======1")
+                            activity?.let { it1 -> data.banners[it].url?.let { it2 -> WebActivity.goWeb(it1, it2) } }
+                        }
+                        start()
                     }
-                    mHeadBinding.viewpager.start()
-
                 } else {
                     mAdapter.removeAllHeaderView()
                 }
@@ -135,37 +127,34 @@ class NewsFragment : BaseFragment() {
                 if (data.starts.isNotEmpty()) {
                     LitePal.deleteAll(IndexCommon::class.java)
                     for (start in data.starts) {
-                        Log.e("aaa", "开始时间${start.startDate} 结束时间${start.endDate}")
-//                        if (System.currentTimeMillis() > start.startDate && System.currentTimeMillis() < start.endDate) {
-                        start.save()
-                        Glide.with(activity!!).load(start.image).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).preload()
-//                        }
-
+                        if (start.isEffectived()) {
+                            start.save()
+                            Glide.with(activity!!).load(start.image).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).preload()
+                        }
                     }
                 }
                 if (data.popups.isNotEmpty()) {
+                    for (popup in data.popups) {
+                        if (popup.isEffectived()) {
+                            Glide.with(activity!!).load(data.popups[0].image).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).listener(object : RequestListener<Drawable> {
+                                override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                                    val bundle = Bundle()
+                                    bundle.putParcelable("indexCommon", data.popups[0])
+                                    val homePopUpDialog = HomePopUpDialog()
+                                    homePopUpDialog.arguments = bundle
+                                    homePopUpDialog.show(childFragmentManager, "homepopupdialog")
+                                    return true
+                                }
 
-                    Glide.with(activity!!).load(data.popups[0].image).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).listener(object : RequestListener<Drawable> {
-                        override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-                            val bundle = Bundle()
-                            bundle.putParcelable("indexCommon", data.popups[0])
-                            val homePopUpDialog = HomePopUpDialog()
-                            homePopUpDialog.arguments = bundle
-                            homePopUpDialog.show(childFragmentManager, "homepopupdialog")
-                            return true
+                                override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                                    return false
+                                }
+
+                            }).preload()
+                            break
                         }
+                    }
 
-                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                            return false
-                        }
-
-                    }).preload()
-
-//                    AudioSpeedChooseDialog fragment = new AudioSpeedChooseDialog();
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString("currentSpeed", currentSpeed);
-//                    bundle.putStringArrayList("speeds", speeds);
-//                    fragment.setArguments(bundle);
                 }
             }
 
