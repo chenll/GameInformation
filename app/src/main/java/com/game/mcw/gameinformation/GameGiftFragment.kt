@@ -42,29 +42,32 @@ class GameGiftFragment : BaseFragment() {
         mBinding.recyclerView.isNestedScrollingEnabled = true
         mBinding.recyclerView.layoutManager = layoutManager
         mBinding.recyclerView.addItemDecoration(HorizontalDividerItemDecoration.Builder(activity).size(QMUIDisplayHelper.dp2px(activity, 6)).color(ContextCompat.getColor(activity!!, R.color.transparent)).build())
-        mAdapter = GameGiftAdapter(R.layout.item_game_gift)
-        mAdapter.bindToRecyclerView(mBinding.recyclerView)
-        mAdapter.isFirstOnly(false)
-        mAdapter.disableLoadMoreIfNotFullPage()
-        mAdapter.setOnLoadMoreListener({
-            loadData(false)
-        }, mBinding.recyclerView)
-        mAdapter.setOnItemChildClickListener { adapter, view, position ->
-            showLoading()
-            AppRepository.getIndexRepository().takeGift((adapter.getItem(position) as GameGift).id).subscribe(object : NetRespObserver<String>() {
-                override fun onNext(t: String) {
-                    hideLoading()
-                    Toast.makeText(activity, "领取成功", Toast.LENGTH_SHORT).show()
-                }
+        mAdapter = GameGiftAdapter(R.layout.item_game_gift).apply {
+            bindToRecyclerView(mBinding.recyclerView)
+            isFirstOnly(false)
+            disableLoadMoreIfNotFullPage()
+            setOnLoadMoreListener({
+                loadData(false)
+            }, mBinding.recyclerView)
+            setOnItemChildClickListener { adapter, view, position ->
+                showLoading()
+                AppRepository.getIndexRepository().takeGift((adapter.getItem(position) as GameGift).id).subscribe(object : NetRespObserver<String>() {
+                    override fun onNext(t: String) {
+                        hideLoading()
+                        Toast.makeText(activity, "领取成功", Toast.LENGTH_SHORT).show()
+                    }
+                    override fun onError(e: Throwable) {
+                        super.onError(e)
+                        hideLoading()
+                    }
 
-                override fun onError(e: Throwable) {
-                    super.onError(e)
-                    hideLoading()
-                }
+
+                })
+            }
 
 
-            })
         }
+
         mBinding.swipeRefreshLayout.setOnRefreshListener {
             loadData(true)
         }

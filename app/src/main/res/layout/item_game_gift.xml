@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/iv_game_icon"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="61dp"
+            android:layout_height="61dp"
             android:src="@mipmap/ic_launcher"
             app:imageUrl="@{gameGift.icon}"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -31,6 +31,7 @@
             android:gravity="bottom"
             android:paddingLeft="10dp"
             android:text="@{gameGift.gameName}"
+            android:textColor="@color/text_black"
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/tv_intro"
             app:layout_constraintLeft_toRightOf="@+id/iv_game_icon"
@@ -44,7 +45,8 @@
             android:layout_height="0dp"
             android:gravity="top"
             android:paddingLeft="10dp"
-            android:text="@{gameGift.name}"
+            android:text='@{gameGift.name+""}'
+            android:textColor="@color/text_black_60"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/iv_game_icon"
@@ -52,24 +54,25 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_game_name"
             tools:ignore="MissingConstraints" />
 
+
         <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
             android:id="@+id/btn_get"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:layout_marginRight="10dp"
-            android:paddingLeft="16dp"
+            android:paddingLeft="14dp"
             android:paddingTop="4dp"
-            android:paddingRight="16dp"
+            android:paddingRight="14dp"
             android:paddingBottom="4dp"
             android:text="领取礼包"
-            android:textColor="@color/white"
+            android:textColor="@color/text_black"
+            android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:qmui_backgroundColor="#35AFFC"
-            app:qmui_borderColor="#35AFFC"
-            app:qmui_radius="6dp" />
+            app:qmui_backgroundColor="@color/white"
+            app:qmui_borderColor="#66000000"
+            app:qmui_isRadiusAdjustBounds="true" />
 
     </android.support.constraint.ConstraintLayout>
 

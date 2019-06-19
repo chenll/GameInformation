@@ -33,7 +33,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@{item.name.trim()}"
-            android:textColor="@color/common_list_content_color"
+            android:textColor="@color/black"
             android:textSize="14sp" />
 
         <TextView
@@ -45,7 +45,7 @@
             android:ellipsize="end"
             android:maxLines="3"
             android:text="@{item.brief}"
-            android:textColor="@color/common_list_green_color"
+            android:textColor="@color/text_black_60"
             android:textSize="12sp" />
 
         <ImageView
