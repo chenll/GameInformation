@@ -1,11 +1,9 @@
 package com.game.mcw.gameinformation
 
 import android.databinding.DataBindingUtil
-import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +17,7 @@ import com.game.mcw.gameinformation.adapter.NewsAdapter
 import com.game.mcw.gameinformation.databinding.CommonEmptyViewBinding
 import com.game.mcw.gameinformation.databinding.FragmentHomeChild1Binding
 import com.game.mcw.gameinformation.databinding.HeadNewsBinding
+import com.game.mcw.gameinformation.dialog.HomePopUpDialog
 import com.game.mcw.gameinformation.modle.IndexCommon
 import com.game.mcw.gameinformation.modle.IndexResource
 import com.game.mcw.gameinformation.modle.News

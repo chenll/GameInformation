@@ -1,4 +1,4 @@
-package com.game.mcw.gameinformation
+package com.game.mcw.gameinformation.dialog
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.game.mcw.gameinformation.R
 import com.game.mcw.gameinformation.databinding.DialogHomePopupBinding
 import com.game.mcw.gameinformation.modle.IndexCommon
 import com.qmuiteam.qmui.util.QMUIDisplayHelper

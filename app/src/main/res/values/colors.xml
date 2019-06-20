@@ -14,5 +14,6 @@
 
     <color name="text_black">#000000</color>
     <color name="text_black_60">#80000000</color>
+    <color name="text_black_30">#33000000</color>
 
 </resources>

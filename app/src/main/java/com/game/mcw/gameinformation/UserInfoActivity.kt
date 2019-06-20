@@ -8,13 +8,11 @@ import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.support.v4.content.ContextCompat
-import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
 import com.game.mcw.gameinformation.databinding.ActivityUserinfoBinding
 import com.game.mcw.gameinformation.event.UserChangeEvent
 import com.game.mcw.gameinformation.manager.MyUserManager
-import com.game.mcw.gameinformation.modle.UserBean
 import com.game.mcw.gameinformation.modle.dispose.NetRespObserver
 import com.game.mcw.gameinformation.net.AppRepository
 import com.game.mcw.gameinformation.utils.GlideUtil

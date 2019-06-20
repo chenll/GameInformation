@@ -1,7 +1,9 @@
 package com.game.mcw.gameinformation
 
+import android.app.ProgressDialog.show
 import android.content.Intent
 import android.databinding.DataBindingUtil
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
@@ -12,6 +14,8 @@ import android.widget.Toast
 import com.game.mcw.gameinformation.adapter.GameGiftAdapter
 import com.game.mcw.gameinformation.adapter.GameGiftExclusiveAdapter
 import com.game.mcw.gameinformation.databinding.FragmentGameGiftBinding
+import com.game.mcw.gameinformation.dialog.GameGiftTakeDialog
+import com.game.mcw.gameinformation.dialog.HomePopUpDialog
 import com.game.mcw.gameinformation.modle.GameExclusiveGift
 import com.game.mcw.gameinformation.modle.GameGift
 import com.game.mcw.gameinformation.modle.dispose.NetRespObserver
@@ -51,11 +55,19 @@ class GameGiftFragment : BaseFragment() {
                 loadData(false)
             }, mBinding.recyclerView)
             setOnItemChildClickListener { adapter, _, position ->
+
+
                 showLoading()
                 AppRepository.getIndexRepository().takeGift((adapter.getItem(position) as GameGift).id).subscribe(object : NetRespObserver<String>() {
-                    override fun onNext(t: String) {
+                    override fun onNext(code: String) {
                         hideLoading()
-                        Toast.makeText(activity, "领取成功", Toast.LENGTH_SHORT).show()
+                        GameGiftTakeDialog().apply {
+                            arguments = Bundle().apply {
+                                putParcelable("gamegift", adapter.getItem(position) as GameGift)
+                                putString("code", code)
+                            }
+                            show(this@GameGiftFragment.childFragmentManager, "gamegifttakedialog")
+                        }
                     }
 
                     override fun onError(e: Throwable) {
