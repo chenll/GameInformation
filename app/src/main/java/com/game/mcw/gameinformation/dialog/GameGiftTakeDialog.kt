@@ -45,7 +45,7 @@ class GameGiftTakeDialog : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
             mGameGift = it.getParcelable("gamegift")
-            mCode = it.getString("code")
+            mCode = it.getString("code", "")
 
         }
         binding.gameGift = mGameGift

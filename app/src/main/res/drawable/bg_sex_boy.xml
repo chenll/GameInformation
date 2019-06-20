@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true">
+        <layer-list>
+            <item>
+                <shape android:shape="oval">
+                    <size android:width="90dp" android:height="90dp" />
+                    <solid android:color="#2eb4fb" />
+                </shape>
+            </item>
+            <item>
+                <bitmap android:src="@drawable/sex_boy">
+                    <size android:width="90dp" android:height="90dp" />
+                </bitmap>
+            </item>
+        </layer-list>
+    </item>
+
+    <item>
+        <layer-list>
+            <item>
+                <shape android:shape="oval">
+                    <size android:width="90dp" android:height="90dp" />
+                    <solid android:color="#e5e5e5" />
+                </shape>
+            </item>
+            <item>
+                <bitmap android:src="@drawable/sex_boy">
+                    <size android:width="90dp" android:height="90dp" />
+                </bitmap>
+            </item>
+        </layer-list>
+    </item>
+
+</selector>
