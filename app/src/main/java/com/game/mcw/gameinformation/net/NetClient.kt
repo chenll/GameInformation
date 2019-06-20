@@ -29,7 +29,7 @@ class NetClient(val ctx: Context) {
                         val token = MyUserManager.instance.userBean!!.token
                         if (!TextUtils.isEmpty(token)) {
 //                            original.addHeader("X-Auth-Token", token)
-                            original.addHeader("key", token)
+                            original.addHeader("token", token)
                         }
                     }
                     val request = original.build()

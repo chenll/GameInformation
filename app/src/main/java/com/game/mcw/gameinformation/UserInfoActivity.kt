@@ -8,8 +8,11 @@ import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.support.v4.content.ContextCompat
+import android.text.TextUtils
 import android.view.View
+import android.widget.Toast
 import com.game.mcw.gameinformation.databinding.ActivityUserinfoBinding
+import com.game.mcw.gameinformation.event.UserChangeEvent
 import com.game.mcw.gameinformation.manager.MyUserManager
 import com.game.mcw.gameinformation.modle.UserBean
 import com.game.mcw.gameinformation.modle.dispose.NetRespObserver
@@ -26,6 +29,8 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Function
 import io.reactivex.schedulers.Schedulers
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 
 class UserInfoActivity : BaseActivity<ActivityUserinfoBinding>() {
@@ -39,6 +44,7 @@ class UserInfoActivity : BaseActivity<ActivityUserinfoBinding>() {
         initToolBar()
         mBinding.user = MyUserManager.instance.userBean
         MyUserManager.instance.userBean?.avatar?.let { GlideUtil.loadCircleHeadPic(it, mBinding.ivHead) }
+        registerEventBus()
     }
 
     private fun initToolBar() {
@@ -110,6 +116,7 @@ class UserInfoActivity : BaseActivity<ActivityUserinfoBinding>() {
     @SuppressLint("CheckResult")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
         if (requestCode == 111 && resultCode == RESULT_OK) {
             //图片路径 同样视频地址也是这个 根据requestCode
 //            val pathList = Matisse.obtainResult(data)
@@ -117,14 +124,17 @@ class UserInfoActivity : BaseActivity<ActivityUserinfoBinding>() {
             showLoading()
             AppRepository.getIndexRepository().upLoadFile(pathList[0])
                     .subscribeOn(Schedulers.io()).observeOn(Schedulers.io())
-                    .flatMap(Function<String, Observable<UserBean>> { headUrl ->
+                    .flatMap(Function<String, Observable<String>> { headUrl ->
                         return@Function AppRepository.getUserRepository().editUserMessage(avatar = headUrl)
                     })
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : NetRespObserver<UserBean>() {
-                        override fun onNext(user: UserBean) {
+                    .subscribe(object : NetRespObserver<String>() {
+                        override fun onNext(user: String) {
                             hideLoading()
-                            MyUserManager.instance.updateUser(user)
+//                            MyUserManager.instance.updateUser(user)
+                            Toast.makeText(MyApplication.INSTANCE, "修改成功", Toast.LENGTH_SHORT).show()
+                            MyUserManager.instance.autoAsyncUpdateUserMessage(true)
+
                         }
 
                         override fun onError(e: Throwable) {
@@ -135,5 +145,13 @@ class UserInfoActivity : BaseActivity<ActivityUserinfoBinding>() {
 
         }
     }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun Event(userChangeEvent: UserChangeEvent) {
+        mBinding.user = MyUserManager.instance.userBean
+        MyUserManager.instance.userBean?.avatar?.let { GlideUtil.loadCircleHeadPic(it, mBinding.ivHead) }
+    }
+
 
 }

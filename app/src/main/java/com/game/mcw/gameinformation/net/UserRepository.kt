@@ -16,6 +16,9 @@ class UserRepository(userApi: UserApi) {
 
 
     //    fun editUserMessage(avatar: String = MyUserManager.instance.userBean!!.avatar, nickname: String = MyUserManager.instance.userBean!!.nickname, sex: String = MyUserManager.instance.userBean!!.sex): Observable<UserBean> = RepositoryUtils.extractData(mUserApi.editUserMessage(avatar, nickname, sex), UserBean::class.java)
-    fun editUserMessage(avatar: String = MyUserManager.instance.userBean!!.avatar, nickname: String = MyUserManager.instance.userBean!!.nickname, sex: String = "1"): Observable<UserBean> = RepositoryUtils.extractData(mUserApi.editUserMessage(avatar, nickname, sex), UserBean::class.java)
+    fun editUserMessage(avatar: String = MyUserManager.instance.userBean!!.avatar, nickname: String = MyUserManager.instance.userBean!!.nickname, sex: String = "1"): Observable<String> = RepositoryUtils.extractData(mUserApi.editUserMessage(avatar, nickname, sex), String::class.java)
+
+
+    fun getUserMessage(): Observable<UserBean> = RepositoryUtils.extractData(mUserApi.getUserMessage(), object : TypeToken<UserBean>() {}.type)
 
 }

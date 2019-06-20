@@ -46,8 +46,7 @@ class MyFragment : BaseFragment() {
 
 
     private fun initViews() {
-
-        GlideUtil.loadCircleHeadPic("", mBinding.ivHead)
+        GlideUtil.loadCircleHeadPic(MyUserManager.instance.userBean!!.avatar, mBinding.ivHead)
         val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         mBinding.rvMyHead.layoutManager = layoutManager
         mCardAdapter = MyCardAdapter(R.layout.item_my_card).apply {
@@ -81,7 +80,7 @@ class MyFragment : BaseFragment() {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun Event(userChangeEvent: UserChangeEvent) {
         mBinding.user = MyUserManager.instance.userBean
-
+        GlideUtil.loadCircleHeadPic(MyUserManager.instance.userBean!!.avatar, mBinding.ivHead)
     }
 
 }

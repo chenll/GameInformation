@@ -4,6 +4,7 @@ import com.game.mcw.gameinformation.modle.AppResponse
 import io.reactivex.Observable
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 
@@ -25,6 +26,9 @@ interface UserApi {
     @FormUrlEncoded
     @POST("/center/user/edit")
     fun editUserMessage(@Field("avatar") avatar: String, @Field("nickname") nickname: String, @Field("sex") sex: String): Observable<AppResponse<Any>>
+
+    @GET("/center/user/init")
+    fun getUserMessage(): Observable<AppResponse<Any>>
 
 
 }

@@ -1,8 +1,11 @@
 package com.game.mcw.gameinformation
 
 import android.databinding.DataBindingUtil
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -135,11 +138,18 @@ class NewsFragment : BaseFragment() {
                         val indexCommon = this
                         Glide.with(activity!!).load(indexCommon.image).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).listener(object : RequestListener<Drawable> {
                             override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-                                HomePopUpDialog().apply {
-                                    arguments = Bundle().apply { putParcelable("indexCommon", indexCommon) }
-                                    show(this@NewsFragment.childFragmentManager, "homepopupdialog")
+                                resource?.let {
+                                    HomePopUpDialog().apply {
+                                        val bitmap = (resource as BitmapDrawable).bitmap
+                                        arguments = Bundle().apply {
+                                            putParcelable("indexCommon", indexCommon)
+                                            putInt("height", bitmap.height)
+                                            putInt("width", bitmap.width)
+                                        }
+                                        show(this@NewsFragment.childFragmentManager, "homepopupdialog")
+                                    }
                                 }
-                                return true
+                                return false
                             }
 
                             override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
