@@ -43,7 +43,7 @@ class GameFragment : BaseFragment() {
         }
         loadData(false)
         mAdapter.setOnItemChildClickListener { _, _, position ->
-            activity?.let { WebActivity.goWeb(it, mAdapter.getItem(position)!!.url) }
+            activity?.let { WebActivity.goWeb(it, mAdapter.getItem(position)!!.url,mAdapter.getItem(position)!!.name) }
         }
     }
 

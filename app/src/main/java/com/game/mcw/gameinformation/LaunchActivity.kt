@@ -1,5 +1,6 @@
 package com.game.mcw.gameinformation
 
+import android.content.Context
 import android.os.Bundle
 import com.bumptech.glide.Glide
 import com.game.mcw.gameinformation.databinding.ActivityLaunchBinding
@@ -12,6 +13,7 @@ import java.util.concurrent.TimeUnit
 
 class LaunchActivity : BaseActivity<ActivityLaunchBinding>() {
     private lateinit var mDisposable: Disposable
+    private lateinit var mIndexCommon: IndexCommon
     override fun getLayoutId(): Int {
         return R.layout.activity_launch
     }
@@ -20,18 +22,32 @@ class LaunchActivity : BaseActivity<ActivityLaunchBinding>() {
         super.onCreate(savedInstanceState)
         mBinding.aty = this
         LitePal.findAllAsync(IndexCommon::class.java).listen { list ->
-            list?.let {
-                list.forEach {
-                    if (it.isEffectived()) {
-                        Glide.with(this@LaunchActivity).load(it.image).centerCrop().into(mBinding.ivLaunch)
+            if (list == null || list.isEmpty()) {
+                return@listen
+            }
+            for (indexCommon in list) {
+                if (indexCommon.isEffectived()) {
+                    mIndexCommon = indexCommon
+                    Glide.with(this@LaunchActivity).load(mIndexCommon.image).centerCrop().into(mBinding.ivLaunch)
+                    mBinding.ivLaunch.setOnClickListener {
+                        mIndexCommon.url?.let { it1 ->
+                            if (!mDisposable.isDisposed) {
+                                mDisposable.dispose()
+                            }
+                            WebActivity.goWeb(this@LaunchActivity, it1)
+                            finish()
+                        }
                     }
+                    break
                 }
             }
 
+
         }
+
         mDisposable = Flowable.intervalRange(0, 3, 0, 1, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext {}.doOnCancel { goToMain() }
+                .doOnCancel { goToMain() }
                 .doOnComplete { goToMain() }
                 .subscribe()
     }

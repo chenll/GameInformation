@@ -3,8 +3,24 @@
 
     <data />
 
-    <FrameLayout
-        android:id="@+id/fl_web_root"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:id="@+id/ll_root"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/toolbar_home" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_decoration_size"
+            android:background="@color/common_decoration" />
+
+        <FrameLayout
+            android:id="@+id/fl_web_root"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 </layout>

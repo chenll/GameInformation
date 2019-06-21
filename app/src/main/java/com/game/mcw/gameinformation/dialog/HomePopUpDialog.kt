@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.game.mcw.gameinformation.R
+import com.game.mcw.gameinformation.WebActivity
 import com.game.mcw.gameinformation.databinding.DialogHomePopupBinding
 import com.game.mcw.gameinformation.modle.IndexCommon
 import com.qmuiteam.qmui.util.QMUIDisplayHelper
@@ -31,7 +32,15 @@ class HomePopUpDialog : DialogFragment() {
             width = QMUIDisplayHelper.getScreenWidth(activity) * 3 / 4
             height = min(width * mPicheight / mPicwidth, QMUIDisplayHelper.getScreenHeight(activity) * 9 / 10)
         }
-        activity?.let { Glide.with(it).load(indexCommon.image).into(binding.ivPopup) }
+        activity?.let {
+            Glide.with(it).load(indexCommon.image).into(binding.ivPopup)
+            binding.ivPopup.setOnClickListener { v ->
+                indexCommon.url?.let { url ->
+                    WebActivity.goWeb(it, url)
+                    dismiss()
+                }
+            }
+        }
         binding.ivClose.setOnClickListener {
             dismiss()
         }

@@ -40,10 +40,18 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                 Toast.makeText(this, "请输入手机号码", Toast.LENGTH_SHORT).show()
                 return
             }
+            showLoading()
             AppRepository.getUserRepository().getVcode4Login(mBinding.etMobile.text.toString()).subscribe(object : NetRespObserver<VcodeResponse>() {
                 override fun onNext(data: VcodeResponse) {
+                    hideLoading()
                     Toast.makeText(this@LoginActivity, "验证码发生${if (data.code == "0") "成功" else "失败"}", Toast.LENGTH_SHORT).show()
                     isVCodeSended = (data.code == "0")
+                }
+
+                override fun onError(e: Throwable) {
+                    super.onError(e)
+                    hideLoading()
+
                 }
 
             })
@@ -62,13 +70,20 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                 Toast.makeText(this, "请输入验证码", Toast.LENGTH_SHORT).show()
                 return
             }
+            showLoading()
+
             AppRepository.getUserRepository().login(mBinding.etMobile.text.toString(), mBinding.etVcode.text.toString()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(object : NetRespObserver<UserBean>() {
                 override fun onNext(data: UserBean) {
+                    hideLoading()
                     MyUserManager.instance.updateUser(data)
                     Toast.makeText(this@LoginActivity, "登录成功", Toast.LENGTH_SHORT).show()
                     finish()
                 }
 
+                override fun onError(e: Throwable) {
+                    super.onError(e)
+                    hideLoading()
+                }
 
             })
         }
