@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import com.game.mcw.gameinformation.adapter.GameExclusiveGiftDetaliAdapter
 import com.game.mcw.gameinformation.databinding.ActivityExclusiveGiftDeatilBinding
 import com.game.mcw.gameinformation.databinding.CommonEmptyViewBinding
+import com.game.mcw.gameinformation.dialog.GameGiftTakeDialog
 import com.game.mcw.gameinformation.modle.GameExclusiveGift
 import com.game.mcw.gameinformation.modle.GameExclusiveGiftDetail
+import com.game.mcw.gameinformation.modle.GameGift
 import com.game.mcw.gameinformation.modle.dispose.NetRespObserver
 import com.game.mcw.gameinformation.net.AppRepository
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper
@@ -27,13 +29,33 @@ class ExclusiveGiftDetailActivity : BaseActivity<ActivityExclusiveGiftDeatilBind
         super.onCreate(savedInstanceState)
         mGameExclusiveGift = intent.getParcelableExtra("GameExclusiveGift") as GameExclusiveGift
         initToolBar()
-        mAdapter = GameExclusiveGiftDetaliAdapter(R.layout.item_game_gift)
-        mAdapter.bindToRecyclerView(mBinding.recyclerView)
         emptyViewBinding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.common_empty_view, null, false)
-        mAdapter.emptyView = emptyViewBinding.root
-        mAdapter.isFirstOnly(false)
-        mAdapter.disableLoadMoreIfNotFullPage()
 
+        mAdapter = GameExclusiveGiftDetaliAdapter(R.layout.item_game_gift).apply {
+            bindToRecyclerView(mBinding.recyclerView)
+            emptyView = emptyViewBinding.root
+            isFirstOnly(false)
+            disableLoadMoreIfNotFullPage()
+            setOnItemChildClickListener { adapter, _, position ->
+                showLoading()
+                AppRepository.getIndexRepository().takeGift((adapter.getItem(position) as GameGift).id).subscribe(object : NetRespObserver<String>() {
+                    override fun onNext(code: String) {
+                        hideLoading()
+                        GameGiftTakeDialog().apply {
+                            arguments = Bundle().apply {
+                                putParcelable("gamegift", adapter.getItem(position) as GameGift)
+                                putString("code", code)
+                            }
+                            show(this@ExclusiveGiftDetailActivity.supportFragmentManager, "gamegifttakedialog")
+                        }
+                    }
+                    override fun onError(e: Throwable) {
+                        super.onError(e)
+                        hideLoading()
+                    }
+                })
+            }
+        }
         loadData()
 
 
