@@ -34,11 +34,11 @@ class MyFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         registerEventBus()
         mBinding.user = MyUserManager.instance.userBean
-        if (MyUserManager.instance.userBean != null) {
-            Toast.makeText(activity, "已登录${MyUserManager.instance.userBean!!.userId}", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(activity, "未登录", Toast.LENGTH_SHORT).show()
-        }
+//        if (MyUserManager.instance.userBean != null) {
+//            Toast.makeText(activity, "已登录${MyUserManager.instance.userBean!!.userId}", Toast.LENGTH_SHORT).show()
+//        } else {
+//            Toast.makeText(activity, "未登录", Toast.LENGTH_SHORT).show()
+//        }
         initViews()
 
 
