@@ -1,6 +1,5 @@
 package com.game.mcw.gameinformation.modle
 
-import android.text.TextUtils
 import com.google.gson.annotations.SerializedName
 import org.litepal.crud.LitePalSupport
 

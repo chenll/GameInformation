@@ -2,6 +2,7 @@ package com.game.mcw.gameinformation
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.ProgressDialog.show
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Build
@@ -11,8 +12,12 @@ import android.support.v4.content.ContextCompat
 import android.view.View
 import android.widget.Toast
 import com.game.mcw.gameinformation.databinding.ActivityUserinfoBinding
+import com.game.mcw.gameinformation.dialog.GameGiftTakeDialog
+import com.game.mcw.gameinformation.dialog.NickNameEditDialog
+import com.game.mcw.gameinformation.dialog.SexSelectDialog
 import com.game.mcw.gameinformation.event.UserChangeEvent
 import com.game.mcw.gameinformation.manager.MyUserManager
+import com.game.mcw.gameinformation.modle.GameGift
 import com.game.mcw.gameinformation.modle.dispose.NetRespObserver
 import com.game.mcw.gameinformation.net.AppRepository
 import com.game.mcw.gameinformation.utils.GlideUtil
@@ -88,14 +93,18 @@ class UserInfoActivity : BaseActivity<ActivityUserinfoBinding>() {
 
     fun onUUIDItemClick(view: View) {}
     fun onNiceNameItemClick(view: View) {
-        QMUIDialog.EditTextDialogBuilder(this)
-                .setTitle("请输入新昵称")
-                .addAction("取消") { dialog, _ -> dialog.dismiss() }
-                .addAction("确定") { dialog, _ -> dialog.dismiss() }
-                .create().show()
+        NickNameEditDialog().apply {
+            show(this@UserInfoActivity.supportFragmentManager, "nicknameeditdialog")
+        }
     }
 
-    fun onSexItemClick(view: View) {}
+    fun onSexItemClick(view: View) {
+        SexSelectDialog().apply {
+            show(this@UserInfoActivity.supportFragmentManager, "sexselectdialog")
+        }
+
+    }
+
     fun onAgreementItemClick(view: View) {}
     fun onLogOutItemClick(view: View) {
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="common_decoration_size">0.8dp</dimen>
+    <dimen name="sex_icon_size">68dp</dimen>
 
 
 </resources>

@@ -4,13 +4,13 @@
         <layer-list>
             <item>
                 <shape android:shape="oval">
-                    <size android:width="90dp" android:height="90dp" />
-                    <solid android:color="#2eb4fb" />
+                    <size android:width="@dimen/sex_icon_size" android:height="@dimen/sex_icon_size" />
+                    <solid android:color="#ff6ae5" />
                 </shape>
             </item>
             <item>
-                <bitmap android:src="@drawable/sex_boy">
-                    <size android:width="90dp" android:height="90dp" />
+                <bitmap android:src="@drawable/sex_girl">
+                    <size android:width="@dimen/sex_icon_size" android:height="@dimen/sex_icon_size" />
                 </bitmap>
             </item>
         </layer-list>
@@ -20,13 +20,13 @@
         <layer-list>
             <item>
                 <shape android:shape="oval">
-                    <size android:width="90dp" android:height="90dp" />
+                    <size android:width="@dimen/sex_icon_size" android:height="@dimen/sex_icon_size" />
                     <solid android:color="#e5e5e5" />
                 </shape>
             </item>
             <item>
-                <bitmap android:src="@drawable/sex_boy">
-                    <size android:width="90dp" android:height="90dp" />
+                <bitmap android:src="@drawable/sex_girl">
+                    <size android:width="@dimen/sex_icon_size" android:height="@dimen/sex_icon_size" />
                 </bitmap>
             </item>
         </layer-list>

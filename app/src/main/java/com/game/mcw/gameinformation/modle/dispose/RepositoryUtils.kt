@@ -31,7 +31,7 @@ object RepositoryUtils {
                 Observable.error(AppRespException(response))
             }
 
-        })
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
     }
 
     fun <T> extractData(observable: Observable<AppResponse<Any>>, type: Type): Observable<T> {
