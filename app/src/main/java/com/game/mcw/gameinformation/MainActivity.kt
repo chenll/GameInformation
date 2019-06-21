@@ -2,6 +2,9 @@ package com.game.mcw.gameinformation
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.text.TextUtils
+import android.view.KeyEvent
+import android.widget.Toast
 import com.game.mcw.gameinformation.adapter.HomeFragmentPagerAdapter
 import java.util.*
 
@@ -34,5 +37,20 @@ class MainActivity : BaseActivity<com.game.mcw.gameinformation.databinding.Activ
                 .addItem(android.R.drawable.ic_menu_help, "我的")
                 .build()
         navigationController.setupWithViewPager(mBinding.vpFragment)
+    }
+
+    var exitTime: Long = 0
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event?.action == KeyEvent.ACTION_DOWN) {
+            if (System.currentTimeMillis() - exitTime > 2000) {
+                Toast.makeText(MyApplication.INSTANCE, "再按一次退出程序", Toast.LENGTH_SHORT).show()
+                exitTime = System.currentTimeMillis()
+            } else {
+                finish()
+            }
+            return true
+        }
+
+        return super.onKeyDown(keyCode, event)
     }
 }
