@@ -31,4 +31,8 @@ class IndexRepository(indexApi: IndexApi) {
         val fileRQ = RequestBody.create(MediaType.parse("image/*"), file)
         return RepositoryUtils.extractData(mIndexApi.uploadFile(MultipartBody.Part.createFormData("file", file.name, fileRQ)), object : TypeToken<String>() {}.type)
     }
+
+
+    fun getTaskList(page: Int): Observable<List<Task>> = RepositoryUtils.extractData(mIndexApi.getTaskList(page, 20), object : TypeToken<List<Task>>() {}.type)
+
 }

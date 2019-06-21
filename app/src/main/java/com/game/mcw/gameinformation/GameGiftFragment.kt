@@ -16,6 +16,7 @@ import com.game.mcw.gameinformation.adapter.GameGiftExclusiveAdapter
 import com.game.mcw.gameinformation.databinding.FragmentGameGiftBinding
 import com.game.mcw.gameinformation.dialog.GameGiftTakeDialog
 import com.game.mcw.gameinformation.dialog.HomePopUpDialog
+import com.game.mcw.gameinformation.manager.MyUserManager
 import com.game.mcw.gameinformation.modle.GameExclusiveGift
 import com.game.mcw.gameinformation.modle.GameGift
 import com.game.mcw.gameinformation.modle.dispose.NetRespObserver
@@ -55,7 +56,10 @@ class GameGiftFragment : BaseFragment() {
                 loadData(false)
             }, mBinding.recyclerView)
             setOnItemChildClickListener { adapter, _, position ->
-
+                if (MyUserManager.instance.userBean == null) {
+                    startActivity(LoginActivity::class.java)
+                    return@setOnItemChildClickListener
+                }
 
                 showLoading()
                 AppRepository.getIndexRepository().takeGift((adapter.getItem(position) as GameGift).id).subscribe(object : NetRespObserver<String>() {

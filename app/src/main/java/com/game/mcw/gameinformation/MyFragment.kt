@@ -46,7 +46,7 @@ class MyFragment : BaseFragment() {
 
 
     private fun initViews() {
-        GlideUtil.loadCircleHeadPic(MyUserManager.instance.userBean!!.avatar, mBinding.ivHead)
+        MyUserManager.instance.userBean?.let { GlideUtil.loadCircleHeadPic(it.avatar, mBinding.ivHead) }
         val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         mBinding.rvMyHead.layoutManager = layoutManager
         mCardAdapter = MyCardAdapter(R.layout.item_my_card).apply {
@@ -69,6 +69,11 @@ class MyFragment : BaseFragment() {
             addData(Card(444, "收入明细", R.mipmap.my_icon_5, intArrayOf(Color.parseColor("#FC8970"), Color.parseColor("#F6A524"))))
             addData(Card(444, "隐私政策", R.mipmap.my_icon_6, intArrayOf(Color.parseColor("#FC8970"), Color.parseColor("#F6A524"))))
             bindToRecyclerView(mBinding.rvMyBody)
+            setOnItemClickListener { _, _, position ->
+                when (position) {
+                    0 -> startActivity(TaskActivity::class.java)
+                }
+            }
         }
 
     }
@@ -80,7 +85,7 @@ class MyFragment : BaseFragment() {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun Event(userChangeEvent: UserChangeEvent) {
         mBinding.user = MyUserManager.instance.userBean
-        GlideUtil.loadCircleHeadPic(MyUserManager.instance.userBean!!.avatar, mBinding.ivHead)
+        GlideUtil.loadCircleHeadPic(if (MyUserManager.instance.userBean == null) "" else MyUserManager.instance.userBean!!.avatar, mBinding.ivHead)
     }
 
 }

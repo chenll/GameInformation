@@ -36,6 +36,7 @@
                 android:id="@+id/iv_head"
                 android:layout_width="53dp"
                 android:layout_height="53dp"
+                android:src="@mipmap/head_default"
                 app:layout_constraintLeft_toLeftOf="parent"
                 tools:ignore="MissingConstraints" />
 

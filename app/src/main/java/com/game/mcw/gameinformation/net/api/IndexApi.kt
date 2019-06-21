@@ -55,4 +55,9 @@ interface IndexApi {
     fun uploadFile(@Part body: MultipartBody.Part): Observable<AppResponse<Any>>
 
 
+    /**
+     * 任务列表
+     */
+    @GET("/center/task/list/taskList")
+    fun getTaskList(@Query("page") pageNum: Int, @Query("limit") limit: Int): Observable<AppResponse<Any>>
 }

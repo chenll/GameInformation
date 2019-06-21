@@ -59,6 +59,9 @@
         <activity
             android:name=".ExclusiveGiftDetailActivity"
             android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".TaskActivity"
+            android:configChanges="orientation|screenSize" />
     </application>
 
 </manifest>

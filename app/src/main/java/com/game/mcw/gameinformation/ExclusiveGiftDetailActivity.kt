@@ -8,6 +8,7 @@ import com.game.mcw.gameinformation.adapter.GameExclusiveGiftDetaliAdapter
 import com.game.mcw.gameinformation.databinding.ActivityExclusiveGiftDeatilBinding
 import com.game.mcw.gameinformation.databinding.CommonEmptyViewBinding
 import com.game.mcw.gameinformation.dialog.GameGiftTakeDialog
+import com.game.mcw.gameinformation.manager.MyUserManager
 import com.game.mcw.gameinformation.modle.GameExclusiveGift
 import com.game.mcw.gameinformation.modle.GameExclusiveGiftDetail
 import com.game.mcw.gameinformation.modle.GameGift
@@ -37,6 +38,11 @@ class ExclusiveGiftDetailActivity : BaseActivity<ActivityExclusiveGiftDeatilBind
             isFirstOnly(false)
             disableLoadMoreIfNotFullPage()
             setOnItemChildClickListener { adapter, _, position ->
+                if (MyUserManager.instance.userBean == null) {
+                    startActivity(LoginActivity::class.java )
+                    return@setOnItemChildClickListener
+                }
+
                 showLoading()
                 AppRepository.getIndexRepository().takeGift((adapter.getItem(position) as GameGift).id).subscribe(object : NetRespObserver<String>() {
                     override fun onNext(code: String) {
