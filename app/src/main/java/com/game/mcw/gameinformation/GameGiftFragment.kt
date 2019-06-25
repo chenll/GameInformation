@@ -129,6 +129,7 @@ class GameGiftFragment : BaseFragment() {
     private fun loadData(isRefresh: Boolean) {
         AppRepository.getIndexRepository().getGameGiftList(if (isRefresh) 1 else page).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(object : NetRespObserver<List<GameGift>>() {
             override fun onNext(data: List<GameGift>) {
+                mBinding.swipeRefreshLayout.isRefreshing = false
                 if (data.isNotEmpty()) {
                     if (isRefresh) {
                         mAdapter.setNewData(data)
@@ -139,7 +140,6 @@ class GameGiftFragment : BaseFragment() {
                     }
                     mAdapter.notifyDataSetChanged()
                     mAdapter.loadMoreComplete()
-                    mBinding.swipeRefreshLayout.isRefreshing = false
                 } else {
                     mAdapter.loadMoreEnd()
                 }

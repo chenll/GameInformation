@@ -72,6 +72,7 @@ class MyFragment : BaseFragment() {
             setOnItemClickListener { _, _, position ->
                 when (position) {
                     0 -> startActivity(TaskActivity::class.java)
+                    1 -> startActivity(CommodityListActivity::class.java)
                 }
             }
         }

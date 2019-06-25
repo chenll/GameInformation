@@ -60,4 +60,10 @@ interface IndexApi {
      */
     @GET("/center/task/list/taskList")
     fun getTaskList(@Query("page") pageNum: Int, @Query("limit") limit: Int): Observable<AppResponse<Any>>
+
+    /**
+     * 商城商品列表
+     */
+    @GET("/center/user/market/commodityList")
+    fun getCommodityList(@Query("page") pageNum: Int, @Query("limit") limit: Int): Observable<AppResponse<Any>>
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <gradient
+                android:angle="90"
+                android:endColor="#5e57e3"
+                android:startColor="#617eff" />
+        </shape>
+    </item>
+    <item>
+        <bitmap android:src="@drawable/commodity_bg_icon" android:gravity="right|top" >
+
+            <size android:width="@dimen/sex_icon_size" android:height="@dimen/sex_icon_size" />
+
+        </bitmap>
+    </item>
+</layer-list>

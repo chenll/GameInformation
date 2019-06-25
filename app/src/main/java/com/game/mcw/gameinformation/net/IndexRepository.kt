@@ -35,4 +35,7 @@ class IndexRepository(indexApi: IndexApi) {
 
     fun getTaskList(page: Int): Observable<List<Task>> = RepositoryUtils.extractData(mIndexApi.getTaskList(page, 20), object : TypeToken<List<Task>>() {}.type)
 
+
+    fun getCommodityList(page: Int): Observable<List<Commodity>> = RepositoryUtils.extractData(mIndexApi.getCommodityList(page, 20), object : TypeToken<List<Commodity>>() {}.type)
+
 }

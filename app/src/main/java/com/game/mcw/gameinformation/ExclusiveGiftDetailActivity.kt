@@ -41,6 +41,7 @@ class ExclusiveGiftDetailActivity : BaseActivity<ActivityExclusiveGiftDeatilBind
             addHeaderView(headViewBinding.root)
             isFirstOnly(false)
             disableLoadMoreIfNotFullPage()
+            setOnLoadMoreListener({ loadData() }, mBinding.recyclerView)
             setOnItemChildClickListener { adapter, _, position ->
                 if (MyUserManager.instance.userBean == null) {
                     startActivity(LoginActivity::class.java)
@@ -67,14 +68,10 @@ class ExclusiveGiftDetailActivity : BaseActivity<ActivityExclusiveGiftDeatilBind
                 })
             }
         }
+
         loadData()
 
 
-    }
-
-    override fun initStatusBar() {
-        QMUIStatusBarHelper.translucent(this)
-        QMUIStatusBarHelper.setStatusBarLightMode(this)
     }
 
     private fun initToolBar() {
