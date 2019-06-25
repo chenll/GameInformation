@@ -35,7 +35,7 @@ class ExclusiveGiftDetailActivity : BaseActivity<ActivityExclusiveGiftDeatilBind
         emptyViewBinding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.common_empty_view, null, false)
         headViewBinding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.head_gift_detail, null, false)
         headViewBinding.gameGift = mGameExclusiveGift
-        mAdapter = GameExclusiveGiftDetaliAdapter(R.layout.item_game_gift).apply {
+        mAdapter = GameExclusiveGiftDetaliAdapter(R.layout.item_game_gift_detail).apply {
             bindToRecyclerView(mBinding.recyclerView)
             emptyView = emptyViewBinding.root
             addHeaderView(headViewBinding.root)

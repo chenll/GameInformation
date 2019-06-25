@@ -5,11 +5,15 @@ import android.support.annotation.ColorInt
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.TextUtils
 import android.widget.ImageView
+import android.widget.TextView
 import com.game.mcw.gameinformation.R
 import com.game.mcw.gameinformation.utils.GlideUtil
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration
 import com.yqritc.recyclerviewflexibledivider.VerticalDividerItemDecoration
+import org.w3c.dom.Text
+import java.util.regex.Pattern
 
 object BindingAdapters {
 
@@ -52,5 +56,22 @@ object BindingAdapters {
             }
         }
 
+    }
+
+
+    /**
+     * 加载圆角图片
+     */
+    @BindingAdapter("complexText")
+    @JvmStatic
+    fun TextView.formateText(text: String) {
+//        GlideUtil.loadCircleHeadPic(uri, this)
+        if (TextUtils.isEmpty(text)) {
+            this.text = ""
+            return
+        }
+        val parrern = Pattern.compile("\\s*|\t|\r|\n")
+        val matcher = parrern.matcher(text)
+        this.text = matcher.replaceAll("")
     }
 }
