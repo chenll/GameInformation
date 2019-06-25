@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
+        android:background="@color/white"
         android:fitsSystemWindows="true"
         android:orientation="vertical">
 
@@ -28,8 +28,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:background="#f5f5f5"
             app:rvDecorationColor="@{@color/common_list_decoration}"
             app:rvOrientation="@{LinearLayoutManager.VERTICAL}" />
     </LinearLayout>

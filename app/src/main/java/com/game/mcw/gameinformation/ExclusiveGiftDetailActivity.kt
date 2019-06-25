@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import com.game.mcw.gameinformation.adapter.GameExclusiveGiftDetaliAdapter
 import com.game.mcw.gameinformation.databinding.ActivityExclusiveGiftDeatilBinding
 import com.game.mcw.gameinformation.databinding.CommonEmptyViewBinding
+import com.game.mcw.gameinformation.databinding.HeadGiftDetailBinding
 import com.game.mcw.gameinformation.dialog.GameGiftTakeDialog
 import com.game.mcw.gameinformation.manager.MyUserManager
 import com.game.mcw.gameinformation.modle.GameExclusiveGift
@@ -20,6 +21,7 @@ import kotlinx.android.synthetic.main.toolbar_home.view.*
 class ExclusiveGiftDetailActivity : BaseActivity<ActivityExclusiveGiftDeatilBinding>() {
     private lateinit var mAdapter: GameExclusiveGiftDetaliAdapter
     private lateinit var emptyViewBinding: CommonEmptyViewBinding
+    private lateinit var headViewBinding: HeadGiftDetailBinding
     private lateinit var mGameExclusiveGift: GameExclusiveGift
 
     override fun getLayoutId(): Int {
@@ -31,15 +33,17 @@ class ExclusiveGiftDetailActivity : BaseActivity<ActivityExclusiveGiftDeatilBind
         mGameExclusiveGift = intent.getParcelableExtra("GameExclusiveGift") as GameExclusiveGift
         initToolBar()
         emptyViewBinding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.common_empty_view, null, false)
-
+        headViewBinding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.head_gift_detail, null, false)
+        headViewBinding.gameGift = mGameExclusiveGift
         mAdapter = GameExclusiveGiftDetaliAdapter(R.layout.item_game_gift).apply {
             bindToRecyclerView(mBinding.recyclerView)
             emptyView = emptyViewBinding.root
+            addHeaderView(headViewBinding.root)
             isFirstOnly(false)
             disableLoadMoreIfNotFullPage()
             setOnItemChildClickListener { adapter, _, position ->
                 if (MyUserManager.instance.userBean == null) {
-                    startActivity(LoginActivity::class.java )
+                    startActivity(LoginActivity::class.java)
                     return@setOnItemChildClickListener
                 }
 
@@ -55,6 +59,7 @@ class ExclusiveGiftDetailActivity : BaseActivity<ActivityExclusiveGiftDeatilBind
                             show(this@ExclusiveGiftDetailActivity.supportFragmentManager, "gamegifttakedialog")
                         }
                     }
+
                     override fun onError(e: Throwable) {
                         super.onError(e)
                         hideLoading()

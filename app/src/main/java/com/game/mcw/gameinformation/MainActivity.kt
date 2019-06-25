@@ -39,7 +39,7 @@ class MainActivity : BaseActivity<com.game.mcw.gameinformation.databinding.Activ
         navigationController.setupWithViewPager(mBinding.vpFragment)
     }
 
-    var exitTime: Long = 0
+    private var exitTime: Long = 0
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK && event?.action == KeyEvent.ACTION_DOWN) {
             if (System.currentTimeMillis() - exitTime > 2000) {
