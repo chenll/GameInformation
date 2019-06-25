@@ -57,9 +57,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
-
+            app:complexText='@{gameGift.content+""}'
             android:gravity="center"
-            android:text='@{gameGift.content??""}'
             android:textColor="@color/text_black"
             android:textSize="14sp" />
 

@@ -46,6 +46,7 @@ class GameGiftTakeDialog : DialogFragment() {
         arguments?.let {
             mGameGift = it.getParcelable("gamegift")
             mCode = it.getString("code", "")
+            binding.code = mCode
 
         }
         binding.gameGift = mGameGift
