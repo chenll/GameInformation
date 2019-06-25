@@ -19,6 +19,9 @@ interface UserApi {
     @POST("/user/login")
     fun userLogin(@Field("mobile") mobile: String, @Field("code") code: String): Observable<AppResponse<Any>>
 
+    @POST("/user/logout")
+    fun userLogout(): Observable<AppResponse<Any>>
+
     @FormUrlEncoded
     @POST("/user/sms/send")
     fun getVcode(@Field("mobile") mobile: String, @Field("type") code: Int): Observable<Any>

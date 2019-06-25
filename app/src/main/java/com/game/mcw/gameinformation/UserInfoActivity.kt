@@ -18,6 +18,7 @@ import com.game.mcw.gameinformation.dialog.SexSelectDialog
 import com.game.mcw.gameinformation.event.UserChangeEvent
 import com.game.mcw.gameinformation.manager.MyUserManager
 import com.game.mcw.gameinformation.modle.GameGift
+import com.game.mcw.gameinformation.modle.UserBean
 import com.game.mcw.gameinformation.modle.dispose.NetRespObserver
 import com.game.mcw.gameinformation.net.AppRepository
 import com.game.mcw.gameinformation.utils.GlideUtil
@@ -112,11 +113,23 @@ class UserInfoActivity : BaseActivity<ActivityUserinfoBinding>() {
                 .setMessage("确定不是手滑了吗？")
                 .addAction("取消") { dialog, _ -> dialog.dismiss() }
                 .addAction("确定") { dialog, _ ->
-                    MyUserManager.instance.updateUser(null)
-                    dialog.dismiss()
-                    finish()
-                }
-                .create().show()
+                    showLoading()
+                    AppRepository.getUserRepository().logout().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(object : NetRespObserver<String>() {
+                        override fun onNext(data: String) {
+                            hideLoading()
+                            MyUserManager.instance.updateUser(null)
+                            dialog.dismiss()
+                            finish()
+                        }
+
+                        override fun onError(e: Throwable) {
+                            super.onError(e)
+                            dialog.dismiss()
+                            hideLoading()
+                        }
+
+                    })
+                }.create().show()
 
     }
 

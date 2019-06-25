@@ -3,7 +3,7 @@ package com.game.mcw.gameinformation
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
-import android.view.LayoutInflater
+import android.view.*
 import com.game.mcw.gameinformation.adapter.CommodityAdapter
 import com.game.mcw.gameinformation.databinding.ActivityCommodityListBinding
 import com.game.mcw.gameinformation.databinding.CommonEmptyViewBinding
@@ -119,4 +119,18 @@ class CommodityListActivity : BaseActivity<ActivityCommodityListBinding>() {
         QMUIStatusBarHelper.setStatusBarDarkMode(this)
 
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        return super.onCreateOptionsMenu(menu)
+        super.onCreateOptionsMenu(menu)
+        var item = menu?.add(0, 0, 0, "兑换记录")
+        item?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+//        super.onCreateContextMenu(menu, v, menuInfo)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return super.onOptionsItemSelected(item)
+    }
+
 }
