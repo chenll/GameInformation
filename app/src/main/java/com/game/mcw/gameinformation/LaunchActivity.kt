@@ -1,6 +1,5 @@
 package com.game.mcw.gameinformation
 
-import android.content.Context
 import android.os.Bundle
 import com.bumptech.glide.Glide
 import com.game.mcw.gameinformation.databinding.ActivityLaunchBinding

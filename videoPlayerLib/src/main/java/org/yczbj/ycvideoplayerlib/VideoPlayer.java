@@ -7,7 +7,6 @@ import android.graphics.SurfaceTexture;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Surface;
 import android.view.TextureView;

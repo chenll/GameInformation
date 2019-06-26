@@ -4,19 +4,12 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
-import com.game.mcw.gameinformation.adapter.GameExclusiveGiftDetaliAdapter
 import com.game.mcw.gameinformation.adapter.TaskAdapter
-import com.game.mcw.gameinformation.databinding.ActivityExclusiveGiftDeatilBinding
 import com.game.mcw.gameinformation.databinding.ActivityTaskBinding
 import com.game.mcw.gameinformation.databinding.CommonEmptyViewBinding
-import com.game.mcw.gameinformation.dialog.GameGiftTakeDialog
-import com.game.mcw.gameinformation.modle.GameExclusiveGift
-import com.game.mcw.gameinformation.modle.GameExclusiveGiftDetail
-import com.game.mcw.gameinformation.modle.GameGift
 import com.game.mcw.gameinformation.modle.Task
 import com.game.mcw.gameinformation.modle.dispose.NetRespObserver
 import com.game.mcw.gameinformation.net.AppRepository
-import com.qmuiteam.qmui.util.QMUIStatusBarHelper
 import kotlinx.android.synthetic.main.toolbar_home.view.*
 
 class TaskActivity : BaseActivity<ActivityTaskBinding>() {

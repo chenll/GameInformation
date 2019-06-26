@@ -18,7 +18,6 @@ import com.game.mcw.gameinformation.modle.GameExclusiveGift
 import com.game.mcw.gameinformation.modle.GameGift
 import com.game.mcw.gameinformation.modle.dispose.NetRespObserver
 import com.game.mcw.gameinformation.net.AppRepository
-import com.game.mcw.gameinformation.utils.GlideUtil
 import com.qmuiteam.qmui.util.QMUIDisplayHelper
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration
 import com.yqritc.recyclerviewflexibledivider.VerticalDividerItemDecoration

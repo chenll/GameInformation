@@ -2,7 +2,6 @@ package com.game.mcw.gameinformation
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.text.TextUtils
 import android.view.KeyEvent
 import android.widget.Toast
 import com.game.mcw.gameinformation.adapter.HomeFragmentPagerAdapter

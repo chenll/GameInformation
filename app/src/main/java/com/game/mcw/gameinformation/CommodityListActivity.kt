@@ -3,14 +3,14 @@ package com.game.mcw.gameinformation
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import com.game.mcw.gameinformation.adapter.CommodityAdapter
 import com.game.mcw.gameinformation.databinding.ActivityCommodityListBinding
 import com.game.mcw.gameinformation.databinding.CommonEmptyViewBinding
-import com.game.mcw.gameinformation.dialog.GameGiftTakeDialog
 import com.game.mcw.gameinformation.manager.MyUserManager
 import com.game.mcw.gameinformation.modle.Commodity
-import com.game.mcw.gameinformation.modle.GameGift
 import com.game.mcw.gameinformation.modle.dispose.NetRespObserver
 import com.game.mcw.gameinformation.net.AppRepository
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper

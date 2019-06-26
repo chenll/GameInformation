@@ -4,7 +4,6 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
-import com.facebook.stetho.server.ProtocolDetectingSocketHandler
 import com.game.mcw.gameinformation.adapter.GameExclusiveGiftDetaliAdapter
 import com.game.mcw.gameinformation.databinding.ActivityExclusiveGiftDeatilBinding
 import com.game.mcw.gameinformation.databinding.CommonEmptyViewBinding
@@ -16,7 +15,6 @@ import com.game.mcw.gameinformation.modle.GameExclusiveGiftDetail
 import com.game.mcw.gameinformation.modle.GameGift
 import com.game.mcw.gameinformation.modle.dispose.NetRespObserver
 import com.game.mcw.gameinformation.net.AppRepository
-import com.qmuiteam.qmui.util.QMUIStatusBarHelper
 import kotlinx.android.synthetic.main.toolbar_home.view.*
 
 class ExclusiveGiftDetailActivity : BaseActivity<ActivityExclusiveGiftDeatilBinding>() {
