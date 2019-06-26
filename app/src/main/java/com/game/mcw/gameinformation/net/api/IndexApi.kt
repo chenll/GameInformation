@@ -21,7 +21,7 @@ interface IndexApi {
     fun getVideoList(@Query("page") pageNum: Int): Observable<AppResponse<Any>>
 
     @GET("/gift/list/recentGift")
-    fun getGiftList(@Query("page") pageNum: Int, @Query("token") token: Int = 111, @Query("limit") limit: Int = 20): Observable<AppResponse<Any>>
+    fun getGiftList(@Query("page") pageNum: Int, @Query("limit") limit: Int = 20): Observable<AppResponse<Any>>
 
     /**
      * 获取独家礼包详情

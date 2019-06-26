@@ -71,6 +71,9 @@ class ExclusiveGiftDetailActivity : BaseActivity<ActivityExclusiveGiftDeatilBind
                                 putParcelable("gamegift", adapter.getItem(position) as GameGift)
                                 putString("code", code)
                             }
+                            item.status = 1
+                            item.code = code
+                            mAdapter.notifyItemChanged(position + 1)
                             show(this@ExclusiveGiftDetailActivity.supportFragmentManager, "gamegifttakedialog")
                         }
                     }

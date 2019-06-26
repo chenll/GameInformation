@@ -1,5 +1,8 @@
 package com.game.mcw.gameinformation.dialog
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.databinding.DataBindingUtil
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -9,19 +12,18 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
+import android.widget.Toast
+import com.game.mcw.gameinformation.MyApplication
 import com.game.mcw.gameinformation.R
+import com.game.mcw.gameinformation.WebActivity
 import com.game.mcw.gameinformation.databinding.DialogGiftTakeBinding
-import com.game.mcw.gameinformation.databinding.DialogHomePopupBinding
 import com.game.mcw.gameinformation.modle.GameGift
-import com.game.mcw.gameinformation.modle.IndexCommon
 import com.qmuiteam.qmui.util.QMUIDisplayHelper
-import kotlin.math.min
 
 class GameGiftTakeDialog : DialogFragment() {
     lateinit var binding: DialogGiftTakeBinding
     lateinit var mGameGift: GameGift
-    lateinit var mCode: String
+    private lateinit var mCode: String
     override fun onStart() {
         super.onStart()
         dialog.window?.let {
@@ -52,6 +54,21 @@ class GameGiftTakeDialog : DialogFragment() {
         binding.gameGift = mGameGift
         binding.ivClose.setOnClickListener {
             dismiss()
+        }
+        binding.startGame.setOnClickListener {
+            activity?.let {
+                WebActivity.goWeb(it, url = mGameGift.url!!)
+                dismiss()
+            }
+
+        }
+        binding.copy.setOnClickListener {
+            val clipboardManager = activity!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clipData = ClipData.newPlainText("Label", mCode)
+            clipboardManager.primaryClip = clipData
+            Toast.makeText(MyApplication.INSTANCE, "复制成功", Toast.LENGTH_SHORT).show()
+            dismiss()
+
         }
     }
 }

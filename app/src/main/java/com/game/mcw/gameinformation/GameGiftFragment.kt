@@ -1,31 +1,31 @@
 package com.game.mcw.gameinformation
 
-import android.app.ProgressDialog.show
 import android.content.Intent
 import android.databinding.DataBindingUtil
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.game.mcw.gameinformation.adapter.GameGiftAdapter
 import com.game.mcw.gameinformation.adapter.GameGiftExclusiveAdapter
 import com.game.mcw.gameinformation.databinding.FragmentGameGiftBinding
 import com.game.mcw.gameinformation.dialog.GameGiftTakeDialog
-import com.game.mcw.gameinformation.dialog.HomePopUpDialog
+import com.game.mcw.gameinformation.event.UserChangeEvent
 import com.game.mcw.gameinformation.manager.MyUserManager
 import com.game.mcw.gameinformation.modle.GameExclusiveGift
 import com.game.mcw.gameinformation.modle.GameGift
 import com.game.mcw.gameinformation.modle.dispose.NetRespObserver
 import com.game.mcw.gameinformation.net.AppRepository
+import com.game.mcw.gameinformation.utils.GlideUtil
 import com.qmuiteam.qmui.util.QMUIDisplayHelper
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration
 import com.yqritc.recyclerviewflexibledivider.VerticalDividerItemDecoration
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class GameGiftFragment : BaseFragment() {
     private lateinit var mBinding: FragmentGameGiftBinding
@@ -40,6 +40,7 @@ class GameGiftFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        registerEventBus()
         initExclusiveRecyclerView()
 
         val layoutManagerVertical = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
@@ -81,6 +82,9 @@ class GameGiftFragment : BaseFragment() {
                                 putParcelable("gamegift", adapter.getItem(position) as GameGift)
                                 putString("code", code)
                             }
+                            item.status = 1
+                            item.code = code
+                            mAdapter.notifyItemChanged(position)
                             show(this@GameGiftFragment.childFragmentManager, "gamegifttakedialog")
                         }
                     }
@@ -163,5 +167,12 @@ class GameGiftFragment : BaseFragment() {
                 mBinding.swipeRefreshLayout.isRefreshing = false
             }
         })
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun Event(userChangeEvent: UserChangeEvent) {
+        mAdapter.setNewData(null)
+        loadData(true)
     }
 }
