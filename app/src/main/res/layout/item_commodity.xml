@@ -13,10 +13,10 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:paddingLeft="16dp"
         android:paddingTop="16dp"
-        android:paddingRight="16dp"
-        android:layout_height="wrap_content">
+        android:paddingRight="16dp">
 
         <ImageView
             android:id="@+id/iv_game_icon"
@@ -30,9 +30,9 @@
         <TextView
             android:id="@+id/tv_game_name"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:gravity="bottom"
-            android:paddingLeft="10dp"
+            android:layout_marginLeft="10dp"
             android:text='@{commodity.title+""}'
             android:textColor="@color/text_black"
             android:textSize="14sp"
@@ -45,19 +45,45 @@
         <TextView
             android:id="@+id/tv_intro"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:gravity="top"
-            android:paddingLeft="10dp"
+            android:layout_marginLeft="10dp"
             android:text='@{commodity.score+"积分"}'
             android:textColor="#fc5052"
             android:textSize="12sp"
-
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/pb_progress"
             app:layout_constraintLeft_toRightOf="@+id/iv_game_icon"
             app:layout_constraintRight_toLeftOf="@+id/btn_get"
-            app:layout_constraintTop_toBottomOf="@+id/tv_game_name"
+            app:layout_constraintTop_toTopOf="@+id/tv_game_name"
             tools:ignore="MissingConstraints" />
 
+        <ProgressBar
+            android:id="@+id/pb_progress"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginLeft="10dp"
+            android:max="@{commodity.total}"
+            android:progress="@{commodity.total-commodity.leftCount}"
+            android:progressDrawable="@drawable/pb_stly"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_progress"
+            app:layout_constraintLeft_toRightOf="@+id/iv_game_icon"
+            app:layout_constraintRight_toLeftOf="@+id/tv_progress"
+            app:layout_constraintTop_toTopOf="@+id/tv_progress" />
+
+
+        <TextView
+            android:id="@+id/tv_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:paddingLeft="10dp"
+            android:layout_marginRight="30dp"
+            android:textColor="#fc5052"
+            android:textSize="12sp"
+            app:layout_constraintRight_toLeftOf="@+id/btn_get"
+            app:layout_constraintTop_toBottomOf="@+id/tv_intro"
+            tools:ignore="MissingConstraints" />
 
         <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
             android:id="@+id/btn_get"
