@@ -60,9 +60,20 @@ class GameGiftFragment : BaseFragment() {
                     startActivity(LoginActivity::class.java)
                     return@setOnItemChildClickListener
                 }
+                val item = adapter.getItem(position) as GameGift
+                if (item.status == 1) {
+                    GameGiftTakeDialog().apply {
+                        arguments = Bundle().apply {
+                            putParcelable("gamegift", adapter.getItem(position) as GameGift)
+                            putString("code", item.code)
+                        }
+                        show(this@GameGiftFragment.childFragmentManager, "gamegifttakedialog")
+                    }
+                    return@setOnItemChildClickListener
+                }
 
                 showLoading()
-                AppRepository.getIndexRepository().takeGift((adapter.getItem(position) as GameGift).id).subscribe(object : NetRespObserver<String>() {
+                AppRepository.getIndexRepository().takeGift(item.id).subscribe(object : NetRespObserver<String>() {
                     override fun onNext(code: String) {
                         hideLoading()
                         GameGiftTakeDialog().apply {

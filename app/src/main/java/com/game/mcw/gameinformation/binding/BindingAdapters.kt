@@ -1,13 +1,20 @@
 package com.game.mcw.gameinformation.binding
 
+import android.content.res.ColorStateList
 import android.databinding.BindingAdapter
+import android.databinding.BindingConversion
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.support.annotation.ColorInt
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.widget.ImageView
 import android.widget.TextView
+import com.game.mcw.gameinformation.MyApplication
 import com.game.mcw.gameinformation.R
 import com.game.mcw.gameinformation.utils.GlideUtil
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration
@@ -74,4 +81,18 @@ object BindingAdapters {
         val matcher = parrern.matcher(text)
         this.text = matcher.replaceAll("")
     }
+
+    @BindingConversion
+    @JvmStatic
+    fun convertColorToDrawable(color: Int): ColorDrawable {
+        return ColorDrawable(color)
+    }
+
+    @BindingConversion
+    @JvmStatic
+    fun convertColorToColorStateList(color: Int): ColorStateList {
+        return ColorStateList.valueOf(color)
+    }
+
+
 }

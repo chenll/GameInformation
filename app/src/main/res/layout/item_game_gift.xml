@@ -13,8 +13,8 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@color/white"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/iv_game_icon"
@@ -65,7 +65,7 @@
             android:paddingTop="4dp"
             android:paddingRight="14dp"
             android:paddingBottom="4dp"
-            android:text="领取礼包"
+            android:text='@{gameGift.status==1? "查看礼包":"领取礼包" }'
             android:textColor="@color/text_black"
             android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"

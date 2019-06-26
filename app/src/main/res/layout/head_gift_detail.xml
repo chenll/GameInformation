@@ -6,9 +6,15 @@
 
     <data>
 
+        <import type="android.text.Html" />
+
         <variable
             name="gameGift"
             type="com.game.mcw.gameinformation.modle.GameExclusiveGift" />
+
+        <variable
+            name="gameGiftDetail"
+            type="com.game.mcw.gameinformation.modle.GameExclusiveGiftDetail" />
     </data>
 
     <LinearLayout
@@ -41,7 +47,7 @@
                 android:id="@+id/iv_game_icon"
                 android:layout_width="@dimen/game_icon_square_size_smal"
                 android:layout_height="@dimen/game_icon_square_size_smal"
-                app:imageUrl="@{gameGift.icon}"
+                app:imageUrl="@{gameGiftDetail.icon}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -51,9 +57,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="@{gameGift.name}"
+                android:text="@{gameGiftDetail.name}"
                 app:layout_constraintBottom_toTopOf="@+id/gline"
                 app:layout_constraintLeft_toRightOf="@+id/iv_game_icon"
+                android:textSize="15sp"
                 app:layout_constraintRight_toLeftOf="@+id/btn_start"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,7 +69,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="11111111111111111"
+                android:text='@{ Html.fromHtml( "近期 &lt;font color=\&quot;#8e1af6\&quot;&gt;" +gameGiftDetail.recentCount+"&lt;/font&gt;  |  ") }'
+                android:textColor="@color/text_black_60"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/iv_game_icon"
                 app:layout_constraintTop_toBottomOf="@+id/gline" />
@@ -71,7 +80,9 @@
                 android:id="@+id/tv_game_gift_total"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="222"
+                android:text='@{ Html.fromHtml( "总计 &lt;font color=\&quot;#8e1af6\&quot;&gt;" +gameGiftDetail.totalCount+"&lt;/font&gt;") }'
+                android:textColor="@color/text_black_60"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/tv_game_gift_recent"
                 app:layout_constraintRight_toLeftOf="@+id/btn_start"

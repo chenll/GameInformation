@@ -4,7 +4,10 @@ import android.os.Parcel
 import android.os.Parcelable
 
 
-class GameGift(val id: Int, val gameName: String?, val icon: String?, val name: String?, val startTime: String?, val endTime: String?, var code: String?, val leftCount: String?, val takeMethod: String?, val content: String?) : Parcelable {
+/**
+ * 领取状态：0：未领取，1：已领取
+ */
+class GameGift(val id: Int, val gameName: String?, val icon: String?, val name: String?, val startTime: String?, val endTime: String?, var code: String?, val leftCount: Int, val total: Int, val takeMethod: String?, val content: String?,val status:Int) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
             parcel.readString(),
@@ -13,9 +16,11 @@ class GameGift(val id: Int, val gameName: String?, val icon: String?, val name: 
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
+            parcel.readInt(),
+            parcel.readInt(),
             parcel.readString(),
             parcel.readString(),
-            parcel.readString()) {
+            parcel.readInt()) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -26,9 +31,11 @@ class GameGift(val id: Int, val gameName: String?, val icon: String?, val name: 
         parcel.writeString(startTime)
         parcel.writeString(endTime)
         parcel.writeString(code)
-        parcel.writeString(leftCount)
+        parcel.writeInt(leftCount)
+        parcel.writeInt(total)
         parcel.writeString(takeMethod)
         parcel.writeString(content)
+        parcel.writeInt(status)
     }
 
     override fun describeContents(): Int {
@@ -44,4 +51,5 @@ class GameGift(val id: Int, val gameName: String?, val icon: String?, val name: 
             return arrayOfNulls(size)
         }
     }
+
 }

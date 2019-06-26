@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
+import com.facebook.stetho.server.ProtocolDetectingSocketHandler
 import com.game.mcw.gameinformation.adapter.GameExclusiveGiftDetaliAdapter
 import com.game.mcw.gameinformation.databinding.ActivityExclusiveGiftDeatilBinding
 import com.game.mcw.gameinformation.databinding.CommonEmptyViewBinding
@@ -23,6 +24,7 @@ class ExclusiveGiftDetailActivity : BaseActivity<ActivityExclusiveGiftDeatilBind
     private lateinit var emptyViewBinding: CommonEmptyViewBinding
     private lateinit var headViewBinding: HeadGiftDetailBinding
     private lateinit var mGameExclusiveGift: GameExclusiveGift
+    private var mGameExclusiveGiftDetail: GameExclusiveGiftDetail? = null
 
     override fun getLayoutId(): Int {
         return R.layout.activity_exclusive_gift_deatil
@@ -47,6 +49,18 @@ class ExclusiveGiftDetailActivity : BaseActivity<ActivityExclusiveGiftDeatilBind
                     startActivity(LoginActivity::class.java)
                     return@setOnItemChildClickListener
                 }
+                val item = adapter.getItem(position) as GameGift
+                if (item.status == 1) {
+                    GameGiftTakeDialog().apply {
+                        arguments = Bundle().apply {
+                            putParcelable("gamegift", adapter.getItem(position) as GameGift)
+                            putString("code", item.code)
+                        }
+                        show(this@ExclusiveGiftDetailActivity.supportFragmentManager, "gamegifttakedialog")
+                    }
+                    return@setOnItemChildClickListener
+                }
+
 
                 showLoading()
                 AppRepository.getIndexRepository().takeGift((adapter.getItem(position) as GameGift).id).subscribe(object : NetRespObserver<String>() {
@@ -70,6 +84,11 @@ class ExclusiveGiftDetailActivity : BaseActivity<ActivityExclusiveGiftDeatilBind
         }
 
         loadData()
+        headViewBinding.btnStart.setOnClickListener {
+            mGameExclusiveGiftDetail?.let {
+                WebActivity.goWeb(this, url = it.url)
+            }
+        }
 
 
     }
@@ -89,6 +108,8 @@ class ExclusiveGiftDetailActivity : BaseActivity<ActivityExclusiveGiftDeatilBind
     private fun loadData() {
         AppRepository.getIndexRepository().getByGameId(mGameExclusiveGift.id).subscribe(object : NetRespObserver<GameExclusiveGiftDetail>() {
             override fun onNext(data: GameExclusiveGiftDetail) {
+                mGameExclusiveGiftDetail = data
+                headViewBinding.gameGiftDetail = mGameExclusiveGiftDetail
                 mAdapter.setNewData(data.gifts)
                 mBinding.includeToolbar.toolbar.toolbar_title.text = data.name
                 mAdapter.loadMoreEnd()
