@@ -25,13 +25,11 @@ class NetClient(val ctx: Context) {
                 .addNetworkInterceptor(StethoInterceptor())
                 .addInterceptor { chain ->
                     val original = chain.request().newBuilder().addHeader("device", "android")
-                    if (MyUserManager.instance.userBean != null) {
-                        val token = MyUserManager.instance.userBean!!.token
-                        if (!TextUtils.isEmpty(token)) {
-//                            original.addHeader("X-Auth-Token", token)
-                            original.addHeader("token", token)
-                        }
+                    MyUserManager.instance.userBean?.let {
+                        //                            original.addHeader("X-Auth-Token", token)
+                        original.addHeader("token", it.token)
                     }
+
                     val request = original.build()
                     chain.proceed(request.newBuilder().method(request.method(), request.body()).build())
                 }

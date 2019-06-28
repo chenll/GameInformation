@@ -22,15 +22,37 @@ android {
         multiDexEnabled true
     }
 
+    signingConfigs {
+        release {
+            keyAlias 'flowlight'
+            keyPassword 'flowlight205'
+            storeFile file('../flowlight')
+            storePassword 'flowlight205'
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+        debug {
+            keyAlias 'flowlight'
+            keyPassword 'flowlight205'
+            storeFile file('../flowlight')
+            storePassword 'flowlight205'
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
 
     buildTypes {
         debug {
+            minifyEnabled false //是否对代码进行混淆
             buildConfigField("String", "API_URL", "\"" + api_url + "\"")
+            signingConfig signingConfigs.debug
         }
         release {
-            minifyEnabled false
-            buildConfigField("String", "API_URL", "\"" + api_url + "\"")
+            minifyEnabled false //是否对代码进行混淆
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "API_URL", "\"" + api_url + "\"")
+            signingConfig signingConfigs.release
+
         }
     }
     dataBinding {
@@ -43,6 +65,8 @@ android {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
     }
+
+
 }
 
 dependencies {
@@ -84,7 +108,7 @@ dependencies {
     implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
 
     //视频播放
-    implementation project( ':videoPlayerLib')
+    implementation project(':videoPlayerLib')
     //adapter
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.31'
     //分割线
@@ -92,9 +116,10 @@ dependencies {
 
     implementation 'org.greenrobot:eventbus:3.1.1'
 
-    implementation 'com.just.agentweb:agentweb:4.0.2' // (必选)
-    implementation 'com.just.agentweb:download:4.0.2' // (可选)
-    implementation 'com.just.agentweb:filechooser:4.0.2'// (可选)
+    implementation 'com.just.agentweb:agentweb:4.0.3-beta' // (必选)
+    implementation 'com.just.agentweb:download:4.0.3-beta' // (可选)
+    implementation 'com.just.agentweb:filechooser:4.0.3-beta'// (可选)
+    implementation 'com.github.Justson:Downloader:v4.0.3'
     implementation 'com.youth.banner:banner:1.4.10'
     implementation 'org.litepal.android:kotlin:3.0.0'
     implementation 'org.greenrobot:eventbus:3.1.1'
