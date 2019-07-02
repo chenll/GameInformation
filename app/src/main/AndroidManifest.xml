@@ -48,6 +48,10 @@
             android:configChanges="orientation|screenSize"
             android:hardwareAccelerated="true" />
         <activity
+            android:name=".WebPageActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true" />
+        <activity
             android:name=".LoginActivity"
             android:configChanges="orientation|screenSize" />
         <activity

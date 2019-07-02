@@ -23,6 +23,7 @@
     <list>
         <mapping class="com.game.mcw.gameinformation.modle.UserBean" />
         <mapping class="com.game.mcw.gameinformation.modle.IndexCommon" />
+        <mapping class="com.game.mcw.gameinformation.modle.MyCookie" />
     </list>
 
 </litepal>
