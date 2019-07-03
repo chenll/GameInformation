@@ -7,12 +7,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.game.mcw.gameinformation.adapter.NewsLoadMoreView
 import com.game.mcw.gameinformation.adapter.NewsAdapter
 import com.game.mcw.gameinformation.databinding.CommonEmptyViewBinding
 import com.game.mcw.gameinformation.databinding.FragmentHomeChild1Binding
@@ -35,6 +37,7 @@ class NewsFragment : BaseFragment() {
     private var page = 1
     private lateinit var mHeadBinding: HeadNewsBinding
     private lateinit var emptyViewBinding: CommonEmptyViewBinding
+    private lateinit var mLoadMoreView: NewsLoadMoreView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home_child_1, container, false)
@@ -46,14 +49,17 @@ class NewsFragment : BaseFragment() {
         mBinding.recyclerView.isNestedScrollingEnabled = true
         mHeadBinding = DataBindingUtil.inflate(LayoutInflater.from(activity), R.layout.head_news, null, false)
         emptyViewBinding = DataBindingUtil.inflate(LayoutInflater.from(activity), R.layout.common_empty_view, null, false)
+        mLoadMoreView = NewsLoadMoreView()
         mAdapter = NewsAdapter().apply {
+            setLoadMoreView(mLoadMoreView)
             bindToRecyclerView(mBinding.recyclerView)
             setHeaderView(mHeadBinding.root)
             emptyView = emptyViewBinding.root
             isFirstOnly(false)
 //            openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM)
             disableLoadMoreIfNotFullPage()
-            setOnLoadMoreListener({ loadData(false) }, mBinding.recyclerView)
+
+
         }
         mBinding.swipeRefreshLayout.setOnRefreshListener {
             loadData(true)
@@ -68,9 +74,15 @@ class NewsFragment : BaseFragment() {
     private fun loadData(isRefresh: Boolean) {
         AppRepository.getIndexRepository().getNewsList(if (isRefresh) 1 else page).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(object : NetRespObserver<List<NewsGroup>>() {
             override fun onNext(data: List<NewsGroup>) {
-                mBinding.swipeRefreshLayout.isRefreshing = false
                 if (data.isEmpty()) {
-                    mAdapter.loadMoreEnd()
+                    with(mAdapter) {
+                        setOnLoadMoreListener({
+                            Toast.makeText(MyApplication.INSTANCE, "敬请期待~", Toast.LENGTH_SHORT).show()
+                            loadMoreEnd()
+                        }, mBinding.recyclerView)
+                        loadMoreEnd()
+                        enableLoadMoreEndClick(true)
+                    }
                     return
                 }
                 val dataFinal = ArrayList<NewsGroup>()
@@ -82,30 +94,31 @@ class NewsFragment : BaseFragment() {
                     } else {
                         dataFinal.add(newsGroup)
                     }
+
                 }
                 with(mAdapter) {
                     setNewData(dataFinal)
-                    loadMoreComplete()
+                    setOnLoadMoreListener({
+                        Toast.makeText(MyApplication.INSTANCE, "敬请期待~", Toast.LENGTH_SHORT).show()
+                        loadMoreEnd()
+                    }, mBinding.recyclerView)
                     loadMoreEnd()
+                    enableLoadMoreEndClick(true)
                 }
-//                    if (isRefresh) {
-//                        mAdapter.setNewData(data)
-//                        page = 2
-//                    } else {
-//                        mAdapter.addData(data)
-//                        page++
-//                    }
-//                    mAdapter.notifyDataSetChanged()
-//                    mAdapter.loadMoreComplete()
-
 
             }
 
             override fun onError(e: Throwable) {
                 super.onError(e)
-                mBinding.swipeRefreshLayout.isRefreshing = false
-                mAdapter.loadMoreFail()
+                with(mAdapter) {
+                    setOnLoadMoreListener({ loadData(true) }, mBinding.recyclerView)
+                    loadMoreFail()
+                }
+            }
 
+            override fun onFinish() {
+                super.onFinish()
+                mBinding.swipeRefreshLayout.isRefreshing = false
             }
         })
     }
@@ -125,11 +138,9 @@ class NewsFragment : BaseFragment() {
 
                 if (data.starts.isNotEmpty()) {
                     LitePal.deleteAll(IndexCommon::class.java)
-                    for (start in data.starts) {
-                        if (start.isEffectived()) {
-                            start.save()
-                            Glide.with(activity!!).load(start.image).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).preload()
-                        }
+                    for (start in data.starts.toTypedArray().filter { it.isEffectived() }) {
+                        start.save()
+                        Glide.with(activity!!).load(start.image).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).preload()
                     }
                 }
                 if (data.popups.isNotEmpty()) {
