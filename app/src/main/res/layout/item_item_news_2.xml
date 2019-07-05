@@ -30,7 +30,6 @@
             android:id="@+id/iv_pic"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:scaleType="fitXY"
             android:src="@mipmap/ic_launcher"
             app:imageUrl="@{item.image}"
             app:layout_constraintDimensionRatio="H,16:9"

@@ -1,11 +1,15 @@
 package com.game.mcw.gameinformation.utils
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.support.annotation.DrawableRes
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.load.resource.bitmap.TransformationUtils.fitCenter
 import com.bumptech.glide.request.RequestOptions
 import com.game.mcw.gameinformation.MyApplication
 import com.game.mcw.gameinformation.R
@@ -48,8 +52,7 @@ object GlideUtil {
      */
     fun loadBorderRadiusGameIcon(url: String, view: ImageView) {
         val roundedCorners = RoundedCorners(QMUIDisplayHelper.dp2px(MyApplication.INSTANCE, 6))
-//        val requestOptions = RequestOptions.bitmapTransform(MultiTransformation<Bitmap>(MultiTransformation(roundedCorners)))
-        val requestOptions = RequestOptions.bitmapTransform(roundedCorners)
+        val requestOptions = RequestOptions.bitmapTransform(MultiTransformation<Bitmap>(MultiTransformation(CenterCrop(),roundedCorners)))
         val transforms = Glide.with(view.context).load(R.mipmap.game_icon_def).apply(requestOptions)
         Glide.with(view.context).load(url)
                 .apply(requestOptions)
