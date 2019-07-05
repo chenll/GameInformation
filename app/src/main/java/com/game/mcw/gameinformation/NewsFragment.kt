@@ -136,13 +136,7 @@ class NewsFragment : BaseFragment() {
                 }
 
 
-                if (data.starts.isNotEmpty()) {
-                    LitePal.deleteAll(IndexCommon::class.java)
-                    for (start in data.starts.toTypedArray().filter { it.isEffectived() }) {
-                        start.save()
-                        Glide.with(activity!!).load(start.image).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).preload()
-                    }
-                }
+
                 if (data.popups.isNotEmpty()) {
                     data.popups.toTypedArray().filter { it.isEffectived() }[0].apply {
                         val indexCommon = this
@@ -169,6 +163,16 @@ class NewsFragment : BaseFragment() {
                         }).preload()
                     }
                 }
+
+                if (data.starts.isNotEmpty()) {
+                    LitePal.deleteAll(IndexCommon::class.java)
+                    for (start in data.starts.toTypedArray().filter { it.isEffectived() }) {
+                        start.save()
+                        Glide.with(activity!!).load(start.image).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).preload()
+                    }
+                }
+                (activity as MainActivity).setQuits(data.quits)
+
 
             }
 
