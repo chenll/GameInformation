@@ -22,6 +22,7 @@ class GameDetailActivity : BaseActivity<ActivityGameDetailBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initToolBar()
+        mAdapter.bindToRecyclerView( mBinding.recyclerView)
         val gameId = intent.getIntExtra("gameid", -1)
         AppRepository.getIndexRepository().getGameDetils(gameId).subscribe(object : NetRespObserver<News>() {
             override fun onNext(t: News) {
@@ -31,7 +32,7 @@ class GameDetailActivity : BaseActivity<ActivityGameDetailBinding>() {
                     mBinding.recyclerView.visibility = View.VISIBLE
                     mAdapter.setNewData(t.imageScreens)
                 }else{
-                    mBinding.recyclerView.visibility = View.VISIBLE
+                    mBinding.recyclerView.visibility = View.GONE
 
                 }
 
