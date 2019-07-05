@@ -22,8 +22,9 @@ class GameDetailActivity : BaseActivity<ActivityGameDetailBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initToolBar()
-        mAdapter.bindToRecyclerView( mBinding.recyclerView)
+        mAdapter.bindToRecyclerView(mBinding.recyclerView)
         val gameId = intent.getIntExtra("gameid", -1)
+        showLoading()
         AppRepository.getIndexRepository().getGameDetils(gameId).subscribe(object : NetRespObserver<News>() {
             override fun onNext(t: News) {
                 GlideUtil.loadBorderRadiusGameIcon(t.icon, mBinding.ivGameIcon)
@@ -31,10 +32,19 @@ class GameDetailActivity : BaseActivity<ActivityGameDetailBinding>() {
                 if (t.imageScreens != null && t.imageScreens.isNotEmpty()) {
                     mBinding.recyclerView.visibility = View.VISIBLE
                     mAdapter.setNewData(t.imageScreens)
-                }else{
+                } else {
                     mBinding.recyclerView.visibility = View.GONE
 
                 }
+                mBinding.btnStartGame.setOnClickListener {
+                    WebActivity.goWeb(this@GameDetailActivity, t.url, t.name)
+                }
+
+            }
+
+            override fun onFinish() {
+                super.onFinish()
+                hideLoading()
 
             }
         })
