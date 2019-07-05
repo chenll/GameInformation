@@ -17,6 +17,12 @@ interface IndexApi {
     @GET("/index/list/newsInit")
     fun getNewsList(@Query("page") pageNum: Int): Observable<AppResponse<Any>>
 
+    /**
+     * 获取游戏详情
+     */
+    @GET("/index/detail")
+    fun getGameDetils(@Query("id") id: Int): Observable<AppResponse<Any>>
+
     @GET("/index/list/video")
     fun getVideoList(@Query("page") pageNum: Int): Observable<AppResponse<Any>>
 
