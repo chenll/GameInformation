@@ -4,6 +4,8 @@
 
     <data>
 
+        <import type="android.support.v7.widget.LinearLayoutManager" />
+
         <variable
             name="game"
             type="com.game.mcw.gameinformation.modle.News" />
@@ -32,21 +34,80 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/include_toolbar" />
 
-        <ImageView
-            android:id="@+id/iv_game_icon"
-            android:layout_width="@dimen/game_icon_square_size_smal"
-            android:layout_height="@dimen/game_icon_square_size_smal"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/v_line" />
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/cl_game_nature"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/v_line">
+
+            <ImageView
+                android:id="@+id/iv_game_icon"
+                android:layout_width="@dimen/game_icon_square_size_smal"
+                android:layout_height="@dimen/game_icon_square_size_smal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{game.name}"
+                app:layout_constraintLeft_toRightOf="@+id/iv_game_icon"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
 
         <TextView
+            android:id="@+id/tv_game_brief_hint"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{game.name}"
-            app:layout_constraintLeft_toRightOf="@+id/iv_game_icon"
+            android:text="游戏介绍"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/v_line" />
+            app:layout_constraintTop_toBottomOf="@+id/cl_game_nature" />
 
+        <TextView
+            android:id="@+id/tv_game_brief"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{game.brief}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_game_brief_hint" />
+
+
+        <TextView
+            android:id="@+id/tv_game_type_hint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="游戏类型"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_game_brief" />
+
+        <TextView
+            android:id="@+id/tv_game_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="----------"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_game_type_hint" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="w,1:3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_game_type"
+            app:rvDecorationColor="@{@color/common_list_decoration}"
+            app:rvOrientation="@{LinearLayoutManager.HORIZONTAL}" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>
